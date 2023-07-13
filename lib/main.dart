@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:trainee/configs/pages/main_page.dart';
 import 'package:trainee/configs/routes/main_route.dart';
 import 'package:trainee/configs/themes/main_theme.dart';
+import 'package:trainee/modules/features/splash/bindings/splash_binding.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,10 +23,11 @@ class MyApp extends StatelessWidget {
         return GetMaterialApp(
           title: 'Trainee Sekeleton',
           debugShowCheckedModeBanner: false,
-          initialRoute: MainRoute.initial,
+          initialRoute: MainRoute.splash,
           theme: mainTheme,
           defaultTransition: Transition.native,
           getPages: MainPage.main,
+          initialBinding: SplashBinding(),
         );
       },
     );
