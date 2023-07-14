@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -7,9 +8,15 @@ import 'package:trainee/modules/features/counter/controllers/conter_controller.d
 
 class ConterView extends StatelessWidget {
   const ConterView({super.key});
+  static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
 
   @override
   Widget build(BuildContext context) {
+    analytics.setCurrentScreen(
+      screenName: 'Counter Screen',
+      screenClassOverride: 'Trainee',
+    );
+
     return Obx(
       () => Scaffold(
         appBar: AppBar(

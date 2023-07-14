@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "207269428309",
+    "project_id": "trainee-venturo",
+    "storage_bucket": "trainee-venturo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:207269428309:android:a34a0c3fee1b11d43fe8dc",
+        "android_client_info": {
+          "package_name": "com.core.venturo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "207269428309-b8uphh5l0770gljdclb3tdim0jbjenr3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDH6iLHA_c6OfrnKJsZd9xp7Y5MmqpBXG0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "207269428309-b8uphh5l0770gljdclb3tdim0jbjenr3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

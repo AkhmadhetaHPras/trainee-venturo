@@ -1,11 +1,18 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:trainee/constants/cores/assets/image_constant.dart';
 
 class SplashView extends StatelessWidget {
   const SplashView({super.key});
+  static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
 
   @override
   Widget build(BuildContext context) {
+    analytics.setCurrentScreen(
+      screenName: 'Splash Screen',
+      screenClassOverride: 'Trainee',
+    );
+
     return Scaffold(
       body: Center(
         child: Image.asset(
