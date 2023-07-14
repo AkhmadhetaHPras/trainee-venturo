@@ -1,6 +1,11 @@
+import 'dart:async';
+
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:trainee/constants/cores/assets/image_constant.dart';
+
+import '../../../../../configs/routes/main_route.dart';
 
 class SplashView extends StatelessWidget {
   const SplashView({super.key});
@@ -11,6 +16,11 @@ class SplashView extends StatelessWidget {
     analytics.setCurrentScreen(
       screenName: 'Splash Screen',
       screenClassOverride: 'Trainee',
+    );
+
+    Timer(
+      const Duration(seconds: 1),
+      () => Get.offNamed(MainRoute.initial),
     );
 
     return Scaffold(
