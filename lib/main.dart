@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:trainee/configs/pages/main_page.dart';
 import 'package:trainee/configs/routes/main_route.dart';
@@ -11,8 +13,15 @@ import 'modules/global_binddings/global_binding.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  /// Localstorage init
+  await Hive.initFlutter();
+  await Hive.openBox("venturo");
+
+  // firebase init
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
+  // sentry init
   await SentryFlutter.init(
     (options) {
       options.dsn =
@@ -41,6 +50,7 @@ class MyApp extends StatelessWidget {
           defaultTransition: Transition.native,
           getPages: MainPage.main,
           initialBinding: GlobalBinding(),
+          builder: EasyLoading.init(),
         );
       },
     );

@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,9 +10,15 @@ import 'package:trainee/constants/cores/assets/image_constant.dart';
 
 class NoConnectionView extends StatelessWidget {
   const NoConnectionView({super.key});
+  static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
 
   @override
   Widget build(BuildContext context) {
+    analytics.setCurrentScreen(
+      screenName: 'No Connection Screen',
+      screenClassOverride: 'Trainee',
+    );
+
     return Scaffold(
       appBar: null,
       body: Container(
