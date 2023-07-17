@@ -1,6 +1,6 @@
 class ApiConstant {
   ApiConstant._();
 
-  static const String production = 'https://space.venturo.id/';
-  static const String staging = 'https://space.venturo.id/';
+  static const String production = 'https://trainee.landa.id/javacode/';
+  static const String staging = 'https://trainee.landa.id/javacode/';
 }

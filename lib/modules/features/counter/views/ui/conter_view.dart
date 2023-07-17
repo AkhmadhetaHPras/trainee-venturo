@@ -29,6 +29,14 @@ class ConterView extends StatelessWidget {
               fontWeight: FontWeight.w700,
             ),
           ),
+          actions: [
+            IconButton(
+              onPressed: () {
+                ConterController.to.logout(context);
+              },
+              icon: const Icon(Icons.logout),
+            ),
+          ],
         ),
         body: Container(
           padding: EdgeInsets.symmetric(

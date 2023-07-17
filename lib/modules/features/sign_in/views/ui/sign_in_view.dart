@@ -147,7 +147,7 @@ class SignInView extends StatelessWidget {
                 iconAssetPath: ImageConstant.icGoogle,
                 backgroundColor: MainColor.white,
                 fontColor: MainColor.black,
-                onPressed: () {},
+                onPressed: () => SignInController.to.signInWithGoogle(context),
               ),
               const SizedBox(
                 height: 17,

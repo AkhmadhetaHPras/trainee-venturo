@@ -1,16 +1,24 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:panara_dialogs/panara_dialogs.dart';
 import 'package:trainee/configs/routes/main_route.dart';
 import 'package:trainee/configs/themes/main_color.dart';
 import 'package:trainee/constants/cores/api/api_constant.dart';
+import 'package:trainee/modules/features/sign_in/repositories/sign_in_repository.dart';
 import 'package:trainee/modules/global_controllers/global_controller.dart';
 import 'package:trainee/shared/styles/google_text_style.dart';
+import 'package:trainee/utils/services/local_storage_service.dart';
 
 class SignInController extends GetxController {
   static SignInController get to => Get.find();
+
+  final SignInRepository _authRepository = SignInRepository();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn googleSignIn = GoogleSignIn();
 
   /// Form Variable Setting
   var formKey = GlobalKey<FormState>();
@@ -45,7 +53,11 @@ class SignInController extends GetxController {
       );
 
       formKey.currentState!.save();
-      if (emailCtrl.text == "admin@gmail.com" && passwordCtrl.text == "admin") {
+
+      await _authRepository.loginUser(emailCtrl.text, passwordCtrl.text);
+      bool? isLoginStatus = await LocalStorageService.isLogIn();
+
+      if (isLoginStatus == true) {
         EasyLoading.dismiss();
         Get.offAllNamed(MainRoute.initial);
       } else {
@@ -139,5 +151,59 @@ class SignInController extends GetxController {
         ),
       ),
     );
+  }
+
+  void signInWithGoogle(context) async {
+    EasyLoading.show(
+      status: 'Sedang Diproses...',
+      maskType: EasyLoadingMaskType.black,
+      dismissOnTap: false,
+    );
+
+    GlobalController.to.checkConnection();
+
+    if (GlobalController.to.isConnect.isTrue) {
+      GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
+
+      if (googleSignInAccount != null) {
+        GoogleSignInAuthentication googleSignInAuthentication =
+            await googleSignInAccount.authentication;
+
+        AuthCredential credential = GoogleAuthProvider.credential(
+          accessToken: googleSignInAuthentication.accessToken,
+          idToken: googleSignInAuthentication.idToken,
+        );
+
+        await _auth.signInWithCredential(credential);
+
+        await _authRepository.loginUserGoogle(
+            googleSignInAccount.email,
+            googleSignInAccount.displayName == null
+                ? "Default Name"
+                : googleSignInAccount.displayName!);
+
+        bool? isLoginStatus = await LocalStorageService.isLogIn();
+
+        if (isLoginStatus == true) {
+          EasyLoading.dismiss();
+          Get.offAllNamed(MainRoute.initial);
+        } else {
+          EasyLoading.dismiss();
+          PanaraInfoDialog.show(
+            context,
+            title: "Error",
+            message: "Terjadi Kesalahan",
+            buttonText: "Coba lagi",
+            onTapDismiss: () {
+              Get.back();
+            },
+            panaraDialogType: PanaraDialogType.error,
+            barrierDismissible: false,
+          );
+        }
+      }
+    } else {
+      Get.toNamed(MainRoute.noConnection);
+    }
   }
 }

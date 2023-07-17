@@ -29,7 +29,7 @@ class SocialSignInButtonComponent extends StatelessWidget {
           backgroundColor,
         ),
       ),
-      onPressed: () {},
+      onPressed: onPressed,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [

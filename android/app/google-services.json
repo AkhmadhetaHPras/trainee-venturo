@@ -14,7 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "207269428309-b8uphh5l0770gljdclb3tdim0jbjenr3.apps.googleusercontent.com",
+          "client_id": "207269428309-1pnaav7dtrg6m0s5e87mork6d5iglda6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.core.venturo",
+            "certificate_hash": "89c35547f1a643b26bf6392e24ece811ee5838b9"
+          }
+        },
+        {
+          "client_id": "207269428309-2rb09666hn3sudnodgrnubtp4jmkcugt.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -27,8 +35,15 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "207269428309-b8uphh5l0770gljdclb3tdim0jbjenr3.apps.googleusercontent.com",
+              "client_id": "207269428309-2rb09666hn3sudnodgrnubtp4jmkcugt.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "207269428309-g8ch7cnqen0hu8sjlmio3pkhcuk6m8bn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.core.venturo"
+              }
             }
           ]
         }
