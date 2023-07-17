@@ -59,7 +59,7 @@ class SignInController extends GetxController {
 
       if (isLoginStatus == true) {
         EasyLoading.dismiss();
-        Get.offAllNamed(MainRoute.initial);
+        Get.offAllNamed(MainRoute.initLocation);
       } else {
         EasyLoading.dismiss();
         PanaraInfoDialog.show(
@@ -186,7 +186,7 @@ class SignInController extends GetxController {
 
         if (isLoginStatus == true) {
           EasyLoading.dismiss();
-          Get.offAllNamed(MainRoute.initial);
+          Get.offAllNamed(MainRoute.initLocation);
         } else {
           EasyLoading.dismiss();
           PanaraInfoDialog.show(

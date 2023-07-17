@@ -6,4 +6,5 @@ abstract class MainRoute {
   static const String signIn = "/sign-in";
   static const String forgotPassword = "/forgot-password";
   static const String otpInput = "/otp-input";
+  static const String initLocation = "/init-location";
 }

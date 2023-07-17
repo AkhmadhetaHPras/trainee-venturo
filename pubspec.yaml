@@ -28,6 +28,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  app_settings: ^5.0.0
   cupertino_icons: ^1.0.2
   dio: ^5.2.1+1
   firebase_analytics: ^10.4.3
@@ -35,8 +36,11 @@ dependencies:
   firebase_core: ^2.14.0
   flutter:
     sdk: flutter
+  flutter_conditional_rendering: ^2.0.0
   flutter_easyloading: ^3.0.5
   flutter_screenutil: ^5.7.0
+  geocoding: ^2.1.0
+  geolocator: ^9.0.2
   get: ^4.6.5
   google_fonts: ^4.0.4
   google_sign_in: ^6.1.4
