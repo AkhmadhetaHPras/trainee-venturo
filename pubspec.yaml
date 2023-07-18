@@ -29,6 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   app_settings: ^5.0.0
+  cached_network_image: ^3.2.3
   cupertino_icons: ^1.0.2
   dio: ^5.2.1+1
   firebase_analytics: ^10.4.3
@@ -39,14 +40,17 @@ dependencies:
   flutter_conditional_rendering: ^2.0.0
   flutter_easyloading: ^3.0.5
   flutter_screenutil: ^5.7.0
+  flutter_slidable: ^3.0.0
   geocoding: ^2.1.0
   geolocator: ^9.0.2
   get: ^4.6.5
   google_fonts: ^4.0.4
   google_sign_in: ^6.1.4
   hive_flutter: ^1.1.0
+  loadmore: ^2.1.0
   panara_dialogs: ^0.1.4
   pinput: ^2.2.31
+  pull_to_refresh: ^2.0.0
   sentry_flutter: ^7.8.0
 
 dev_dependencies:

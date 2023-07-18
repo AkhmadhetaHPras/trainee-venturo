@@ -8,4 +8,5 @@ class ImageConstant {
   static const String icApple = "assets/images/ic_apple.png";
   static const String bgPattern2 = "assets/images/bg_pattern_2.png";
   static const String bgLocation = "assets/images/bg_location.png";
+  static const String foodCover = "assets/images/ic_food_cover.png";
 }

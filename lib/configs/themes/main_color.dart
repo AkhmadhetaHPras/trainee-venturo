@@ -10,6 +10,7 @@ class MainColor {
   static const Color danger = Color(0xffdc3545);
   static const Color warning = Color(0xffffc107);
   static const Color info = Color(0xff17a2b8);
+  static const Color dark = Color(0xFF2E2E2E);
 
   static const Color white = Color(0xffffffff);
   static const Color black = Color(0xff333333);
