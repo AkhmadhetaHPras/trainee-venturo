@@ -2,54 +2,30 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:trainee/configs/routes/main_route.dart';
 
-class PromoCard extends StatelessWidget {
-  const PromoCard({
-    super.key,
-    this.enableShadow,
-    required this.promoName,
-    required this.discountNominal,
-    required this.thumbnailUrl,
-    this.width,
-  });
-
-  final bool? enableShadow;
-  final String promoName;
-  final String discountNominal;
-  final String thumbnailUrl;
-  final double? width;
+class DiscountCard extends StatelessWidget {
+  const DiscountCard({super.key});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        Get.toNamed(MainRoute.detailPromo);
-      },
+      onTap: () {},
       borderRadius: BorderRadius.circular(15.r),
       child: Container(
-        width: width ?? 282.w,
-        height: 188.h,
+        width: double.infinity,
+        height: 180,
         decoration: BoxDecoration(
           color: Theme.of(context).primaryColor,
           borderRadius: BorderRadius.circular(15.r),
           image: DecorationImage(
-              image: CachedNetworkImageProvider(
-                thumbnailUrl,
+              image: const CachedNetworkImageProvider(
+                "https://javacode.landa.id/img/promo/gambar_62661b52223ff.png",
               ),
               fit: BoxFit.cover,
               colorFilter: ColorFilter.mode(
                 Theme.of(context).primaryColor.withAlpha(150),
                 BlendMode.srcATop,
               )),
-          boxShadow: [
-            if (enableShadow == true)
-              const BoxShadow(
-                color: Color.fromARGB(115, 71, 70, 70),
-                offset: Offset(0, 2),
-                blurRadius: 8,
-              ),
-          ],
         ),
         child: Padding(
           padding: EdgeInsets.all(16.w),
@@ -68,7 +44,7 @@ class PromoCard extends StatelessWidget {
                   ),
                   children: [
                     TextSpan(
-                      text: ' $discountNominal %',
+                      text: ' 10 %',
                       style: Get.textTheme.displaySmall?.copyWith(
                         fontWeight: FontWeight.w800,
                         foreground: Paint()
@@ -81,7 +57,7 @@ class PromoCard extends StatelessWidget {
                 ),
               ),
               Text(
-                promoName,
+                "Mengikuti kegiatan tahsin/mengaji",
                 textAlign: TextAlign.center,
                 style: Get.textTheme.labelMedium?.copyWith(
                   color: Colors.white,

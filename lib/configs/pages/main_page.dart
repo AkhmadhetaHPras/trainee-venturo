@@ -4,6 +4,7 @@ import 'package:trainee/modules/features/counter/binddings/conter_bindding.dart'
 import 'package:trainee/modules/features/counter/views/ui/conter_view.dart';
 import 'package:trainee/modules/features/initial/bindings/location_binding.dart';
 import 'package:trainee/modules/features/menu/views/ui/menu_view.dart';
+import 'package:trainee/modules/features/promo/views/ui/promo_view.dart';
 import 'package:trainee/modules/features/splash/bindings/splash_binding.dart';
 
 import '../../modules/features/forgot_password/bindings/forgot_password_binding.dart';
@@ -63,6 +64,10 @@ abstract class MainPage {
     GetPage(
       name: MainRoute.detailMenu,
       page: () => const MenuView(),
+    ),
+    GetPage(
+      name: MainRoute.detailPromo,
+      page: () => const PromoView(),
     ),
   ];
 }

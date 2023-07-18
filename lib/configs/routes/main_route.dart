@@ -9,4 +9,5 @@ abstract class MainRoute {
   static const String initLocation = "/init-location";
   static const String list = '/list';
   static const String detailMenu = '/detail-menu';
+  static const String detailPromo = '/detail-promo';
 }

@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import 'package:trainee/configs/themes/main_color.dart';
 import 'package:trainee/shared/styles/google_text_style.dart';
 
-class DetailMenuAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const DetailMenuAppBar({
+class DetailPromoAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const DetailPromoAppBar({
     super.key,
   });
 
@@ -34,21 +34,29 @@ class DetailMenuAppBar extends StatelessWidget implements PreferredSizeWidget {
       child: Row(
         children: [
           IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: const Icon(Icons.arrow_back),
-          ),
+              onPressed: () {
+                Get.back();
+              },
+              icon: const Icon(Icons.arrow_back)),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.only(right: 35.0),
-              child: Text(
-                "Detail Menu",
-                style: GoogleTextStyle.fw700.copyWith(
-                  fontSize: 20.sp,
-                  color: MainColor.dark,
-                ),
-                textAlign: TextAlign.center,
+              padding: const EdgeInsets.only(right: 55.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(Icons.discount),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    "Promo",
+                    style: GoogleTextStyle.fw700.copyWith(
+                      fontSize: 20.sp,
+                      color: MainColor.dark,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
               ),
             ),
           ),
