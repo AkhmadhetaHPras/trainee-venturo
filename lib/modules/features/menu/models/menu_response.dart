@@ -1,3 +1,5 @@
+import 'package:trainee/modules/features/menu/views/components/option_section.dart';
+
 class DetailMenuResponse {
   int? statusCode;
   Data? data;
@@ -66,9 +68,11 @@ class Menu {
   }
 }
 
-class Topping {
+class Topping extends CommonModel {
+  @override
   int? idDetail;
   int? idMenu;
+  @override
   String? keterangan;
   String? type;
   int? harga;
@@ -92,9 +96,11 @@ class Topping {
   }
 }
 
-class Level {
+class Level extends CommonModel {
+  @override
   int? idDetail;
   int? idMenu;
+  @override
   String? keterangan;
   String? type;
   int? harga;
@@ -116,4 +122,9 @@ class Level {
       harga: json['harga'],
     );
   }
+}
+
+abstract class CommonModel {
+  String? get keterangan;
+  int? get idDetail;
 }
