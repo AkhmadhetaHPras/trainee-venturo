@@ -3,6 +3,7 @@ import 'package:trainee/configs/routes/main_route.dart';
 import 'package:trainee/modules/features/counter/binddings/conter_bindding.dart';
 import 'package:trainee/modules/features/counter/views/ui/conter_view.dart';
 import 'package:trainee/modules/features/initial/bindings/location_binding.dart';
+import 'package:trainee/modules/features/menu/bindings/menu_binding.dart';
 import 'package:trainee/modules/features/menu/views/ui/menu_view.dart';
 import 'package:trainee/modules/features/promo/bindings/promo_binding.dart';
 import 'package:trainee/modules/features/promo/views/ui/promo_view.dart';
@@ -65,6 +66,7 @@ abstract class MainPage {
     GetPage(
       name: MainRoute.detailMenu,
       page: () => const MenuView(),
+      binding: MenuBinding(),
     ),
     GetPage(
       name: MainRoute.detailPromo,

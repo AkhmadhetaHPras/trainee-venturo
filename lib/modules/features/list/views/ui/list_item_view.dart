@@ -151,7 +151,8 @@ class ListItemView extends StatelessWidget {
                                   // } else {
                                   //   ListController.to.selectedItems.add(item);
                                   // }
-                                  Get.toNamed(MainRoute.detailMenu);
+                                  Get.toNamed(MainRoute.detailMenu,
+                                      arguments: item.idMenu);
                                 },
                               ),
                             ),

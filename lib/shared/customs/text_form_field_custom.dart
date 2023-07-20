@@ -9,7 +9,7 @@ class TextFormFieldCustom extends StatelessWidget {
     required this.controller,
     required this.keyboardType,
     this.initialValue,
-    required this.label,
+    this.label,
     required this.hint,
     this.isPassword = false,
     this.isRequired = false,
@@ -21,7 +21,7 @@ class TextFormFieldCustom extends StatelessWidget {
   final TextEditingController controller;
   final TextInputType keyboardType;
   final String? initialValue;
-  final String label;
+  final String? label;
   final String hint;
   final bool isPassword;
   final bool isRequired;
@@ -31,17 +31,18 @@ class TextFormFieldCustom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var text2 = Text(
+      label ?? "",
+      style: GoogleTextStyle.fw400.copyWith(
+        fontSize: 14.sp,
+        color: MainColor.black,
+      ),
+    );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(
-          label,
-          style: GoogleTextStyle.fw400.copyWith(
-            fontSize: 14.sp,
-            color: MainColor.black,
-          ),
-        ),
+        label != null ? text2 : SizedBox(),
         TextFormField(
           keyboardType: keyboardType,
           obscureText: isPassword,
