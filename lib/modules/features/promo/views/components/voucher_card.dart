@@ -4,7 +4,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class VoucherCard extends StatelessWidget {
-  const VoucherCard({super.key});
+  const VoucherCard({
+    super.key,
+    this.thumbnail,
+    required this.nama,
+    required this.nominal,
+  });
+
+  final String? thumbnail;
+  final String nama;
+  final int nominal;
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +27,9 @@ class VoucherCard extends StatelessWidget {
           color: Theme.of(context).primaryColor,
           borderRadius: BorderRadius.circular(15.r),
           image: DecorationImage(
-              image: const CachedNetworkImageProvider(
-                "https://javacode.landa.id/img/promo/gambar_62661b5e24f48.png",
+              image: CachedNetworkImageProvider(
+                thumbnail ??
+                    "https://javacode.landa.id/img/promo/gambar_62661b5e24f48.png",
               ),
               fit: BoxFit.cover,
               colorFilter: ColorFilter.mode(
@@ -41,7 +51,7 @@ class VoucherCard extends StatelessWidget {
                 ),
               ),
               Text(
-                'Rp. 200.000',
+                'Rp. $nominal',
                 style: Get.textTheme.displaySmall?.copyWith(
                   fontWeight: FontWeight.w800,
                   foreground: Paint()
@@ -51,7 +61,7 @@ class VoucherCard extends StatelessWidget {
                 ),
               ),
               Text(
-                "Berhasil mereferensikan rekan/teman untuk menjadi karyawan",
+                nama,
                 textAlign: TextAlign.center,
                 style: Get.textTheme.labelMedium?.copyWith(
                   color: Colors.white,

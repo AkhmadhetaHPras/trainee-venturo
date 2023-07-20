@@ -1,8 +1,10 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:trainee/configs/themes/main_color.dart';
+import 'package:trainee/modules/features/promo/controllers/detail_promo_controller.dart';
 import 'package:trainee/modules/features/promo/views/components/detail_menu_app_bar.dart';
+import 'package:trainee/modules/features/promo/views/components/discount_card.dart';
 import 'package:trainee/modules/features/promo/views/components/voucher_card.dart';
 import 'package:trainee/shared/styles/google_text_style.dart';
 
@@ -20,10 +22,21 @@ class PromoView extends StatelessWidget {
         body: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Center(
+            Center(
               child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 24),
-                child: VoucherCard(),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 24),
+                child: DetailPromoController.to.promo.value.type! == "voucher"
+                    ? VoucherCard(
+                        nama: DetailPromoController.to.promo.value.nama!,
+                        nominal: DetailPromoController.to.promo.value.nominal!,
+                        thumbnail: DetailPromoController.to.promo.value.foto,
+                      )
+                    : DiscountCard(
+                        nama: DetailPromoController.to.promo.value.nama!,
+                        discount: DetailPromoController.to.promo.value.diskon!,
+                        thumbnail: DetailPromoController.to.promo.value.foto,
+                      ),
               ),
             ),
             Expanded(
@@ -54,7 +67,7 @@ class PromoView extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10.0),
                         child: Text(
-                          "Berhasil mereferensikan rekan/teman untuk menjadi karyawan",
+                          DetailPromoController.to.promo.value.nama!,
                           style: GoogleTextStyle.fw700.copyWith(
                             fontSize: 20.sp,
                             color: MainColor.primary,
@@ -91,15 +104,17 @@ class PromoView extends StatelessWidget {
                                     color: MainColor.dark,
                                   ),
                                 ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea vommodo consequat.",
-                                  style: GoogleTextStyle.fw400.copyWith(
-                                    fontSize: 12.sp,
-                                    color: MainColor.dark,
-                                  ),
+                                Html(
+                                  data: DetailPromoController
+                                      .to.promo.value.syaratKetentuan!,
+                                  style: {
+                                    "p": Style(
+                                        fontSize: FontSize(12),
+                                        margin: Margins.only(left: -8),
+                                        fontWeight: FontWeight.w300,
+                                        color: MainColor.dark,
+                                        fontFamily: "Montserrat"),
+                                  },
                                 ),
                               ],
                             ),

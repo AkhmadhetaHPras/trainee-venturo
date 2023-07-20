@@ -40,21 +40,29 @@ class ListItemView extends StatelessWidget {
                   child: SizedBox(
                     width: 1.sw,
                     height: 188.h,
-                    child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      shrinkWrap: true,
-                      padding: EdgeInsets.symmetric(horizontal: 25.w),
-                      itemBuilder: (context, index) {
-                        return PromoCard(
-                          enableShadow: false,
-                          promoName: 'Promo $index',
-                          discountNominal: '${index * 10}',
-                          thumbnailUrl:
-                              "https://javacode.landa.id/img/promo/gambar_62661b52223ff.png",
-                        );
-                      },
-                      separatorBuilder: (context, index) => 26.horizontalSpace,
-                      itemCount: 2,
+                    child: Obx(
+                      () => ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        shrinkWrap: true,
+                        padding: EdgeInsets.symmetric(horizontal: 25.w),
+                        itemBuilder: (context, index) {
+                          final promo = ListController.to.promos[index];
+                          return PromoCard(
+                            id: promo.idPromo!,
+                            termCondition: promo.syaratKetentuan,
+                            type: promo.type!,
+                            enableShadow: false,
+                            promoName: promo.nama!,
+                            discountNominal: promo.diskon,
+                            voucherNominal: promo.nominal,
+                            thumbnailUrl: promo.foto ??
+                                "https://javacode.landa.id/img/promo/gambar_62661b52223ff.png",
+                          );
+                        },
+                        separatorBuilder: (context, index) =>
+                            26.horizontalSpace,
+                        itemCount: ListController.to.promos.length,
+                      ),
                     ),
                   ),
                 ),

@@ -4,8 +4,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class DiscountCard extends StatelessWidget {
-  const DiscountCard({super.key});
+  const DiscountCard({
+    super.key,
+    this.thumbnail,
+    required this.nama,
+    required this.discount,
+  });
 
+  final String? thumbnail;
+  final String nama;
+  final int discount;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -18,8 +26,9 @@ class DiscountCard extends StatelessWidget {
           color: Theme.of(context).primaryColor,
           borderRadius: BorderRadius.circular(15.r),
           image: DecorationImage(
-              image: const CachedNetworkImageProvider(
-                "https://javacode.landa.id/img/promo/gambar_62661b52223ff.png",
+              image: CachedNetworkImageProvider(
+                thumbnail ??
+                    "https://javacode.landa.id/img/promo/gambar_62661b52223ff.png",
               ),
               fit: BoxFit.cover,
               colorFilter: ColorFilter.mode(
@@ -44,7 +53,7 @@ class DiscountCard extends StatelessWidget {
                   ),
                   children: [
                     TextSpan(
-                      text: ' 10 %',
+                      text: ' $discount %',
                       style: Get.textTheme.displaySmall?.copyWith(
                         fontWeight: FontWeight.w800,
                         foreground: Paint()
@@ -57,7 +66,7 @@ class DiscountCard extends StatelessWidget {
                 ),
               ),
               Text(
-                "Mengikuti kegiatan tahsin/mengaji",
+                nama,
                 textAlign: TextAlign.center,
                 style: Get.textTheme.labelMedium?.copyWith(
                   color: Colors.white,

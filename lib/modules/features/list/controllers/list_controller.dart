@@ -3,6 +3,7 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:trainee/modules/features/list/models/menu_response.dart';
 
+import '../models/promo_response.dart';
 import '../repositories/list_repository.dart';
 
 class ListController extends GetxController {
@@ -10,6 +11,7 @@ class ListController extends GetxController {
   late final ListRepository repository;
   final RxInt page = 0.obs;
   final RxList<MenuData> items = <MenuData>[].obs;
+  final RxList<PromoData> promos = <PromoData>[].obs;
   final RxList<MenuData> selectedItems = <MenuData>[].obs;
   final RxBool canLoadMore = true.obs;
   final RxString selectedCategory = 'semua menu'.obs;
@@ -26,6 +28,7 @@ class ListController extends GetxController {
   void onInit() async {
     super.onInit();
     repository = ListRepository();
+    await getPromos();
     await getListOfData();
   }
 
@@ -73,6 +76,22 @@ class ListController extends GetxController {
 
       refreshController.loadFailed();
       return false;
+    }
+  }
+
+  Future getPromos() async {
+    try {
+      final promoResponse = await repository.getPromos();
+      promos.clear();
+
+      if (promoResponse?.data != null) {
+        promos.addAll(promoResponse!.data!);
+      }
+    } catch (exception, stacktrace) {
+      await Sentry.captureException(
+        exception,
+        stackTrace: stacktrace,
+      );
     }
   }
 }

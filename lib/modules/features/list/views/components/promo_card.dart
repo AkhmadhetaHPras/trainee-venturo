@@ -3,28 +3,109 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:trainee/configs/routes/main_route.dart';
+import 'package:trainee/modules/features/list/models/promo_response.dart';
 
 class PromoCard extends StatelessWidget {
   const PromoCard({
     super.key,
     this.enableShadow,
     required this.promoName,
-    required this.discountNominal,
+    required this.type,
+    this.discountNominal,
+    this.voucherNominal,
     required this.thumbnailUrl,
     this.width,
+    required this.id,
+    this.termCondition,
   });
 
+  final int id;
+  final String type;
+  final String? termCondition;
   final bool? enableShadow;
   final String promoName;
-  final String discountNominal;
+  final int? discountNominal;
+  final int? voucherNominal;
   final String thumbnailUrl;
   final double? width;
 
   @override
   Widget build(BuildContext context) {
+    final discount = [
+      Text.rich(
+        softWrap: true,
+        textAlign: TextAlign.center,
+        TextSpan(
+          text: 'Diskon',
+          style: Get.textTheme.titleLarge?.copyWith(
+            fontWeight: FontWeight.w800,
+            color: Colors.white,
+          ),
+          children: [
+            TextSpan(
+              text: ' $discountNominal %',
+              style: Get.textTheme.displaySmall?.copyWith(
+                fontWeight: FontWeight.w800,
+                foreground: Paint()
+                  ..style = PaintingStyle.stroke
+                  ..strokeWidth = 1
+                  ..color = Colors.white,
+              ),
+            ),
+          ],
+        ),
+      ),
+      Text(
+        promoName,
+        textAlign: TextAlign.center,
+        style: Get.textTheme.labelMedium?.copyWith(
+          color: Colors.white,
+        ),
+      ),
+    ];
+
+    final voucher = [
+      Text(
+        'Voucher',
+        style: Get.textTheme.titleLarge?.copyWith(
+          fontWeight: FontWeight.w800,
+          color: Colors.white,
+        ),
+      ),
+      Text(
+        'Rp. $voucherNominal',
+        style: Get.textTheme.displaySmall?.copyWith(
+          fontWeight: FontWeight.w800,
+          fontSize: 32.sp,
+          foreground: Paint()
+            ..style = PaintingStyle.stroke
+            ..strokeWidth = 1
+            ..color = Colors.white,
+        ),
+      ),
+      Text(
+        promoName,
+        textAlign: TextAlign.center,
+        style: Get.textTheme.labelMedium?.copyWith(
+          color: Colors.white,
+        ),
+      ),
+    ];
+
     return InkWell(
       onTap: () {
-        Get.toNamed(MainRoute.detailPromo);
+        Get.toNamed(
+          MainRoute.detailPromo,
+          arguments: PromoData(
+            idPromo: id,
+            syaratKetentuan: termCondition,
+            nama: promoName,
+            type: type,
+            diskon: discountNominal,
+            nominal: voucherNominal,
+            foto: thumbnailUrl,
+          ),
+        );
       },
       borderRadius: BorderRadius.circular(15.r),
       child: Container(
@@ -56,38 +137,7 @@ class PromoCard extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text.rich(
-                softWrap: true,
-                textAlign: TextAlign.center,
-                TextSpan(
-                  text: 'Diskon',
-                  style: Get.textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.w800,
-                    color: Colors.white,
-                  ),
-                  children: [
-                    TextSpan(
-                      text: ' $discountNominal %',
-                      style: Get.textTheme.displaySmall?.copyWith(
-                        fontWeight: FontWeight.w800,
-                        foreground: Paint()
-                          ..style = PaintingStyle.stroke
-                          ..strokeWidth = 1
-                          ..color = Colors.white,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Text(
-                promoName,
-                textAlign: TextAlign.center,
-                style: Get.textTheme.labelMedium?.copyWith(
-                  color: Colors.white,
-                ),
-              ),
-            ],
+            children: type == "voucher" ? voucher : discount,
           ),
         ),
       ),

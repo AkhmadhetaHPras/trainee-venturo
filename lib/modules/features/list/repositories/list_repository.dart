@@ -1,4 +1,5 @@
 import 'package:sentry_flutter/sentry_flutter.dart';
+import 'package:trainee/modules/features/list/models/promo_response.dart';
 
 import '../../../../utils/services/http_service.dart';
 import '../../../../utils/services/local_storage_service.dart';
@@ -43,7 +44,6 @@ class ListRepository {
         final data = MenuResponse.fromJson(response.data);
         return data;
       } else {
-        print('API Error: ${response.statusCode} - ${response.data}');
         throw Exception('API Error');
       }
     } catch (exception, stackTrace) {
@@ -56,6 +56,30 @@ class ListRepository {
         data: null,
         errors: ['An error occurred while fetching menu data.'],
       );
+    }
+  }
+
+  Future<PromoResponse?> getPromos() async {
+    try {
+      var dio =
+          HttpService.dioCall(token: await LocalStorageService.getToken());
+
+      final response = await dio.get(
+        '/promo/all',
+      );
+
+      if (response.statusCode == 200) {
+        final data = PromoResponse.fromJson(response.data);
+        return data;
+      } else {
+        throw Exception('API Error');
+      }
+    } catch (exception, stacktrace) {
+      await Sentry.captureException(
+        exception,
+        stackTrace: stacktrace,
+      );
+      return null;
     }
   }
 }
