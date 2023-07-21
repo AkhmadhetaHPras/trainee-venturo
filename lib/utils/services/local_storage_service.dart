@@ -2,7 +2,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:trainee/modules/features/sign_in/models/sign_in_response.dart';
-import 'package:trainee/modules/global_models/menu.dart';
+import 'package:trainee/modules/global_models/menu_cart.dart';
 
 class LocalStorageService extends GetxService {
   LocalStorageService._();
@@ -41,13 +41,13 @@ class LocalStorageService extends GetxService {
   }
 
   // Method to save the cart data to Hive
-  static Future<void> saveCartData(List<Menu> cartItems) async {
+  static Future<void> saveCartData(List<MenuCart> cartItems) async {
     await box.put('cartItems', cartItems);
   }
 
   // Method to retrieve the cart data from Hive
-  static Future<List<Menu>> getCartData() async {
+  static Future<List<MenuCart>> getCartData() async {
     final cartItems = box.get('cartItems', defaultValue: []);
-    return List<Menu>.from(cartItems);
+    return List<MenuCart>.from(cartItems);
   }
 }

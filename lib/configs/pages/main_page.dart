@@ -1,5 +1,6 @@
 import 'package:get/route_manager.dart';
 import 'package:trainee/configs/routes/main_route.dart';
+import 'package:trainee/modules/features/cart/views/ui/cart_view.dart';
 import 'package:trainee/modules/features/counter/binddings/conter_bindding.dart';
 import 'package:trainee/modules/features/counter/views/ui/conter_view.dart';
 import 'package:trainee/modules/features/initial/bindings/location_binding.dart';
@@ -72,6 +73,10 @@ abstract class MainPage {
       name: MainRoute.detailPromo,
       page: () => const PromoView(),
       binding: PromoBinding(),
+    ),
+    GetPage(
+      name: MainRoute.cart,
+      page: () => const CartView(),
     ),
   ];
 }

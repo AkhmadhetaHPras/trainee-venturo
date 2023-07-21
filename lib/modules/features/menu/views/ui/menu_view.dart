@@ -7,7 +7,7 @@ import 'package:trainee/modules/features/menu/views/components/notes_section.dar
 import 'package:trainee/modules/features/menu/views/components/price_section.dart';
 import 'package:trainee/modules/features/menu/views/components/topping_section.dart';
 import 'package:trainee/modules/global_controllers/cart_controller.dart';
-import 'package:trainee/modules/global_models/menu.dart';
+import 'package:trainee/modules/global_models/menu_cart.dart';
 import 'package:trainee/shared/customs/bottom_navigation.dart';
 import 'package:trainee/shared/customs/custom_app_bar.dart';
 import 'package:trainee/shared/styles/google_text_style.dart';
@@ -147,10 +147,15 @@ class MenuView extends StatelessWidget {
                       ElevatedButton(
                         onPressed: () async {
                           await CartController.to.addToCart(
-                            Menu(
+                            MenuCart(
                               idMenu:
                                   DetailMenuController.to.menu.value.idMenu!,
+                              nama: DetailMenuController.to.menu.value.nama!,
                               harga: DetailMenuController.to.menu.value.harga!,
+                              deskripsi:
+                                  DetailMenuController.to.menu.value.deskripsi,
+                              foto: DetailMenuController.to.menu.value.foto ??
+                                  "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/240px-No_image_available.svg.png",
                               level: DetailMenuController
                                       .to.selectedLevel.value?.idDetail ??
                                   0,
@@ -160,6 +165,10 @@ class MenuView extends StatelessWidget {
                                     0
                               ],
                               jumlah: DetailMenuController.to.quantity.value,
+                              catatan:
+                                  DetailMenuController.to.catatan.value.isEmpty
+                                      ? null
+                                      : DetailMenuController.to.catatan.value,
                             ),
                           );
                         },

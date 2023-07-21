@@ -1,8 +1,8 @@
 import 'package:hive_flutter/adapters.dart';
-part 'menu.g.dart';
+part 'menu_cart.g.dart';
 
 @HiveType(typeId: 0)
-class Menu extends HiveObject {
+class MenuCart extends HiveObject {
   @HiveField(0)
   int idMenu;
 
@@ -18,21 +18,27 @@ class Menu extends HiveObject {
   @HiveField(4)
   int jumlah;
 
-  Menu({
+  @HiveField(5)
+  String? catatan;
+
+  @HiveField(6)
+  String? foto;
+
+  @HiveField(7)
+  String? deskripsi;
+
+  @HiveField(8)
+  String nama;
+
+  MenuCart({
     required this.idMenu,
     required this.harga,
     required this.level,
     required this.topping,
     required this.jumlah,
+    required this.nama,
+    this.catatan,
+    this.deskripsi,
+    this.foto,
   });
-
-  factory Menu.fromJson(Map<String, dynamic> json) {
-    return Menu(
-      idMenu: json['id_menu'],
-      harga: json['harga'],
-      level: json['level'],
-      topping: List<int>.from(json['topping']),
-      jumlah: json['jumlah'],
-    );
-  }
 }

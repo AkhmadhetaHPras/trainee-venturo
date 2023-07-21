@@ -1,14 +1,15 @@
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-import 'package:trainee/modules/global_models/menu.dart';
+import 'package:trainee/configs/routes/main_route.dart';
 
 import '../../configs/themes/main_color.dart';
 import '../../utils/services/local_storage_service.dart';
+import '../global_models/menu_cart.dart';
 
 class CartController extends GetxController {
   static CartController get to => Get.find();
 
-  final RxList<Menu> cartItems = <Menu>[].obs;
+  final RxList<MenuCart> cartItems = <MenuCart>[].obs;
 
   @override
   void onReady() async {
@@ -18,7 +19,7 @@ class CartController extends GetxController {
   }
 
   // Method to add an item to the cart and save to Hive
-  Future addToCart(Menu menu) async {
+  Future addToCart(MenuCart menu) async {
     EasyLoading.show(
       status: 'Sedang Diproses...',
       maskType: EasyLoadingMaskType.black,
@@ -27,23 +28,17 @@ class CartController extends GetxController {
     cartItems.add(menu);
     await LocalStorageService.saveCartData(cartItems.toList());
     EasyLoading.dismiss();
-    Get.snackbar(
-      "Berhasil",
-      "Menu telah ditambahkan ke keranjang",
-      duration: const Duration(milliseconds: 1500),
-      backgroundColor: MainColor.white,
-      snackPosition: SnackPosition.BOTTOM,
-    );
+    Get.toNamed(MainRoute.cart);
   }
 
   // Method to remove an item from the cart and save to Hive
-  void removeFromCart(Menu menu) async {
+  void removeFromCart(MenuCart menu) async {
     cartItems.remove(menu);
     await LocalStorageService.saveCartData(cartItems.toList());
   }
 
   // Method to update an item in the cart and save to Hive
-  void updateCartItem(int index, Menu updatedMenu) async {
+  void updateCartItem(int index, MenuCart updatedMenu) async {
     if (index >= 0 && index < cartItems.length) {
       cartItems[index] = updatedMenu;
       await LocalStorageService.saveCartData(cartItems.toList());
@@ -52,14 +47,15 @@ class CartController extends GetxController {
 
   // Method to load cart data from Hive during initialization
   Future<void> loadCartData() async {
-    final List<Menu> savedCartItems = await LocalStorageService.getCartData();
+    final List<MenuCart> savedCartItems =
+        await LocalStorageService.getCartData();
     cartItems.addAll(savedCartItems);
   }
 
   // Get the total price of items in the cart
   int getTotalPrice() {
     int totalPrice = 0;
-    for (Menu menu in cartItems) {
+    for (MenuCart menu in cartItems) {
       totalPrice += menu.harga * menu.jumlah;
     }
     return totalPrice;
