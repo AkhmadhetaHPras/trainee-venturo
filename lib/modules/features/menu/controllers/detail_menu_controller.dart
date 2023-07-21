@@ -17,6 +17,7 @@ class DetailMenuController extends GetxController {
 
   final Rx<Level?> selectedLevel = Level().obs;
   final Rx<Topping?> selectedTopping = Topping().obs;
+  final RxInt quantity = 1.obs;
   late RxString catatan;
   late TextEditingController catatanTextController;
 
@@ -57,5 +58,13 @@ class DetailMenuController extends GetxController {
         stackTrace: stacktrace,
       );
     }
+  }
+
+  addQty() {
+    quantity.value += 1;
+  }
+
+  minQty() {
+    if (quantity > 1) quantity.value -= 1;
   }
 }

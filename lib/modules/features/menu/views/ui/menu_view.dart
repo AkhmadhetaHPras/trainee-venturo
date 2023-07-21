@@ -62,18 +62,38 @@ class MenuView extends StatelessWidget {
                           const Expanded(child: SizedBox()),
                           Material(
                             color: Colors.transparent,
-                            child: IconButton(
-                              onPressed: () {},
-                              icon: const Icon(
-                                  Icons.indeterminate_check_box_outlined),
+                            child: Obx(
+                              () => IconButton(
+                                onPressed:
+                                    DetailMenuController.to.quantity.value > 1
+                                        ? () {
+                                            DetailMenuController.to.minQty();
+                                          }
+                                        : () {},
+                                icon: Icon(
+                                  Icons.indeterminate_check_box_outlined,
+                                  color:
+                                      DetailMenuController.to.quantity.value > 1
+                                          ? MainColor.primary
+                                          : MainColor.grey,
+                                ),
+                              ),
                             ),
                           ),
-                          const Text("1"),
+                          Obx(
+                            () => Text(
+                              DetailMenuController.to.quantity.value.toString(),
+                            ),
+                          ),
                           Material(
                             color: Colors.transparent,
                             child: IconButton(
-                              onPressed: () {},
-                              icon: const Icon(Icons.add_box_outlined),
+                              onPressed: () {
+                                DetailMenuController.to.addQty();
+                              },
+                              icon: const Icon(
+                                Icons.add_box_outlined,
+                              ),
                             ),
                           ),
                         ],

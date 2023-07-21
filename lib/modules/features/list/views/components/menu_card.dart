@@ -52,6 +52,10 @@ class MenuCard extends StatelessWidget {
                     'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/240px-No_image_available.svg.png',
                 useOldImageOnUrlChange: true,
                 fit: BoxFit.contain,
+                errorWidget: (context, url, error) => Image.network(
+                  'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/240px-No_image_available.svg.png',
+                  fit: BoxFit.contain,
+                ),
               ),
             ),
 
