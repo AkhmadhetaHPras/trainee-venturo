@@ -1,5 +1,3 @@
-import 'package:trainee/modules/features/menu/views/components/option_section.dart';
-
 class DetailMenuResponse {
   int? statusCode;
   Data? data;

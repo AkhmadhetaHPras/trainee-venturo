@@ -25,7 +25,6 @@ class ListRepository {
 
   void updateData(MenuResponse response) {
     data.clear();
-    print("response: ${response.data}");
     if (response.data != null) {
       data.addAll(response.data!);
     }

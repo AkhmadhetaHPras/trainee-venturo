@@ -10,12 +10,14 @@ import 'package:trainee/configs/themes/main_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'modules/global_binddings/global_binding.dart';
+import 'modules/global_models/menu.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   /// Localstorage init
   await Hive.initFlutter();
+  Hive.registerAdapter(MenuAdapter());
   await Hive.openBox("venturo");
 
   // firebase init

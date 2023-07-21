@@ -6,6 +6,8 @@ import 'package:trainee/modules/features/menu/views/components/level_section.dar
 import 'package:trainee/modules/features/menu/views/components/notes_section.dart';
 import 'package:trainee/modules/features/menu/views/components/price_section.dart';
 import 'package:trainee/modules/features/menu/views/components/topping_section.dart';
+import 'package:trainee/modules/global_controllers/cart_controller.dart';
+import 'package:trainee/modules/global_models/menu.dart';
 import 'package:trainee/shared/customs/bottom_navigation.dart';
 import 'package:trainee/shared/customs/custom_app_bar.dart';
 import 'package:trainee/shared/styles/google_text_style.dart';
@@ -143,7 +145,24 @@ class MenuView extends StatelessWidget {
                         ),
                       ),
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          await CartController.to.addToCart(
+                            Menu(
+                              idMenu:
+                                  DetailMenuController.to.menu.value.idMenu!,
+                              harga: DetailMenuController.to.menu.value.harga!,
+                              level: DetailMenuController
+                                      .to.selectedLevel.value?.idDetail ??
+                                  0,
+                              topping: [
+                                DetailMenuController
+                                        .to.selectedTopping.value?.idDetail ??
+                                    0
+                              ],
+                              jumlah: DetailMenuController.to.quantity.value,
+                            ),
+                          );
+                        },
                         style: EvelatedButtonStyle.mainRounded.copyWith(
                           backgroundColor: MaterialStateProperty.all<Color>(
                             MainColor.primary,
