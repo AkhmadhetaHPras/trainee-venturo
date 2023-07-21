@@ -4,10 +4,15 @@ import 'package:get/get.dart';
 import 'package:trainee/configs/themes/main_color.dart';
 import 'package:trainee/shared/styles/google_text_style.dart';
 
-class DetailPromoAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const DetailPromoAppBar({
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const CustomAppBar({
     super.key,
+    required this.icon,
+    required this.title,
   });
+
+  final IconData icon;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -44,12 +49,12 @@ class DetailPromoAppBar extends StatelessWidget implements PreferredSizeWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.discount),
+                  Icon(icon),
                   const SizedBox(
                     width: 10,
                   ),
                   Text(
-                    "Promo",
+                    title,
                     style: GoogleTextStyle.fw700.copyWith(
                       fontSize: 20.sp,
                       color: MainColor.dark,

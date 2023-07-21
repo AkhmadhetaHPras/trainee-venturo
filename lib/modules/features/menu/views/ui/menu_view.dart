@@ -1,16 +1,13 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:trainee/configs/themes/main_color.dart';
-import 'package:trainee/modules/features/menu/views/components/detail_menu_app_bar.dart';
 import 'package:trainee/modules/features/menu/views/components/level_section.dart';
 import 'package:trainee/modules/features/menu/views/components/notes_section.dart';
-import 'package:trainee/modules/features/menu/views/components/option_chip.dart';
 import 'package:trainee/modules/features/menu/views/components/price_section.dart';
 import 'package:trainee/modules/features/menu/views/components/topping_section.dart';
 import 'package:trainee/shared/customs/bottom_navigation.dart';
-import 'package:trainee/shared/customs/text_form_field_custom.dart';
+import 'package:trainee/shared/customs/custom_app_bar.dart';
 import 'package:trainee/shared/styles/google_text_style.dart';
 
 import '../../../../../shared/styles/elevated_button_style.dart';
@@ -26,7 +23,7 @@ class MenuView extends StatelessWidget {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.grey[100],
-        appBar: const DetailMenuAppBar(),
+        appBar: const CustomAppBar(icon: Icons.menu_book, title: "Detail Menu"),
         body: Column(
           mainAxisSize: MainAxisSize.min,
           children: [

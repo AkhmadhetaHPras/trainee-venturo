@@ -3,9 +3,9 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:trainee/configs/themes/main_color.dart';
 import 'package:trainee/modules/features/promo/controllers/detail_promo_controller.dart';
-import 'package:trainee/modules/features/promo/views/components/detail_menu_app_bar.dart';
 import 'package:trainee/modules/features/promo/views/components/discount_card.dart';
 import 'package:trainee/modules/features/promo/views/components/voucher_card.dart';
+import 'package:trainee/shared/customs/custom_app_bar.dart';
 import 'package:trainee/shared/styles/google_text_style.dart';
 
 import '../../../../../shared/customs/bottom_navigation.dart';
@@ -18,7 +18,10 @@ class PromoView extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.grey[100],
-        appBar: const DetailPromoAppBar(),
+        appBar: const CustomAppBar(
+          icon: Icons.discount,
+          title: "Promo",
+        ),
         body: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
