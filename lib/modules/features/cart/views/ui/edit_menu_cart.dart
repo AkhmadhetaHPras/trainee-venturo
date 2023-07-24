@@ -129,7 +129,7 @@ class EditMenuCartView extends StatelessWidget {
                                   .to
                                   .cartItems[
                                       EditMenuCartController.to.index.value]
-                                  .catatan ??
+                                  .deskripsi ??
                               "",
                           style: GoogleTextStyle.fw400.copyWith(
                             fontSize: 12.sp,
@@ -173,36 +173,6 @@ class EditMenuCartView extends StatelessWidget {
                           ],
                         ),
                       ),
-                      ElevatedButton(
-                        onPressed: () {
-                          final menu = CartController.to
-                              .cartItems[EditMenuCartController.to.index.value];
-                          CartController.to.updateCartItem(
-                            EditMenuCartController.to.index.value,
-                            MenuCart(
-                              idMenu: menu.idMenu,
-                              harga: menu.harga,
-                              level: menu.level,
-                              topping: menu.topping,
-                              jumlah: menu.jumlah,
-                              nama: menu.nama,
-                              catatan: menu.catatan,
-                              deskripsi: menu.deskripsi,
-                              foto: menu.foto,
-                            ),
-                          );
-                        },
-                        style: EvelatedButtonStyle.mainRounded.copyWith(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                            MainColor.primary,
-                          ),
-                        ),
-                        child: Text(
-                          "Simpan",
-                          style: GoogleTextStyle.fw700.copyWith(
-                              fontSize: 16.sp, color: MainColor.white),
-                        ),
-                      ),
                     ],
                   ),
                 ),
@@ -210,7 +180,54 @@ class EditMenuCartView extends StatelessWidget {
             ),
           ],
         ),
-        bottomNavigationBar: const BottomNavigation(),
+        bottomNavigationBar: Container(
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+          decoration: BoxDecoration(
+            color: MainColor.white,
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(25.r),
+            ),
+            boxShadow: const [
+              BoxShadow(
+                color: Color.fromARGB(111, 24, 24, 24),
+                blurRadius: 15,
+                spreadRadius: -1,
+                offset: Offset(0, 1),
+              ),
+            ],
+          ),
+          child: ElevatedButton(
+            onPressed: () {
+              final menu = CartController
+                  .to.cartItems[EditMenuCartController.to.index.value];
+              CartController.to.updateCartItem(
+                EditMenuCartController.to.index.value,
+                MenuCart(
+                  idMenu: menu.idMenu,
+                  harga: menu.harga,
+                  level: menu.level,
+                  topping: menu.topping,
+                  jumlah: menu.jumlah,
+                  nama: menu.nama,
+                  catatan: menu.catatan,
+                  deskripsi: menu.deskripsi,
+                  foto: menu.foto,
+                ),
+              );
+            },
+            style: EvelatedButtonStyle.mainRounded.copyWith(
+              backgroundColor: MaterialStateProperty.all<Color>(
+                MainColor.primary,
+              ),
+            ),
+            child: Text(
+              "Simpan",
+              style: GoogleTextStyle.fw700
+                  .copyWith(fontSize: 16.sp, color: MainColor.white),
+            ),
+          ),
+        ),
       ),
     );
   }
