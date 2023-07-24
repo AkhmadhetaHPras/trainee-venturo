@@ -111,18 +111,22 @@ class CartView extends StatelessWidget {
                                 const SizedBox(
                                   width: 8,
                                 ),
-                                Text(
-                                  "Diskon 20%",
-                                  style: GoogleTextStyle.fw600.copyWith(
-                                      fontSize: 18, color: MainColor.dark),
+                                Obx(
+                                  () => Text(
+                                    "Diskon ${CartController.to.discount}%",
+                                    style: GoogleTextStyle.fw600.copyWith(
+                                        fontSize: 18, color: MainColor.dark),
+                                  ),
                                 ),
                                 const Expanded(
                                   child: SizedBox(),
                                 ),
-                                Text(
-                                  "Rp. 4000",
-                                  style: GoogleTextStyle.fw400.copyWith(
-                                      fontSize: 14, color: MainColor.danger),
+                                Obx(
+                                  () => Text(
+                                    "Rp. ${CartController.to.discountPrice}",
+                                    style: GoogleTextStyle.fw400.copyWith(
+                                        fontSize: 14, color: MainColor.danger),
+                                  ),
                                 ),
                                 const Icon(
                                   Icons.keyboard_arrow_right,
@@ -239,11 +243,13 @@ class CartView extends StatelessWidget {
                                   fontSize: 12.sp,
                                 ),
                               ),
-                              Text(
-                                "Rp. 90000",
-                                style: GoogleTextStyle.fw700.copyWith(
-                                  fontSize: 20.sp,
-                                  color: MainColor.primary,
+                              Obx(
+                                () => Text(
+                                  "Rp. ${CartController.to.getGrandTotal()}",
+                                  style: GoogleTextStyle.fw700.copyWith(
+                                    fontSize: 20.sp,
+                                    color: MainColor.primary,
+                                  ),
                                 ),
                               ),
                             ],
@@ -255,13 +261,7 @@ class CartView extends StatelessWidget {
                             const Size(40, 40),
                           )),
                           onPressed: () {
-                            Get.snackbar(
-                              "Maaf",
-                              "Not Implemented",
-                              duration: const Duration(milliseconds: 2000),
-                              backgroundColor: MainColor.white,
-                              snackPosition: SnackPosition.BOTTOM,
-                            );
+                            CartController.to.verify();
                           },
                           child: Text(
                             "Pesan Sekarang",

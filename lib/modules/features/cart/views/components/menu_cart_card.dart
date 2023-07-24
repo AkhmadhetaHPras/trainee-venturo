@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:trainee/configs/routes/main_route.dart';
 import 'package:trainee/configs/themes/main_color.dart';
 import 'package:trainee/modules/global_controllers/cart_controller.dart';
 import 'package:trainee/modules/global_models/menu_cart.dart';
@@ -20,7 +21,9 @@ class MenuCartCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Get.toNamed(MainRoute.cartEditMenu, arguments: index);
+      },
       borderRadius: BorderRadius.circular(10.r),
       child: Ink(
         padding: EdgeInsets.all(7.r),

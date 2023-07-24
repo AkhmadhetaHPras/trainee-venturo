@@ -2,23 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:trainee/configs/themes/main_color.dart';
+import 'package:trainee/modules/features/cart/controllers/edit_menu_cart_controller.dart';
 import 'package:trainee/modules/features/cart/views/components/quantity_counter.dart';
 import 'package:trainee/modules/features/menu/views/components/level_section.dart';
 import 'package:trainee/modules/features/menu/views/components/notes_section.dart';
 import 'package:trainee/modules/features/menu/views/components/price_section.dart';
 import 'package:trainee/modules/features/menu/views/components/topping_section.dart';
 import 'package:trainee/modules/global_controllers/cart_controller.dart';
-import 'package:trainee/modules/global_models/menu_cart.dart';
 import 'package:trainee/shared/customs/bottom_navigation.dart';
 import 'package:trainee/shared/customs/custom_app_bar.dart';
 import 'package:trainee/shared/styles/google_text_style.dart';
 
 import '../../../../../shared/styles/elevated_button_style.dart';
-import '../../controllers/detail_menu_controller.dart';
-import '../components/menu_image.dart';
+import '../../../../global_models/menu_cart.dart';
+import '../../../menu/views/components/menu_image.dart';
 
-class MenuView extends StatelessWidget {
-  const MenuView({super.key});
+class EditMenuCartView extends StatelessWidget {
+  const EditMenuCartView({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,13 +28,14 @@ class MenuView extends StatelessWidget {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.grey[100],
-        appBar: const CustomAppBar(icon: Icons.menu_book, title: "Detail Menu"),
+        appBar: const CustomAppBar(icon: Icons.menu_book, title: "Edit Menu"),
         body: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Obx(
               () => MenuImage(
-                image: DetailMenuController.to.menu.value.foto,
+                image: CartController
+                    .to.cartItems[EditMenuCartController.to.index.value].foto,
               ),
             ),
             Expanded(
@@ -58,8 +61,11 @@ class MenuView extends StatelessWidget {
                         children: [
                           Obx(
                             () => Text(
-                              DetailMenuController.to.menu.value.nama ??
-                                  "Nama Menu",
+                              CartController
+                                  .to
+                                  .cartItems[
+                                      EditMenuCartController.to.index.value]
+                                  .nama,
                               style: GoogleTextStyle.fw700.copyWith(
                                 fontSize: 20.sp,
                                 color: MainColor.primary,
@@ -69,15 +75,49 @@ class MenuView extends StatelessWidget {
                           const Expanded(child: SizedBox()),
                           Obx(
                             () => QuantityCounter(
-                              quantity: DetailMenuController.to.quantity.value,
+                              quantity: CartController
+                                  .to
+                                  .cartItems[
+                                      EditMenuCartController.to.index.value]
+                                  .jumlah,
                               onIncrement: () {
-                                DetailMenuController.to.addQty();
+                                final menu = CartController.to.cartItems[
+                                    EditMenuCartController.to.index.value];
+                                CartController.to.updateCartItem(
+                                  EditMenuCartController.to.index.value,
+                                  MenuCart(
+                                    idMenu: menu.idMenu,
+                                    harga: menu.harga,
+                                    level: menu.level,
+                                    topping: menu.topping,
+                                    jumlah: menu.jumlah + 1,
+                                    nama: menu.nama,
+                                    catatan: menu.catatan,
+                                    deskripsi: menu.deskripsi,
+                                    foto: menu.foto,
+                                  ),
+                                );
                               },
                               onDecrement: () {
-                                DetailMenuController.to.minQty();
+                                final menu = CartController.to.cartItems[
+                                    EditMenuCartController.to.index.value];
+                                CartController.to.updateCartItem(
+                                  EditMenuCartController.to.index.value,
+                                  MenuCart(
+                                    idMenu: menu.idMenu,
+                                    harga: menu.harga,
+                                    level: menu.level,
+                                    topping: menu.topping,
+                                    jumlah: menu.jumlah - 1,
+                                    nama: menu.nama,
+                                    catatan: menu.catatan,
+                                    deskripsi: menu.deskripsi,
+                                    foto: menu.foto,
+                                  ),
+                                );
                               },
                             ),
-                          )
+                          ),
                         ],
                       ),
                       const SizedBox(
@@ -85,7 +125,12 @@ class MenuView extends StatelessWidget {
                       ),
                       Obx(
                         () => Text(
-                          DetailMenuController.to.menu.value.deskripsi ?? "",
+                          CartController
+                                  .to
+                                  .cartItems[
+                                      EditMenuCartController.to.index.value]
+                                  .catatan ??
+                              "",
                           style: GoogleTextStyle.fw400.copyWith(
                             fontSize: 12.sp,
                             color: MainColor.dark,
@@ -106,7 +151,11 @@ class MenuView extends StatelessWidget {
                               color: MainColor.dark,
                               height: 1.5,
                             ),
-                            LevelSection(),
+                            LevelSection(
+                                // selectedValue: ,
+                                // data: ,
+                                // onOptionSelected: ,
+                                ),
                             Divider(
                               color: MainColor.dark,
                               height: 1.5,
@@ -125,30 +174,21 @@ class MenuView extends StatelessWidget {
                         ),
                       ),
                       ElevatedButton(
-                        onPressed: () async {
-                          await CartController.to.addToCart(
+                        onPressed: () {
+                          final menu = CartController.to
+                              .cartItems[EditMenuCartController.to.index.value];
+                          CartController.to.updateCartItem(
+                            EditMenuCartController.to.index.value,
                             MenuCart(
-                              idMenu:
-                                  DetailMenuController.to.menu.value.idMenu!,
-                              nama: DetailMenuController.to.menu.value.nama!,
-                              harga: DetailMenuController.to.menu.value.harga!,
-                              deskripsi:
-                                  DetailMenuController.to.menu.value.deskripsi,
-                              foto: DetailMenuController.to.menu.value.foto ??
-                                  "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/240px-No_image_available.svg.png",
-                              level: DetailMenuController
-                                      .to.selectedLevel.value?.idDetail ??
-                                  0,
-                              topping: [
-                                DetailMenuController
-                                        .to.selectedTopping.value?.idDetail ??
-                                    0
-                              ],
-                              jumlah: DetailMenuController.to.quantity.value,
-                              catatan:
-                                  DetailMenuController.to.catatan.value.isEmpty
-                                      ? null
-                                      : DetailMenuController.to.catatan.value,
+                              idMenu: menu.idMenu,
+                              harga: menu.harga,
+                              level: menu.level,
+                              topping: menu.topping,
+                              jumlah: menu.jumlah,
+                              nama: menu.nama,
+                              catatan: menu.catatan,
+                              deskripsi: menu.deskripsi,
+                              foto: menu.foto,
                             ),
                           );
                         },
@@ -158,7 +198,7 @@ class MenuView extends StatelessWidget {
                           ),
                         ),
                         child: Text(
-                          "Tambahkan Ke Pesanan",
+                          "Simpan",
                           style: GoogleTextStyle.fw700.copyWith(
                               fontSize: 16.sp, color: MainColor.white),
                         ),
