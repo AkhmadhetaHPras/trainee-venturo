@@ -5,10 +5,16 @@ import 'package:get/get.dart';
 import '../../../../../configs/themes/main_color.dart';
 import '../../../../../shared/customs/text_form_field_custom.dart';
 import '../../../../../shared/styles/google_text_style.dart';
+import '../../../cart/controllers/edit_menu_cart_controller.dart';
 import '../../controllers/detail_menu_controller.dart';
 
 class NotesSection extends StatelessWidget {
-  const NotesSection({super.key});
+  const NotesSection({
+    super.key,
+    this.edit,
+  });
+
+  final bool? edit;
 
   @override
   Widget build(BuildContext context) {
@@ -58,19 +64,28 @@ class NotesSection extends StatelessWidget {
                   children: [
                     Expanded(
                       child: TextFormFieldCustom(
-                        controller:
-                            DetailMenuController.to.catatanTextController,
+                        controller: edit != null && edit == true
+                            ? EditMenuCartController.to.catatanTextController
+                            : DetailMenuController.to.catatanTextController,
                         keyboardType: TextInputType.text,
-                        initialValue: DetailMenuController.to.catatan.value,
+                        initialValue: edit != null && edit == true
+                            ? EditMenuCartController.to.catatan.value
+                            : DetailMenuController.to.catatan.value,
                         hint: "Catatan",
                       ),
                     ),
                     ElevatedButton(
                       onPressed: () {
                         Navigator.pop(context);
-
-                        DetailMenuController.to.catatan.value =
-                            DetailMenuController.to.catatanTextController.text;
+                        if (edit != null && edit == true) {
+                          EditMenuCartController.to.catatan.value =
+                              EditMenuCartController
+                                  .to.catatanTextController.text;
+                        } else {
+                          DetailMenuController.to.catatan.value =
+                              DetailMenuController
+                                  .to.catatanTextController.text;
+                        }
                       },
                       style: ElevatedButton.styleFrom(
                         fixedSize: const Size(24, 24),
@@ -107,7 +122,9 @@ class NotesSection extends StatelessWidget {
               width: 150,
               child: Obx(
                 () => Text(
-                  DetailMenuController.to.catatan.value,
+                  edit != null && edit == true
+                      ? EditMenuCartController.to.catatan.value
+                      : DetailMenuController.to.catatan.value,
                   style: GoogleTextStyle.fw400
                       .copyWith(fontSize: 18, color: MainColor.dark),
                   textAlign: TextAlign.end,

@@ -22,7 +22,13 @@ class MenuCartCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.toNamed(MainRoute.cartEditMenu, arguments: index);
+        Get.toNamed(MainRoute.cartEditMenu, arguments: [
+          index,
+          menu.idMenu,
+          menu.topping.first,
+          menu.level,
+          menu.catatan ?? ""
+        ]);
       },
       borderRadius: BorderRadius.circular(10.r),
       child: Ink(

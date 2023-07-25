@@ -6,8 +6,23 @@ import '../../../../../shared/styles/google_text_style.dart';
 import '../../controllers/detail_menu_controller.dart';
 
 class PriceSection extends StatelessWidget {
-  const PriceSection({super.key});
+  PriceSection({super.key, this.harga});
 
+  final int? harga;
+
+  Widget textPriceWidget(String text) => Text(
+        "Rp. $text",
+        style: GoogleTextStyle.fw700
+            .copyWith(fontSize: 18, color: MainColor.primary),
+      );
+
+  final Widget obxPriceWidget = Obx(
+    () => Text(
+      "Rp. ${DetailMenuController.to.menu.value.harga}",
+      style: GoogleTextStyle.fw700
+          .copyWith(fontSize: 18, color: MainColor.primary),
+    ),
+  );
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -27,13 +42,7 @@ class PriceSection extends StatelessWidget {
           const Expanded(
             child: SizedBox(),
           ),
-          Obx(
-            () => Text(
-              "Rp. ${DetailMenuController.to.menu.value.harga ?? 0}",
-              style: GoogleTextStyle.fw700
-                  .copyWith(fontSize: 18, color: MainColor.primary),
-            ),
-          )
+          harga == null ? obxPriceWidget : textPriceWidget(harga.toString())
         ],
       ),
     );

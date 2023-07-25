@@ -93,7 +93,7 @@ class MenuView extends StatelessWidget {
                           textAlign: TextAlign.start,
                         ),
                       ),
-                      const Padding(
+                      Padding(
                         padding: EdgeInsets.symmetric(vertical: 40),
                         child: Column(
                           children: [

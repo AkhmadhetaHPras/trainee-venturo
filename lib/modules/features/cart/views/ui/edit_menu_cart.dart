@@ -9,7 +9,6 @@ import 'package:trainee/modules/features/menu/views/components/notes_section.dar
 import 'package:trainee/modules/features/menu/views/components/price_section.dart';
 import 'package:trainee/modules/features/menu/views/components/topping_section.dart';
 import 'package:trainee/modules/global_controllers/cart_controller.dart';
-import 'package:trainee/shared/customs/bottom_navigation.dart';
 import 'package:trainee/shared/customs/custom_app_bar.dart';
 import 'package:trainee/shared/styles/google_text_style.dart';
 
@@ -138,35 +137,65 @@ class EditMenuCartView extends StatelessWidget {
                           textAlign: TextAlign.start,
                         ),
                       ),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 40),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 40),
                         child: Column(
                           children: [
-                            Divider(
+                            const Divider(
                               color: MainColor.dark,
                               height: 1.5,
                             ),
-                            PriceSection(),
-                            Divider(
+                            PriceSection(
+                              harga: CartController
+                                  .to
+                                  .cartItems[
+                                      EditMenuCartController.to.index.value]
+                                  .harga,
+                            ),
+                            const Divider(
                               color: MainColor.dark,
                               height: 1.5,
                             ),
-                            LevelSection(
-                                // selectedValue: ,
-                                // data: ,
-                                // onOptionSelected: ,
-                                ),
-                            Divider(
+                            Obx(
+                              () => LevelSection(
+                                selectedValue: EditMenuCartController
+                                            .to.selectedLevel.value?.idDetail !=
+                                        null
+                                    ? EditMenuCartController.to.selectedLevel
+                                    : null,
+                                data: EditMenuCartController.to.level,
+                                onOptionSelected: (level) {
+                                  EditMenuCartController.to
+                                      .selectedLevel(level);
+                                },
+                              ),
+                            ),
+                            const Divider(
                               color: MainColor.dark,
                               height: 1.5,
                             ),
-                            ToppingSection(),
-                            Divider(
+                            Obx(
+                              () => ToppingSection(
+                                selectedValue: EditMenuCartController.to
+                                            .selectedTopping.value?.idDetail !=
+                                        null
+                                    ? EditMenuCartController.to.selectedTopping
+                                    : null,
+                                data: EditMenuCartController.to.topping,
+                                onOptionSelected: (topping) {
+                                  EditMenuCartController.to
+                                      .selectedTopping(topping);
+                                },
+                              ),
+                            ),
+                            const Divider(
                               color: MainColor.dark,
                               height: 1.5,
                             ),
-                            NotesSection(),
-                            Divider(
+                            const NotesSection(
+                              edit: true,
+                            ),
+                            const Divider(
                               color: MainColor.dark,
                               height: 1.5,
                             ),
@@ -206,15 +235,21 @@ class EditMenuCartView extends StatelessWidget {
                 MenuCart(
                   idMenu: menu.idMenu,
                   harga: menu.harga,
-                  level: menu.level,
-                  topping: menu.topping,
+                  level:
+                      EditMenuCartController.to.selectedLevel.value?.idDetail ??
+                          menu.level,
+                  topping: [
+                    EditMenuCartController.to.selectedTopping.value!.idDetail!
+                  ],
                   jumlah: menu.jumlah,
                   nama: menu.nama,
-                  catatan: menu.catatan,
+                  catatan: EditMenuCartController.to.catatan.value,
                   deskripsi: menu.deskripsi,
                   foto: menu.foto,
                 ),
               );
+
+              Get.back();
             },
             style: EvelatedButtonStyle.mainRounded.copyWith(
               backgroundColor: MaterialStateProperty.all<Color>(

@@ -9,9 +9,9 @@ class LevelSection extends StatelessWidget {
   const LevelSection(
       {super.key, this.selectedValue, this.data, this.onOptionSelected});
 
-  final Rx<Level>? selectedValue;
-  final List<Level>? data;
-  final void Function(Level)? onOptionSelected;
+  final Rx<Level?>? selectedValue;
+  final RxList<Level>? data;
+  final Function(Level level)? onOptionSelected;
 
   @override
   Widget build(BuildContext context) {

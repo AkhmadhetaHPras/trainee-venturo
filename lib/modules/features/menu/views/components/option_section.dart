@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 
 import '../../../../../configs/themes/main_color.dart';
 import '../../../../../shared/styles/google_text_style.dart';
-import '../../controllers/detail_menu_controller.dart';
 import '../../models/menu_response.dart';
 import 'option_chip.dart';
 
@@ -78,8 +77,7 @@ class OptionSection<T extends CommonModel> extends StatelessWidget {
                               height: 25,
                               child: ListView.builder(
                                   scrollDirection: Axis.horizontal,
-                                  itemCount:
-                                      DetailMenuController.to.level.length,
+                                  itemCount: data.length,
                                   itemBuilder: (context, index) {
                                     final datas = data[index];
                                     return Material(
