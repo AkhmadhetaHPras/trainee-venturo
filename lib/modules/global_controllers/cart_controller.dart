@@ -3,6 +3,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:trainee/configs/routes/main_route.dart';
+import 'package:trainee/modules/global_models/voucher.dart';
 
 import '../../utils/services/local_storage_service.dart';
 import '../features/cart/views/components/fingerprint_dialog.dart';
@@ -17,6 +18,7 @@ class CartController extends GetxController {
   late final CartRepository repository;
 
   final RxList<MenuCart> cartItems = <MenuCart>[].obs;
+  final RxList<VoucherData> vouchers = <VoucherData>[].obs;
   final RxInt discountPrice = 0.obs;
   final RxInt discount = 0.obs;
 
@@ -25,6 +27,7 @@ class CartController extends GetxController {
     super.onReady();
     repository = CartRepository();
     await loadCartData();
+    await getVouchers();
     getTotalPrice();
     await getDiscount();
     await getDiscountPrice();
@@ -159,5 +162,14 @@ class CartController extends GetxController {
     );
 
     Get.back();
+  }
+
+  Future getVouchers() async {
+    final datas = await repository.getListVoucher();
+    vouchers.clear();
+
+    if (datas.data != null) {
+      vouchers.addAll(datas.data!);
+    }
   }
 }

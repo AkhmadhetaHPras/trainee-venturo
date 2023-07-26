@@ -50,13 +50,13 @@ class ListController extends GetxController {
               element.kategori == selectedCategory.value))
       .toList();
 
-  List<MenuData> get foodList => items
+  List<MenuData> get foodList => filteredList
       .where((element) =>
           element.nama!.toLowerCase().contains(keyword.value.toLowerCase()) &&
           element.kategori == 'makanan')
       .toList();
 
-  List<MenuData> get drinkList => items
+  List<MenuData> get drinkList => filteredList
       .where((element) =>
           element.nama!.toLowerCase().contains(keyword.value.toLowerCase()) &&
           element.kategori == 'minuman')
