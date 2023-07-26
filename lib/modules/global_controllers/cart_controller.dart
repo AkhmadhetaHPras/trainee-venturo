@@ -67,6 +67,12 @@ class CartController extends GetxController {
     cartItems.addAll(savedCartItems);
   }
 
+  List<MenuCart> get foodList =>
+      cartItems.where((element) => element.kategori == 'makanan').toList().obs;
+
+  List<MenuCart> get drinkList =>
+      cartItems.where((element) => element.kategori == 'minuman').toList();
+
   Future getDiscount() async {
     discount.value = await repository.getDiscount();
   }

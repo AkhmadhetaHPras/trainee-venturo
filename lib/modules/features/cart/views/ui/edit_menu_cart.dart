@@ -85,16 +85,16 @@ class EditMenuCartView extends StatelessWidget {
                                 CartController.to.updateCartItem(
                                   EditMenuCartController.to.index.value,
                                   MenuCart(
-                                    idMenu: menu.idMenu,
-                                    harga: menu.harga,
-                                    level: menu.level,
-                                    topping: menu.topping,
-                                    jumlah: menu.jumlah + 1,
-                                    nama: menu.nama,
-                                    catatan: menu.catatan,
-                                    deskripsi: menu.deskripsi,
-                                    foto: menu.foto,
-                                  ),
+                                      idMenu: menu.idMenu,
+                                      harga: menu.harga,
+                                      level: menu.level,
+                                      topping: menu.topping,
+                                      jumlah: menu.jumlah + 1,
+                                      nama: menu.nama,
+                                      catatan: menu.catatan,
+                                      deskripsi: menu.deskripsi,
+                                      foto: menu.foto,
+                                      kategori: menu.kategori),
                                 );
                               },
                               onDecrement: () {
@@ -103,16 +103,16 @@ class EditMenuCartView extends StatelessWidget {
                                 CartController.to.updateCartItem(
                                   EditMenuCartController.to.index.value,
                                   MenuCart(
-                                    idMenu: menu.idMenu,
-                                    harga: menu.harga,
-                                    level: menu.level,
-                                    topping: menu.topping,
-                                    jumlah: menu.jumlah - 1,
-                                    nama: menu.nama,
-                                    catatan: menu.catatan,
-                                    deskripsi: menu.deskripsi,
-                                    foto: menu.foto,
-                                  ),
+                                      idMenu: menu.idMenu,
+                                      harga: menu.harga,
+                                      level: menu.level,
+                                      topping: menu.topping,
+                                      jumlah: menu.jumlah - 1,
+                                      nama: menu.nama,
+                                      catatan: menu.catatan,
+                                      deskripsi: menu.deskripsi,
+                                      foto: menu.foto,
+                                      kategori: menu.kategori),
                                 );
                               },
                             ),
@@ -233,20 +233,20 @@ class EditMenuCartView extends StatelessWidget {
               CartController.to.updateCartItem(
                 EditMenuCartController.to.index.value,
                 MenuCart(
-                  idMenu: menu.idMenu,
-                  harga: menu.harga,
-                  level:
-                      EditMenuCartController.to.selectedLevel.value?.idDetail ??
-                          menu.level,
-                  topping: [
-                    EditMenuCartController.to.selectedTopping.value!.idDetail!
-                  ],
-                  jumlah: menu.jumlah,
-                  nama: menu.nama,
-                  catatan: EditMenuCartController.to.catatan.value,
-                  deskripsi: menu.deskripsi,
-                  foto: menu.foto,
-                ),
+                    idMenu: menu.idMenu,
+                    harga: menu.harga,
+                    level: EditMenuCartController
+                            .to.selectedLevel.value?.idDetail ??
+                        menu.level,
+                    topping: [
+                      EditMenuCartController.to.selectedTopping.value!.idDetail!
+                    ],
+                    jumlah: menu.jumlah,
+                    nama: menu.nama,
+                    catatan: EditMenuCartController.to.catatan.value,
+                    deskripsi: menu.deskripsi,
+                    foto: menu.foto,
+                    kategori: menu.kategori),
               );
 
               Get.back();

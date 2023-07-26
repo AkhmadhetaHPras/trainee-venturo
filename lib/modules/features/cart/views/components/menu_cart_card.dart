@@ -125,6 +125,7 @@ class MenuCartCard extends StatelessWidget {
                                   catatan: menu.catatan,
                                   deskripsi: menu.deskripsi,
                                   foto: menu.foto,
+                                  kategori: menu.kategori,
                                 ),
                               );
                             }
@@ -166,6 +167,7 @@ class MenuCartCard extends StatelessWidget {
                           catatan: menu.catatan,
                           deskripsi: menu.deskripsi,
                           foto: menu.foto,
+                          kategori: menu.kategori,
                         ),
                       );
                     },

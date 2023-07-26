@@ -149,6 +149,8 @@ class MenuView extends StatelessWidget {
                                   DetailMenuController.to.catatan.value.isEmpty
                                       ? null
                                       : DetailMenuController.to.catatan.value,
+                              kategori:
+                                  DetailMenuController.to.menu.value.kategori!,
                             ),
                           );
                         },

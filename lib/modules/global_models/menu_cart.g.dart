@@ -23,6 +23,7 @@ class MenuCartAdapter extends TypeAdapter<MenuCart> {
       topping: (fields[3] as List).cast<int>(),
       jumlah: fields[4] as int,
       nama: fields[8] as String,
+      kategori: fields[9] as String,
       catatan: fields[5] as String?,
       deskripsi: fields[7] as String?,
       foto: fields[6] as String?,
@@ -32,7 +33,7 @@ class MenuCartAdapter extends TypeAdapter<MenuCart> {
   @override
   void write(BinaryWriter writer, MenuCart obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(10)
       ..writeByte(0)
       ..write(obj.idMenu)
       ..writeByte(1)
@@ -50,7 +51,9 @@ class MenuCartAdapter extends TypeAdapter<MenuCart> {
       ..writeByte(7)
       ..write(obj.deskripsi)
       ..writeByte(8)
-      ..write(obj.nama);
+      ..write(obj.nama)
+      ..writeByte(9)
+      ..write(obj.kategori);
   }
 
   @override

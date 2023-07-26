@@ -30,6 +30,9 @@ class MenuCart extends HiveObject {
   @HiveField(8)
   String nama;
 
+  @HiveField(9)
+  String kategori;
+
   MenuCart({
     required this.idMenu,
     required this.harga,
@@ -37,6 +40,7 @@ class MenuCart extends HiveObject {
     required this.topping,
     required this.jumlah,
     required this.nama,
+    required this.kategori,
     this.catatan,
     this.deskripsi,
     this.foto,
