@@ -6,6 +6,7 @@ import 'package:trainee/modules/features/cart/views/components/menu_cart_card.da
 import 'package:trainee/modules/global_controllers/cart_controller.dart';
 import 'package:trainee/shared/customs/custom_app_bar.dart';
 
+import '../../../../../configs/routes/main_route.dart';
 import '../../../../../shared/styles/elevated_button_style.dart';
 import '../../../../../shared/styles/google_text_style.dart';
 
@@ -143,7 +144,9 @@ class CartView extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 10.0),
                           child: InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              Get.toNamed(MainRoute.chooseVoucher);
+                            },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [

@@ -29,13 +29,13 @@ class EditMenuCartController extends GetxController {
   void onInit() async {
     super.onInit();
     repository = MenuRepository();
-    index.value = Get.arguments[0] as int;
-    id.value = Get.arguments[1] as int;
-    idToppingFirst.value = Get.arguments[2] as int;
-    idLevelFirst.value = Get.arguments[3] as int;
+    index.value = Get.arguments['index'] as int;
+    id.value = Get.arguments['idMenu'] as int;
+    idToppingFirst.value = Get.arguments['topping'] as int;
+    idLevelFirst.value = Get.arguments['level'] as int;
 
     catatanTextController =
-        TextEditingController(text: Get.arguments[4] as String);
+        TextEditingController(text: Get.arguments['catatan'] as String);
 
     catatan = catatanTextController.text.obs;
 

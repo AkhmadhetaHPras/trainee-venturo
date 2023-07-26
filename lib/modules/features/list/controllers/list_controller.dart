@@ -50,6 +50,18 @@ class ListController extends GetxController {
               element.kategori == selectedCategory.value))
       .toList();
 
+  List<MenuData> get foodList => items
+      .where((element) =>
+          element.nama!.toLowerCase().contains(keyword.value.toLowerCase()) &&
+          element.kategori == 'makanan')
+      .toList();
+
+  List<MenuData> get drinkList => items
+      .where((element) =>
+          element.nama!.toLowerCase().contains(keyword.value.toLowerCase()) &&
+          element.kategori == 'minuman')
+      .toList();
+
   Future<bool> getListOfData() async {
     try {
       final result = await repository.getListOfData(
