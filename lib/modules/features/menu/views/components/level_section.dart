@@ -18,7 +18,9 @@ class LevelSection extends StatelessWidget {
     return OptionSection<Level>(
       icon: Icons.local_fire_department,
       title: "Level",
-      selectedValue: selectedValue ?? DetailMenuController.to.selectedLevel,
+      selectedValue: data == null
+          ? DetailMenuController.to.selectedLevel
+          : (selectedValue == null ? Level().obs : selectedValue!),
       data: data ?? DetailMenuController.to.level,
       onOptionSelected: onOptionSelected ??
           (level) {

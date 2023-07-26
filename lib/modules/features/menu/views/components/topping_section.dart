@@ -18,7 +18,9 @@ class ToppingSection extends StatelessWidget {
     return OptionSection<Topping>(
       icon: Icons.local_pizza_outlined,
       title: "Topping",
-      selectedValue: selectedValue ?? DetailMenuController.to.selectedTopping,
+      selectedValue: data == null
+          ? DetailMenuController.to.selectedTopping
+          : (selectedValue == null ? Topping().obs : selectedValue!),
       data: data ?? DetailMenuController.to.topping,
       onOptionSelected: onOptionSelected ??
           (topping) {
