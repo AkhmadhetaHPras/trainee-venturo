@@ -9,6 +9,7 @@ import 'package:trainee/shared/customs/custom_app_bar.dart';
 import '../../../../../configs/routes/main_route.dart';
 import '../../../../../shared/styles/elevated_button_style.dart';
 import '../../../../../shared/styles/google_text_style.dart';
+import '../../../list/views/components/section_header.dart';
 
 class CartView extends StatelessWidget {
   const CartView({super.key});
@@ -26,25 +27,86 @@ class CartView extends StatelessWidget {
           children: [
             Expanded(
               child: Obx(
-                () => ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  padding: EdgeInsets.symmetric(horizontal: 25.w),
-                  itemBuilder: (context, index) {
-                    final item = CartController.to.cartItems[index];
-                    return Padding(
-                      padding: EdgeInsets.symmetric(vertical: 8.5.h),
-                      child: Material(
-                        borderRadius: BorderRadius.circular(10.r),
-                        elevation: 2,
-                        child: MenuCartCard(
-                          menu: item,
-                          index: index,
+                () => CustomScrollView(
+                  physics: const ClampingScrollPhysics(),
+                  slivers: [
+                    SliverToBoxAdapter(child: 28.verticalSpace),
+                    if (CartController.to.foodList.isNotEmpty) ...[
+                      SliverToBoxAdapter(
+                        child: SectionHeader(
+                          icon: Icons.food_bank_outlined,
+                          title: 'Makanan',
+                          color: Theme.of(context).primaryColor,
                         ),
                       ),
-                    );
-                  },
-                  itemCount: CartController.to.cartItems.length,
-                  itemExtent: 112.h,
+                      SliverPadding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 25.w, vertical: 8.h),
+                        sliver: SliverList(
+                          delegate: SliverChildBuilderDelegate(
+                            (context, index) {
+                              final item = CartController.to.cartItems[index];
+                              if (item.kategori == 'makanan') {
+                                return Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(vertical: 8.5.h),
+                                  child: Material(
+                                    borderRadius: BorderRadius.circular(10.r),
+                                    elevation: 2,
+                                    child: MenuCartCard(
+                                      menu: item,
+                                      index: index,
+                                    ),
+                                  ),
+                                );
+                              } else {
+                                return const SizedBox();
+                              }
+                            },
+                            childCount: CartController.to.cartItems.length,
+                          ),
+                        ),
+                      ),
+                    ],
+                    SliverToBoxAdapter(child: 17.verticalSpace),
+                    if (CartController.to.drinkList.isNotEmpty) ...[
+                      SliverToBoxAdapter(
+                        child: SectionHeader(
+                          icon: Icons.local_drink_outlined,
+                          title: 'Minuman',
+                          color: Theme.of(context).primaryColor,
+                        ),
+                      ),
+                      SliverPadding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 25.w, vertical: 8.h),
+                        sliver: SliverList(
+                          delegate: SliverChildBuilderDelegate(
+                            (context, index) {
+                              final item = CartController.to.cartItems[index];
+                              if (item.kategori == 'minuman') {
+                                return Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(vertical: 8.5.h),
+                                  child: Material(
+                                    borderRadius: BorderRadius.circular(10.r),
+                                    elevation: 2,
+                                    child: MenuCartCard(
+                                      menu: item,
+                                      index: index,
+                                    ),
+                                  ),
+                                );
+                              } else {
+                                return const SizedBox();
+                              }
+                            },
+                            childCount: CartController.to.cartItems.length,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ],
                 ),
               ),
             ),
