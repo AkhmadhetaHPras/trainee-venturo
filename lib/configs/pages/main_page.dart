@@ -2,6 +2,7 @@ import 'package:get/route_manager.dart';
 import 'package:trainee/configs/routes/main_route.dart';
 import 'package:trainee/modules/features/cart/bindings/edit_cart_binding.dart';
 import 'package:trainee/modules/features/cart/views/ui/cart_view.dart';
+import 'package:trainee/modules/features/cart/views/ui/detail_voucher.dart';
 import 'package:trainee/modules/features/cart/views/ui/edit_menu_cart.dart';
 import 'package:trainee/modules/features/cart/views/ui/list_voucher.dart';
 import 'package:trainee/modules/features/counter/binddings/conter_bindding.dart';
@@ -89,6 +90,10 @@ abstract class MainPage {
     GetPage(
       name: MainRoute.chooseVoucher,
       page: () => const ListVoucher(),
+    ),
+    GetPage(
+      name: MainRoute.detailVoucher,
+      page: () => const DetailVoucher(),
     ),
   ];
 }

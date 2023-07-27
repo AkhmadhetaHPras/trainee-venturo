@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:trainee/constants/cores/assets/image_constant.dart';
 
 class OrderSuccessDialog extends StatelessWidget {
   const OrderSuccessDialog({Key? key}) : super(key: key);
@@ -14,14 +15,13 @@ class OrderSuccessDialog extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           28.verticalSpace,
-          Icon(
-            Icons.check_circle,
-            size: 80.r,
-            color: Theme.of(context).primaryColor,
+          Image.asset(
+            ImageConstant.icSuccessOrder,
+            height: 100,
           ),
           28.verticalSpace,
           Text(
-            'Order is being prepared'.tr,
+            'Pesanan Sedang Disiapkan'.tr,
             style: Get.textTheme.headlineMedium?.copyWith(
               fontWeight: FontWeight.w400,
             ),
@@ -31,13 +31,13 @@ class OrderSuccessDialog extends StatelessWidget {
           Text.rich(
             TextSpan(children: [
               TextSpan(
-                text: 'You can track your order in',
+                text: 'Kamu dapat melacak pesananmu di fitur',
                 style: Get.textTheme.bodySmall!.copyWith(
                   color: Colors.black,
                 ),
               ),
               TextSpan(
-                text: ' ${'Order history'}',
+                text: ' Pesanan',
                 style: Get.textTheme.bodySmall!.copyWith(
                   fontWeight: FontWeight.w800,
                   color: Colors.black,
@@ -74,7 +74,7 @@ class OrderSuccessDialog extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Okay',
+                    'Oke',
                     textAlign: TextAlign.center,
                     style: Get.textTheme.labelLarge?.copyWith(
                       fontWeight: FontWeight.w800,

@@ -238,9 +238,14 @@ class EditMenuCartView extends StatelessWidget {
                     level: EditMenuCartController
                             .to.selectedLevel.value?.idDetail ??
                         menu.level,
-                    topping: [
-                      EditMenuCartController.to.selectedTopping.value!.idDetail!
-                    ],
+                    topping: EditMenuCartController
+                                .to.selectedTopping.value?.idDetail ==
+                            null
+                        ? menu.topping
+                        : [
+                            EditMenuCartController
+                                .to.selectedTopping.value!.idDetail!
+                          ],
                     jumlah: menu.jumlah,
                     nama: menu.nama,
                     catatan: EditMenuCartController.to.catatan.value,

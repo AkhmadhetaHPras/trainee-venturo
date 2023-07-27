@@ -3,12 +3,14 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:trainee/configs/routes/main_route.dart';
+import 'package:trainee/modules/features/cart/views/components/discount_dialog.dart';
 import 'package:trainee/modules/global_models/voucher.dart';
 
 import '../../utils/services/local_storage_service.dart';
 import '../features/cart/views/components/fingerprint_dialog.dart';
 import '../features/cart/views/components/order_success_dialog.dart';
 import '../features/cart/views/components/pin_dialog.dart';
+import '../global_models/diskon.dart';
 import '../global_models/menu_cart.dart';
 import '../global_repositories/cart_repository.dart';
 
@@ -19,8 +21,10 @@ class CartController extends GetxController {
 
   final RxList<MenuCart> cartItems = <MenuCart>[].obs;
   final RxList<VoucherData> vouchers = <VoucherData>[].obs;
+  final Rx<VoucherData> selectedVoucher = VoucherData().obs;
   final RxInt discountPrice = 0.obs;
   final RxInt discount = 0.obs;
+  RxList<DiskonData> discounts = <DiskonData>[].obs;
 
   @override
   void onReady() async {
@@ -92,6 +96,17 @@ class CartController extends GetxController {
 
   int getGrandTotal() {
     return getTotalPrice() - discountPrice.value;
+  }
+
+  handleCheckboxChanged(int index, bool isChecked) {
+    for (int i = 0; i < vouchers.length; i++) {
+      vouchers[i].checked = (i == index && isChecked);
+      if (!isChecked && (vouchers[i].checked ?? false)) {
+        selectedVoucher(vouchers[i]);
+      } else if (isChecked && (vouchers[i].checked == false)) {
+        selectedVoucher(VoucherData());
+      }
+    }
   }
 
   Future<void> verify() async {
@@ -168,6 +183,15 @@ class CartController extends GetxController {
     );
 
     Get.back();
+  }
+
+  Future<void> showDiscountDialog() async {
+    Get.until(ModalRoute.withName(MainRoute.cart));
+    await Get.defaultDialog(
+      title: '',
+      titleStyle: const TextStyle(fontSize: 0),
+      content: const DiscountDialog(),
+    );
   }
 
   Future getVouchers() async {

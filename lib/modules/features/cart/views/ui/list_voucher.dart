@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:trainee/configs/themes/main_color.dart';
 import 'package:trainee/modules/features/cart/views/components/item_voucher.dart';
-import 'package:trainee/modules/features/cart/views/components/menu_cart_card.dart';
 import 'package:trainee/modules/global_controllers/cart_controller.dart';
 import 'package:trainee/shared/customs/custom_app_bar.dart';
 
@@ -28,7 +27,8 @@ class ListVoucher extends StatelessWidget {
               child: Obx(() {
                 if (CartController.to.vouchers.isEmpty) {
                   return const Center(
-                      child: Text("Maaf anda tidak memiliki voucher"));
+                    child: Text("Maaf anda tidak memiliki voucher"),
+                  );
                 } else {
                   return ListView.builder(
                     scrollDirection: Axis.vertical,
@@ -41,8 +41,9 @@ class ListVoucher extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10.r),
                           elevation: 2,
                           child: ItemVoucher(
-                            name: item.nama!,
-                            info: item.infoVoucher!,
+                            voucher: item,
+                            onChanged: CartController.to
+                                .handleCheckboxChanged(index, item.checked!),
                           ),
                         ),
                       );
@@ -64,27 +65,71 @@ class ListVoucher extends StatelessWidget {
             ),
             boxShadow: const [
               BoxShadow(
-                color: Color.fromARGB(111, 24, 24, 24),
+                color: MainColor.dark,
                 blurRadius: 15,
                 spreadRadius: -1,
                 offset: Offset(0, 1),
               ),
             ],
           ),
-          child: ElevatedButton(
-            onPressed: () {
-              Get.back();
-            },
-            style: EvelatedButtonStyle.mainRounded.copyWith(
-              backgroundColor: MaterialStateProperty.all<Color>(
-                MainColor.primary,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Icon(
+                    Icons.check_circle_outline,
+                    color: MainColor.primary,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8.0,
+                    ),
+                    child: Text.rich(
+                      TextSpan(
+                        children: [
+                          TextSpan(
+                              text:
+                                  'Penggunaan voucher tidak dapat digabung dengan\n',
+                              style: GoogleTextStyle.fw400.copyWith(
+                                color: MainColor.dark,
+                                fontSize: 13.sp,
+                              )),
+                          TextSpan(
+                              text: 'discount employee reward program',
+                              style: GoogleTextStyle.fw600.copyWith(
+                                color: MainColor.primary,
+                                fontSize: 13.sp,
+                              )),
+                        ],
+                      ),
+                    ),
+                  )
+                ],
               ),
-            ),
-            child: Text(
-              "Oke",
-              style: GoogleTextStyle.fw700
-                  .copyWith(fontSize: 16.sp, color: MainColor.white),
-            ),
+              Padding(
+                padding: const EdgeInsets.only(top: 10.0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  style: EvelatedButtonStyle.mainRounded.copyWith(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                      MainColor.primary,
+                    ),
+                  ),
+                  child: Text(
+                    "Oke",
+                    style: GoogleTextStyle.fw700
+                        .copyWith(fontSize: 16.sp, color: MainColor.white),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),

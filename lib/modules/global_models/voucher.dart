@@ -31,6 +31,7 @@ class VoucherData {
   int? periodeSelesai;
   int? type;
   int? status;
+  bool? checked = false;
   dynamic catatan;
 
   VoucherData({
@@ -44,6 +45,7 @@ class VoucherData {
     this.type,
     this.status,
     this.catatan,
+    this.checked,
   });
 
   factory VoucherData.fromJson(Map<String, dynamic> json) {
@@ -58,6 +60,7 @@ class VoucherData {
       type: json['type'],
       status: json['status'],
       catatan: json['catatan'],
+      checked: false,
     );
   }
 }

@@ -166,7 +166,9 @@ class CartView extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 10.0),
                           child: InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              CartController.to.showDiscountDialog();
+                            },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -224,10 +226,21 @@ class CartView extends StatelessWidget {
                                 const Expanded(
                                   child: SizedBox(),
                                 ),
-                                Text(
-                                  "Pilih Voucher",
-                                  style: GoogleTextStyle.fw400.copyWith(
-                                      fontSize: 14, color: MainColor.dark),
+                                SizedBox(
+                                  width: 120,
+                                  child: Obx(
+                                    () => Text(
+                                      CartController
+                                              .to.selectedVoucher.value.nama ??
+                                          "Pilih Voucher",
+                                      style: GoogleTextStyle.fw400.copyWith(
+                                        fontSize: 14,
+                                        color: MainColor.dark,
+                                      ),
+                                      textAlign: TextAlign.end,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
                                 ),
                                 const Icon(
                                   Icons.keyboard_arrow_right,

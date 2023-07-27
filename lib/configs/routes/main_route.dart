@@ -13,4 +13,5 @@ abstract class MainRoute {
   static const String cart = '/cart';
   static const String cartEditMenu = '/cart-edit-menu';
   static const String chooseVoucher = '/cart-choose-voucher';
+  static const String detailVoucher = '/detail-voucher';
 }

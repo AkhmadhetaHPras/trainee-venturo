@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:trainee/modules/global_models/diskon.dart';
 import 'package:trainee/modules/global_models/voucher.dart';
@@ -6,6 +7,8 @@ import 'package:trainee/utils/services/local_storage_service.dart';
 import '../../../../utils/services/http_service.dart';
 
 class CartRepository {
+  static RxList<DiskonData> discounts = <DiskonData>[].obs;
+
   Future<Voucher> getListVoucher() async {
     try {
       var dio =
@@ -46,6 +49,8 @@ class CartRepository {
         final diskonData = Diskon.fromJson(responseData);
         int totalDiskon = 0;
         if (diskonData.data != null) {
+          discounts.clear();
+          discounts.addAll(diskonData.data!);
           for (DiskonData diskonData in diskonData.data!) {
             totalDiskon += diskonData.diskon ?? 0;
           }
