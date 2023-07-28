@@ -19,9 +19,14 @@ class CartView extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
-        appBar: const CustomAppBar(
-          icon: Icons.shopping_cart,
+        appBar: CustomAppBar(
+          icon: Icons.shopping_cart_checkout,
           title: "Pesanan",
+          titleStyle: GoogleTextStyle.fw700.copyWith(
+            fontSize: 20.sp,
+            color: MainColor.black,
+          ),
+          enableBackButton: true,
         ),
         body: Column(
           children: [
@@ -209,7 +214,12 @@ class CartView extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(vertical: 10.0),
                           child: InkWell(
                             onTap: () {
-                              Get.toNamed(MainRoute.chooseVoucher);
+                              if (CartController.to.vouchers.isEmpty) {
+                                Get.snackbar("Mohon maaf",
+                                    "Anda tidak memiliki voucher");
+                              } else {
+                                Get.toNamed(MainRoute.chooseVoucher);
+                              }
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,

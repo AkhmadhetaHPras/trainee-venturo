@@ -22,6 +22,10 @@ import '../../modules/features/initial/views/ui/get_location_screen.dart';
 import '../../modules/features/list/bindings/list_binding.dart';
 import '../../modules/features/list/views/ui/list_item_view.dart';
 import '../../modules/features/no_connection/views/ui/no_connection_view.dart';
+import '../../modules/features/order/bindings/detail_order_binding.dart';
+import '../../modules/features/order/bindings/order_binding.dart';
+import '../../modules/features/order/views/ui/detail_order_view.dart';
+import '../../modules/features/order/views/ui/order_view.dart';
 import '../../modules/features/sign_in/bindings/sing_in_binding.dart';
 import '../../modules/features/sign_in/views/ui/sign_in_view.dart';
 import '../../modules/features/splash/views/ui/splash_view.dart';
@@ -94,6 +98,16 @@ abstract class MainPage {
     GetPage(
       name: MainRoute.detailVoucher,
       page: () => const DetailVoucher(),
+    ),
+    GetPage(
+      name: MainRoute.order,
+      page: () => const OrderView(),
+      binding: OrderBinding(),
+    ),
+    GetPage(
+      name: MainRoute.orderDetail,
+      page: () => const DetailOrderView(),
+      binding: DetailOrderBinding(),
     ),
   ];
 }

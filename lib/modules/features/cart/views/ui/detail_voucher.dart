@@ -21,9 +21,13 @@ class DetailVoucher extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.grey[100],
-        appBar: const CustomAppBar(
-          icon: Icons.discount,
+        appBar: CustomAppBar(
           title: "Detail Voucher",
+          titleStyle: GoogleTextStyle.fw500.copyWith(
+            fontSize: 20.sp,
+            color: MainColor.black,
+          ),
+          enableBackButton: true,
         ),
         body: Column(
           mainAxisSize: MainAxisSize.min,

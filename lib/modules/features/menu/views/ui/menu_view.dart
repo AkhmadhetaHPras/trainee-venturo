@@ -26,7 +26,12 @@ class MenuView extends StatelessWidget {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.grey[100],
-        appBar: const CustomAppBar(icon: Icons.menu_book, title: "Detail Menu"),
+        appBar: CustomAppBar(
+          title: "Detail Menu",
+          titleStyle: GoogleTextStyle.fw700
+              .copyWith(fontSize: 20.sp, color: MainColor.black),
+          enableBackButton: true,
+        ),
         body: Column(
           mainAxisSize: MainAxisSize.min,
           children: [

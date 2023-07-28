@@ -17,9 +17,14 @@ class ListVoucher extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
-        appBar: const CustomAppBar(
+        appBar: CustomAppBar(
           icon: Icons.label_off_outlined,
           title: "Voucher",
+          titleStyle: GoogleTextStyle.fw700.copyWith(
+            fontSize: 20.sp,
+            color: MainColor.black,
+          ),
+          enableBackButton: true,
         ),
         body: Column(
           children: [
