@@ -238,18 +238,51 @@ class CartView extends StatelessWidget {
                                 ),
                                 SizedBox(
                                   width: 120,
-                                  child: Obx(
-                                    () => Text(
-                                      CartController
-                                              .to.selectedVoucher.value.nama ??
-                                          "Pilih Voucher",
-                                      style: GoogleTextStyle.fw400.copyWith(
-                                        fontSize: 14,
-                                        color: MainColor.dark,
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Obx(
+                                        () {
+                                          if (CartController.to.selectedVoucher
+                                                  .value.idVoucher !=
+                                              null) {
+                                            return Text(
+                                              "Rp. ${CartController.to.selectedVoucher.value.nominal ?? 0}",
+                                              style: GoogleTextStyle.fw400
+                                                  .copyWith(
+                                                fontSize: 14.sp,
+                                                color: MainColor.danger,
+                                              ),
+                                              textAlign: TextAlign.end,
+                                              overflow: TextOverflow.ellipsis,
+                                            );
+                                          } else {
+                                            return const SizedBox();
+                                          }
+                                        },
                                       ),
-                                      textAlign: TextAlign.end,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
+                                      Obx(
+                                        () => Text(
+                                          CartController.to.selectedVoucher
+                                                  .value.nama ??
+                                              "Pilih Voucher",
+                                          style: GoogleTextStyle.fw500.copyWith(
+                                            fontSize: CartController
+                                                        .to
+                                                        .selectedVoucher
+                                                        .value
+                                                        .idVoucher !=
+                                                    null
+                                                ? 10.sp
+                                                : 14.sp,
+                                            color: MainColor.dark,
+                                          ),
+                                          textAlign: TextAlign.end,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                                 const Icon(
