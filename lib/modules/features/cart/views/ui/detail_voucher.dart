@@ -149,7 +149,7 @@ class DetailVoucher extends StatelessWidget {
               ),
             ),
             child: Text(
-              "Oke",
+              "Pilih Voucher",
               style: GoogleTextStyle.fw700
                   .copyWith(fontSize: 16.sp, color: MainColor.white),
             ),

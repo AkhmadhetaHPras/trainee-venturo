@@ -40,10 +40,17 @@ class ListVoucher extends StatelessWidget {
                         child: Material(
                           borderRadius: BorderRadius.circular(10.r),
                           elevation: 2,
-                          child: ItemVoucher(
-                            voucher: item,
-                            onChanged: CartController.to
-                                .handleCheckboxChanged(index, item.checked!),
+                          child: Obx(
+                            () => ItemVoucher(
+                              voucher: item,
+                              isChecked: CartController
+                                      .to.selectedVoucher.value.idVoucher ==
+                                  item.idVoucher,
+                              onChanged: (isChecked) {
+                                CartController.to.handleCheckboxChanged(
+                                    index, isChecked ?? false);
+                              },
+                            ),
                           ),
                         ),
                       );

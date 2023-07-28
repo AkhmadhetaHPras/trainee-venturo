@@ -20,7 +20,34 @@ class CartController extends GetxController {
   late final CartRepository repository;
 
   final RxList<MenuCart> cartItems = <MenuCart>[].obs;
-  final RxList<VoucherData> vouchers = <VoucherData>[].obs;
+  final RxList<VoucherData> vouchers = <VoucherData>[
+    VoucherData(
+      idVoucher: 1,
+      nama: "Koordinator Program kekompakan",
+      idUser: 1,
+      nominal: 50000,
+      infoVoucher: "https://i.ibb.co/bJ10gcZ/Voucher-Java-Code-app-01.jpg",
+      periodeMulai: 1610838000,
+      periodeSelesai: 1613516400,
+      type: 1,
+      status: 1,
+      catatan: null,
+      checked: false,
+    ),
+    VoucherData(
+      idVoucher: 2,
+      nama: "Birthday",
+      idUser: 47,
+      nominal: 25000,
+      infoVoucher: "https://i.ibb.co/bJ10gcZ/Voucher-Java-Code-app-01.jpg",
+      periodeMulai: 1610838000,
+      periodeSelesai: 1613516400,
+      type: 0,
+      status: 1,
+      catatan: null,
+      checked: false,
+    ),
+  ].obs;
   final Rx<VoucherData> selectedVoucher = VoucherData().obs;
   final RxInt discountPrice = 0.obs;
   final RxInt discount = 0.obs;
@@ -100,11 +127,16 @@ class CartController extends GetxController {
 
   handleCheckboxChanged(int index, bool isChecked) {
     for (int i = 0; i < vouchers.length; i++) {
-      vouchers[i].checked = (i == index && isChecked);
-      if (!isChecked && (vouchers[i].checked ?? false)) {
-        selectedVoucher(vouchers[i]);
-      } else if (isChecked && (vouchers[i].checked == false)) {
-        selectedVoucher(VoucherData());
+      if (i == index) {
+        vouchers[i].checked = isChecked;
+        if (isChecked) {
+          selectedVoucher.value = vouchers[i];
+        } else {
+          selectedVoucher.value =
+              VoucherData(); // Clear the selected voucher when unchecked
+        }
+      } else {
+        vouchers[i].checked = false;
       }
     }
   }
@@ -196,7 +228,7 @@ class CartController extends GetxController {
 
   Future getVouchers() async {
     final datas = await repository.getListVoucher();
-    vouchers.clear();
+    // vouchers.clear();
 
     if (datas.data != null) {
       vouchers.addAll(datas.data!);
