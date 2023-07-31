@@ -16,7 +16,7 @@ class DetailMenuController extends GetxController {
   final RxList<Level> level = <Level>[].obs;
 
   final Rx<Level?> selectedLevel = Level().obs;
-  final Rx<Topping?> selectedTopping = Topping().obs;
+  final RxList<Topping> selectedTopping = <Topping>[].obs;
   final RxInt quantity = 1.obs;
   late RxString catatan;
   late TextEditingController catatanTextController;
@@ -37,6 +37,28 @@ class DetailMenuController extends GetxController {
     catatanTextController.dispose();
   }
 
+  List<int> getIdDetailsFromSelectedToppings() {
+    List<int> idDetailsList =
+        selectedTopping.map((topping) => topping.idDetail!).toList();
+
+    return idDetailsList;
+  }
+
+  bool isToppingInSelectedList(int idDetail) {
+    bool isFound =
+        selectedTopping.any((topping) => topping.idDetail == idDetail);
+
+    return isFound;
+  }
+
+  void addOrRemoveTopping(Topping topping) {
+    if (isToppingInSelectedList(topping.idDetail!)) {
+      selectedTopping.removeWhere((t) => t.idDetail == topping.idDetail);
+    } else {
+      selectedTopping.add(topping);
+    }
+  }
+
   Future getDetailMenu() async {
     try {
       final menuResponse = await repository.getDetailMenu(id.value);
@@ -50,7 +72,10 @@ class DetailMenuController extends GetxController {
         level.value = levelData!;
 
         selectedLevel.value = level.isEmpty ? null : level.first;
-        selectedTopping.value = topping.isEmpty ? null : topping.first;
+        selectedTopping.clear();
+        if (topping.isNotEmpty) {
+          selectedTopping.add(topping.first);
+        }
       }
     } catch (exception, stacktrace) {
       await Sentry.captureException(

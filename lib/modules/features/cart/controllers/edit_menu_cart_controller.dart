@@ -12,7 +12,7 @@ class EditMenuCartController extends GetxController {
 
   final RxInt index = 0.obs;
   final RxInt id = 0.obs;
-  final RxInt idToppingFirst = 0.obs;
+  final RxList<int> idToppingDatas = <int>[].obs;
   final RxInt idLevelFirst = 0.obs;
 
   final Rx<Menu> menu = Menu().obs;
@@ -20,7 +20,7 @@ class EditMenuCartController extends GetxController {
   final RxList<Level> level = <Level>[].obs;
 
   final Rx<Level?> selectedLevel = Level().obs;
-  final Rx<Topping?> selectedTopping = Topping().obs;
+  final RxList<Topping> selectedTopping = <Topping>[].obs;
 
   late RxString catatan;
   late TextEditingController catatanTextController;
@@ -31,7 +31,7 @@ class EditMenuCartController extends GetxController {
     repository = MenuRepository();
     index.value = Get.arguments['index'] as int;
     id.value = Get.arguments['idMenu'] as int;
-    idToppingFirst.value = Get.arguments['topping'] as int;
+    idToppingDatas.value = Get.arguments['toppings'];
     idLevelFirst.value = Get.arguments['level'] as int;
 
     catatanTextController =
@@ -66,11 +66,31 @@ class EditMenuCartController extends GetxController {
   }
 
   void findToppingWithIdDetail() {
-    final Topping selected = topping.firstWhere(
-        (element) => element.idDetail == idToppingFirst.value,
-        orElse: () => Topping());
+    selectedTopping.clear();
+    for (int idDetail in idToppingDatas) {
+      // Find the Topping object that matches the current idDetail
+      Topping toppingToAdd = topping.firstWhere((t) => t.idDetail == idDetail,
+          orElse: () => Topping());
 
-    selectedTopping.value = selected;
+      if (toppingToAdd.idDetail != null) {
+        selectedTopping.add(toppingToAdd);
+      }
+    }
+  }
+
+  bool isToppingInSelectedList(int idDetail) {
+    bool isFound =
+        selectedTopping.any((topping) => topping.idDetail == idDetail);
+
+    return isFound;
+  }
+
+  void addOrRemoveTopping(Topping topping) {
+    if (isToppingInSelectedList(topping.idDetail!)) {
+      selectedTopping.removeWhere((t) => t.idDetail == topping.idDetail);
+    } else {
+      selectedTopping.add(topping);
+    }
   }
 
   void findLevelWithIdDetail() {

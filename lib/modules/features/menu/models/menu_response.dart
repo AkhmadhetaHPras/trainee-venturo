@@ -1,3 +1,5 @@
+import 'package:get/get.dart';
+
 class DetailMenuResponse {
   int? statusCode;
   Data? data;
@@ -91,6 +93,14 @@ class Topping extends CommonModel {
       type: json['type'],
       harga: json['harga'],
     );
+  }
+}
+
+extension ToppingListExtension on RxList<Topping> {
+  String displayWithCommaDelimiter() {
+    List<String> keteranganList =
+        map((topping) => topping.keterangan!).toList();
+    return keteranganList.join(', ');
   }
 }
 

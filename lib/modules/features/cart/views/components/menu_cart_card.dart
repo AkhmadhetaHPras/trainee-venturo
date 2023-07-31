@@ -25,7 +25,7 @@ class MenuCartCard extends StatelessWidget {
         Get.toNamed(MainRoute.cartEditMenu, arguments: {
           'index': index,
           'idMenu': menu.idMenu,
-          'topping': menu.topping.first,
+          'toppings': menu.topping,
           'level': menu.level,
           'catatan': menu.catatan ?? ""
         });

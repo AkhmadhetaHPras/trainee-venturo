@@ -2,16 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:trainee/configs/routes/main_route.dart';
 import 'package:trainee/modules/features/cart/views/components/discount_dialog.dart';
 import 'package:trainee/modules/global_models/voucher.dart';
 
+import '../../utils/services/http_service.dart';
 import '../../utils/services/local_storage_service.dart';
 import '../features/cart/views/components/fingerprint_dialog.dart';
 import '../features/cart/views/components/order_success_dialog.dart';
 import '../features/cart/views/components/pin_dialog.dart';
 import '../global_models/diskon.dart';
 import '../global_models/menu_cart.dart';
+import '../global_models/order.dart';
 import '../global_repositories/cart_repository.dart';
 
 class CartController extends GetxController {
@@ -102,6 +105,13 @@ class CartController extends GetxController {
             : 0);
   }
 
+  int getPriceCut() {
+    return discountPrice.value +
+        (selectedVoucher.value.idVoucher != null
+            ? selectedVoucher.value.nominal!
+            : 0);
+  }
+
   handleCheckboxChanged(int index, bool isChecked) {
     for (int i = 0; i < vouchers.length; i++) {
       if (i == index) {
@@ -139,7 +149,9 @@ class CartController extends GetxController {
 
         // if succeed, order cart
         if (authenticated) {
-          showOrderSuccessDialog();
+          if (await postOrder()) {
+            showOrderSuccessDialog();
+          }
         }
       } else if (authType == 'pin') {
         // pin auth flow
@@ -176,7 +188,9 @@ class CartController extends GetxController {
 
     if (authenticated == true) {
       // if succeed, order cart
-      showOrderSuccessDialog();
+      if (await postOrder()) {
+        showOrderSuccessDialog();
+      }
     } else if (authenticated != null) {
       // if failed 3 times, show order failed dialog
       Get.until(ModalRoute.withName(MainRoute.cart));
@@ -209,6 +223,52 @@ class CartController extends GetxController {
 
     if (datas.data != null) {
       vouchers.addAll(datas.data!);
+    }
+  }
+
+  Future<bool> postOrder() async {
+    try {
+      var dio =
+          HttpService.dioCall(token: await LocalStorageService.getToken());
+
+      final id = await LocalStorageService.box.get('id');
+      final order = PostOrder(
+          idUser: id,
+          idVoucher: selectedVoucher.value.idVoucher,
+          potongan: getPriceCut(),
+          totalBayar: getGrandTotal());
+
+      var listMenuOrder = <MenuModel>[];
+      for (var item in cartItems) {
+        final menuOrder = MenuModel(
+          idMenu: item.idMenu,
+          harga: item.harga,
+          topping: item.topping,
+          jumlah: item.jumlah,
+          catatan: item.catatan,
+        );
+        listMenuOrder.add(menuOrder);
+      }
+
+      final postModel = OrderDataModel(order: order, menu: listMenuOrder);
+      final response = await dio.post('order/add', data: postModel);
+
+      if (response.statusCode == 200) {
+        final responseData = response.data;
+        if (responseData['status_code'] == 200) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        throw Exception('API Error');
+      }
+    } catch (exception, stackTrace) {
+      await Sentry.captureException(
+        exception,
+        stackTrace: stackTrace,
+      );
+      return false;
     }
   }
 }

@@ -99,30 +99,30 @@ class MenuView extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(vertical: 40),
+                        padding: const EdgeInsets.symmetric(vertical: 40),
                         child: Column(
                           children: [
-                            Divider(
+                            const Divider(
                               color: MainColor.dark,
                               height: 1.5,
                             ),
                             PriceSection(),
-                            Divider(
+                            const Divider(
                               color: MainColor.dark,
                               height: 1.5,
                             ),
-                            LevelSection(),
-                            Divider(
+                            const LevelSection(),
+                            const Divider(
                               color: MainColor.dark,
                               height: 1.5,
                             ),
-                            ToppingSection(),
-                            Divider(
+                            const ToppingSection(),
+                            const Divider(
                               color: MainColor.dark,
                               height: 1.5,
                             ),
-                            NotesSection(),
-                            Divider(
+                            const NotesSection(),
+                            const Divider(
                               color: MainColor.dark,
                               height: 1.5,
                             ),
@@ -144,11 +144,11 @@ class MenuView extends StatelessWidget {
                               level: DetailMenuController
                                       .to.selectedLevel.value?.idDetail ??
                                   0,
-                              topping: [
-                                DetailMenuController
-                                        .to.selectedTopping.value?.idDetail ??
-                                    0
-                              ],
+                              topping: DetailMenuController
+                                      .to.selectedTopping.isEmpty
+                                  ? []
+                                  : DetailMenuController.to
+                                      .getIdDetailsFromSelectedToppings(),
                               jumlah: DetailMenuController.to.quantity.value,
                               catatan:
                                   DetailMenuController.to.catatan.value.isEmpty

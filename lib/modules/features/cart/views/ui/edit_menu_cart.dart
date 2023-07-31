@@ -27,7 +27,12 @@ class EditMenuCartView extends StatelessWidget {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.grey[100],
-        appBar: const CustomAppBar(icon: Icons.menu_book, title: "Edit Menu"),
+        appBar: CustomAppBar(
+          title: "Edit Menu",
+          titleStyle: GoogleTextStyle.fw500
+              .copyWith(fontSize: 20.sp, color: MainColor.black),
+          enableBackButton: true,
+        ),
         body: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -176,15 +181,14 @@ class EditMenuCartView extends StatelessWidget {
                             ),
                             Obx(
                               () => ToppingSection(
-                                selectedValue: EditMenuCartController.to
-                                            .selectedTopping.value?.idDetail !=
-                                        null
+                                selectedValue: EditMenuCartController
+                                        .to.selectedTopping.isNotEmpty
                                     ? EditMenuCartController.to.selectedTopping
                                     : null,
                                 data: EditMenuCartController.to.topping,
                                 onOptionSelected: (topping) {
                                   EditMenuCartController.to
-                                      .selectedTopping(topping);
+                                      .addOrRemoveTopping(topping);
                                 },
                               ),
                             ),
@@ -238,14 +242,10 @@ class EditMenuCartView extends StatelessWidget {
                     level: EditMenuCartController
                             .to.selectedLevel.value?.idDetail ??
                         menu.level,
-                    topping: EditMenuCartController
-                                .to.selectedTopping.value?.idDetail ==
-                            null
-                        ? menu.topping
-                        : [
-                            EditMenuCartController
-                                .to.selectedTopping.value!.idDetail!
-                          ],
+                    topping:
+                        EditMenuCartController.to.selectedTopping.isNotEmpty
+                            ? menu.topping
+                            : [],
                     jumlah: menu.jumlah,
                     nama: menu.nama,
                     catatan: EditMenuCartController.to.catatan.value,
