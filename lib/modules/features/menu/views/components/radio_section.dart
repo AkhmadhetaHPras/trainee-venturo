@@ -129,7 +129,7 @@ class RadioSection extends StatelessWidget {
                 child: SizedBox(),
               ),
               SizedBox(
-                width: 200,
+                width: 150,
                 child: Obx(
                   () => Text(
                     selectedValue.isEmpty
