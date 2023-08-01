@@ -2,12 +2,14 @@ class PostOrder {
   int idUser;
   int? idVoucher;
   int potongan;
+  int diskon;
   int totalBayar;
 
   PostOrder({
     required this.idUser,
     this.idVoucher,
     required this.potongan,
+    required this.diskon,
     required this.totalBayar,
   });
 
@@ -16,6 +18,7 @@ class PostOrder {
       idUser: json['id_user'],
       idVoucher: json['id_voucher'],
       potongan: json['potongan'],
+      diskon: json['diskon'],
       totalBayar: json['total_bayar'],
     );
   }

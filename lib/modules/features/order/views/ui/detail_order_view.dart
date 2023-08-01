@@ -39,7 +39,7 @@ class DetailOrderView extends StatelessWidget {
             () => Conditional.single(
               context: context,
               conditionBuilder: (context) =>
-                  DetailOrderController.to.order.value?['status'] == 0,
+                  DetailOrderController.to.order.value?.order?.status == 0,
               widgetBuilder: (context) => Padding(
                 padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 10.w),
                 child: TextButton(
@@ -133,9 +133,9 @@ class DetailOrderView extends StatelessWidget {
                       TileOption(
                         title: 'Total pesanan',
                         subtitle:
-                            '(${DetailOrderController.to.order.value?['menu'].length} Menu):',
+                            '(${DetailOrderController.to.order.value?.detail?.length} Menu):',
                         message:
-                            'Rp ${DetailOrderController.to.order.value?['total_bayar'] ?? '0'}',
+                            'Rp ${DetailOrderController.to.order.value?.order?.totalBayar ?? '0'}',
                         titleStyle: Get.textTheme.titleMedium,
                         messageStyle: Get.textTheme.titleMedium!.copyWith(
                             color: Theme.of(context).primaryColor,
@@ -147,19 +147,25 @@ class DetailOrderView extends StatelessWidget {
                       Conditional.single(
                         context: context,
                         conditionBuilder: (context) =>
-                            DetailOrderController.to.order.value?['diskon'] ==
+                            DetailOrderController
+                                    .to.order.value?.order?.diskon ==
                                 1 &&
-                            DetailOrderController.to.order.value?['potongan'] >
-                                0,
+                            (DetailOrderController
+                                        .to.order.value?.order?.potongan ==
+                                    null
+                                ? false
+                                : DetailOrderController
+                                        .to.order.value!.order!.potongan >
+                                    0),
                         widgetBuilder: (context) => TileOption(
                           icon: Icons.discount_outlined,
                           iconSize: 24.r,
                           title: 'Discount',
                           message:
-                              'Rp ${DetailOrderController.to.order.value?['potongan'] ?? '0'}',
+                              'Rp ${DetailOrderController.to.order.value?.order?.potongan ?? '0'}',
                           titleStyle: Get.textTheme.titleMedium,
                           messageStyle: Get.textTheme.titleMedium?.copyWith(
-                              color: const Color(0xFFD81D1D),
+                              color: MainColor.danger,
                               fontWeight: FontWeight.w600),
                         ),
                         fallbackBuilder: (context) => const SizedBox(),
@@ -171,16 +177,16 @@ class DetailOrderView extends StatelessWidget {
                         context: context,
                         conditionBuilder: (context) =>
                             DetailOrderController
-                                .to.order.value?['id_voucher'] !=
+                                .to.order.value?.order?.idVoucher !=
                             0,
                         widgetBuilder: (context) => TileOption(
                           icon: Icons.discount,
                           iconSize: 24.r,
                           title: 'Voucher'.tr,
                           message:
-                              'Rp ${DetailOrderController.to.order.value?['potongan'] ?? '0'}',
+                              'Rp ${DetailOrderController.to.order.value?.order?.potongan ?? '0'}',
                           messageSubtitle: DetailOrderController
-                              .to.order.value?['nama_voucher'],
+                              .to.order.value?.order?.namaVoucher,
                           titleStyle: Get.textTheme.titleMedium,
                           messageStyle: Get.textTheme.titleMedium?.copyWith(
                               color: const Color(0xFFD81D1D),
@@ -207,7 +213,7 @@ class DetailOrderView extends StatelessWidget {
                         iconSize: 24.r,
                         title: 'Total pembayaran'.tr,
                         message:
-                            'Rp ${DetailOrderController.to.order.value?['total_bayar'] ?? '0'}',
+                            'Rp ${DetailOrderController.to.order.value?.order?.totalBayar ?? '0'}',
                         titleStyle: Get.textTheme.titleMedium,
                         messageStyle: Get.textTheme.titleMedium!.copyWith(
                             color: Theme.of(context).primaryColor,

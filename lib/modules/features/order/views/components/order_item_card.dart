@@ -5,6 +5,7 @@ import 'package:flutter_conditional_rendering/conditional_switch.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:trainee/modules/features/order/models/order.dart';
 import 'package:trainee/modules/features/order/views/components/primary_button_with_title.dart';
 
 import 'outlined_title_button.dart';
@@ -18,7 +19,7 @@ class OrderItemCard extends StatelessWidget {
     this.onGiveReview,
   });
 
-  final Map<String, dynamic> order;
+  final Order order;
   final VoidCallback? onTap;
   final VoidCallback? onOrderAgain;
   final ValueChanged<int>? onGiveReview;
@@ -49,7 +50,7 @@ class OrderItemCard extends StatelessWidget {
               Flexible(
                 flex: 3,
                 child: Hero(
-                  tag: 'order-${order['id_order']}',
+                  tag: 'order-${order.idOrder}',
                   child: Container(
                     width: 124.w,
                     constraints: BoxConstraints(
@@ -62,9 +63,8 @@ class OrderItemCard extends StatelessWidget {
                       color: Colors.grey[300],
                     ),
                     child: CachedNetworkImage(
-                      imageUrl: order['menu'].isNotEmpty
-                          ? order['menu'].first['foto'] ??
-                              'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/240px-No_image_available.svg.png'
+                      imageUrl: order.menu.isNotEmpty
+                          ? order.menu.first.foto
                           : 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/240px-No_image_available.svg.png',
                       fit: BoxFit.contain,
                       height: 75.h,
@@ -91,31 +91,31 @@ class OrderItemCard extends StatelessWidget {
                     // order status
                     Row(
                       children: [
-                        if (order['status'] == 0)
+                        if (order.status == 0)
                           Icon(
                             Icons.access_time,
                             color: const Color(0xFFFFAC01),
                             size: 16.r,
                           ),
-                        if (order['status'] == 1)
+                        if (order.status == 1)
                           Icon(
                             Icons.access_time,
                             color: const Color(0xFFFFAC01),
                             size: 16.r,
                           ),
-                        if (order['status'] == 2)
+                        if (order.status == 2)
                           Icon(
                             Icons.access_time,
                             color: const Color(0xFFFFAC01),
                             size: 16.r,
                           ),
-                        if (order['status'] == 3)
+                        if (order.status == 3)
                           Icon(
                             Icons.check,
                             color: const Color(0xFF009C48),
                             size: 16.r,
                           ),
-                        if (order['status'] == 4)
+                        if (order.status == 4)
                           Icon(
                             Icons.close,
                             color: const Color(0xFFD81D1D),
@@ -125,7 +125,7 @@ class OrderItemCard extends StatelessWidget {
                         Expanded(
                           child: ConditionalSwitch.single<int>(
                             context: context,
-                            valueBuilder: (context) => order['status'],
+                            valueBuilder: (context) => order.status,
                             caseBuilders: {
                               0: (context) => Text(
                                     'Dalam antrian'.tr,
@@ -160,7 +160,7 @@ class OrderItemCard extends StatelessWidget {
                           DateFormat(
                             'dd MMMM yyyy',
                             Get.locale?.countryCode,
-                          ).format(DateTime.parse(order['tanggal'])),
+                          ).format(DateTime.parse(order.tanggal)),
                           style: Get.textTheme.labelMedium!
                               .copyWith(color: Colors.grey[400]),
                         ),
@@ -170,7 +170,7 @@ class OrderItemCard extends StatelessWidget {
 
                     // Menu title
                     Text(
-                      order['menu'].map((e) => e['nama']).join(', '),
+                      order.menu.map((e) => e.nama).join(', '),
                       style: Get.textTheme.bodyMedium,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -182,13 +182,13 @@ class OrderItemCard extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          'Rp ${order['total_bayar']}',
+                          'Rp ${order.totalBayar}',
                           style: Get.textTheme.labelLarge!
                               .copyWith(color: Theme.of(context).primaryColor),
                         ),
                         5.horizontalSpace,
                         Text(
-                          '(${order['menu'].length} Menu)',
+                          '(${order.menu.length} Menu)',
                           style: Get.textTheme.labelLarge!
                               .copyWith(color: Colors.grey[400]),
                         ),
@@ -199,24 +199,24 @@ class OrderItemCard extends StatelessWidget {
                     Conditional.single(
                       context: context,
                       conditionBuilder: (context) =>
-                          order['status'] == 3 || order['status'] == 4,
+                          order.status == 3 || order.status == 4,
                       widgetBuilder: (context) => Wrap(
                         spacing: 15.r,
                         children: [
-                          if (order['status'] == 3)
+                          if (order.status == 3)
                             Padding(
                               padding: EdgeInsets.only(top: 10.r, bottom: 5.r),
                               child: OutlinedTitleButton.compact(
                                 text: 'Give review'.tr,
                                 onPressed: () =>
-                                    onGiveReview?.call(order['id_order']),
+                                    onGiveReview?.call(order.idOrder),
                               ),
                             ),
                           Padding(
                             padding: EdgeInsets.only(
                                 top: 10.r,
                                 bottom: 5.r,
-                                right: order['status'] == 3 ? 0.r : 0.3.sw),
+                                right: order.status == 3 ? 0.r : 0.3.sw),
                             child: PrimaryButtonWithTitle.compact(
                               title: 'Order again'.tr,
                               onPressed: onOrderAgain,

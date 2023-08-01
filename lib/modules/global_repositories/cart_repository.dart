@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:trainee/modules/global_models/diskon.dart';
-import 'package:trainee/modules/global_models/order.dart';
 import 'package:trainee/modules/global_models/voucher.dart';
 import 'package:trainee/utils/services/local_storage_service.dart';
 

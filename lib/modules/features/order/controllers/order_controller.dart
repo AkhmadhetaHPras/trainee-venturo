@@ -3,21 +3,25 @@ import 'package:get/get.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:trainee/modules/features/order/repositories/order_repository.dart';
 
+import '../models/order.dart';
+
 class OrderController extends GetxController {
   static OrderController get to => Get.find<OrderController>();
   late final OrderRepository _orderRepository;
 
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
     _orderRepository = OrderRepository();
+
+    await _orderRepository.fetchOrderData();
 
     getOngoingOrders();
     getOrderHistories();
   }
 
-  RxList<Map<String, dynamic>> onGoingOrders = RxList();
-  RxList<Map<String, dynamic>> historyOrders = RxList();
+  RxList<Order> onGoingOrders = RxList();
+  RxList<Order> historyOrders = RxList();
   RxString onGoingOrderState = 'loading'.obs;
   RxString orderHistoryState = 'loading'.obs;
 
@@ -38,7 +42,7 @@ class OrderController extends GetxController {
     onGoingOrderState('loading');
     try {
       final result = _orderRepository.getOngoingOrder();
-      final data = result.where((element) => element['status'] != 4).toList();
+      final data = result.where((element) => element.status != 4).toList();
       onGoingOrders(data.reversed.toList());
       onGoingOrderState('success');
     } catch (exception, stacktrace) {
@@ -71,32 +75,29 @@ class OrderController extends GetxController {
     selectedDateRange(range);
   }
 
-  List<Map<String, dynamic>> get filteredHistoryOrder {
+  List<Order> get filteredHistoryOrder {
     final historyOrderList = historyOrders.toList();
 
     if (selectedCategory.value == 'canceled') {
-      historyOrderList.removeWhere((element) => element['status'] != 4);
+      historyOrderList.removeWhere((element) => element.status != 4);
     } else if (selectedCategory.value == 'completed') {
-      historyOrderList.removeWhere((element) => element['status'] != 3);
+      historyOrderList.removeWhere((element) => element.status != 3);
     }
 
     historyOrderList.removeWhere((element) =>
-        DateTime.parse(element['tanggal'] as String)
+        DateTime.parse(element.tanggal)
             .isBefore(selectedDateRange.value.start) ||
-        DateTime.parse(element['tanggal'] as String)
-            .isAfter(selectedDateRange.value.end));
+        DateTime.parse(element.tanggal).isAfter(selectedDateRange.value.end));
 
-    historyOrderList.sort((a, b) => DateTime.parse(b['tanggal'] as String)
-        .compareTo(DateTime.parse(a['tanggal'] as String)));
+    historyOrderList.sort((a, b) =>
+        DateTime.parse(b.tanggal).compareTo(DateTime.parse(a.tanggal)));
 
     return historyOrderList;
   }
 
   String get totalHistoryOrder {
-    final total = filteredHistoryOrder.where((e) => e['status'] == 3).fold(
-        0,
-        (previousValue, element) =>
-            previousValue + element['total_bayar'] as int);
+    final total = filteredHistoryOrder.where((e) => e.status == 3).fold(
+        0, (previousValue, element) => previousValue + element.totalBayar);
 
     return total.toString();
   }

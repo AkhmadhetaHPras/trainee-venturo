@@ -30,8 +30,8 @@ class OrderTracker extends StatelessWidget {
               child: Conditional.single(
                 context: context,
                 conditionBuilder: (context) =>
-                    DetailOrderController.to.order.value?['status'] == 0 ||
-                    DetailOrderController.to.order.value?['status'] == 1,
+                    DetailOrderController.to.order.value?.order?.status == 0 ||
+                    DetailOrderController.to.order.value?.order?.status == 1,
                 widgetBuilder: (context) => const CheckedStep(),
                 fallbackBuilder: (context) => const UncheckedStep(),
               ),
@@ -50,7 +50,7 @@ class OrderTracker extends StatelessWidget {
               child: Conditional.single(
                 context: context,
                 conditionBuilder: (context) =>
-                    DetailOrderController.to.order.value?['status'] == 2,
+                    DetailOrderController.to.order.value?.order?.status == 2,
                 widgetBuilder: (context) => const CheckedStep(),
                 fallbackBuilder: (context) => const UncheckedStep(),
               ),
@@ -69,7 +69,7 @@ class OrderTracker extends StatelessWidget {
               child: Conditional.single(
                 context: context,
                 conditionBuilder: (context) =>
-                    DetailOrderController.to.order.value?['status'] == 3,
+                    DetailOrderController.to.order.value?.order?.status == 3,
                 widgetBuilder: (context) => const CheckedStep(),
                 fallbackBuilder: (context) => const UncheckedStep(),
               ),

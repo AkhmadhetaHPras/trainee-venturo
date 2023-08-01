@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:trainee/configs/routes/main_route.dart';
 import 'package:trainee/configs/themes/main_color.dart';
 import 'package:trainee/shared/styles/google_text_style.dart';
 
@@ -32,41 +34,51 @@ class BottomNavigation extends StatelessWidget implements PreferredSizeWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Icon(
-                Icons.home,
-                size: 34,
-                color: MainColor.white,
-              ),
-              Text(
-                "Home",
-                style: GoogleTextStyle.fw700.copyWith(
+          InkWell(
+            onTap: () {
+              Get.offAllNamed(MainRoute.list);
+            },
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Icon(
+                  Icons.home,
+                  size: 34,
                   color: MainColor.white,
-                  fontSize: 12.sp,
                 ),
-              ),
-            ],
+                Text(
+                  "Home",
+                  style: GoogleTextStyle.fw700.copyWith(
+                    color: MainColor.white,
+                    fontSize: 12.sp,
+                  ),
+                ),
+              ],
+            ),
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Icon(
-                Icons.brunch_dining,
-                size: 34,
-                color: MainColor.white,
-              ),
-              Text(
-                "Pesanan",
-                style: GoogleTextStyle.fw700.copyWith(
+          InkWell(
+            onTap: () {
+              Get.toNamed(MainRoute.order);
+            },
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Icon(
+                  Icons.brunch_dining,
+                  size: 34,
                   color: MainColor.white,
-                  fontSize: 12.sp,
                 ),
-              ),
-            ],
+                Text(
+                  "Pesanan",
+                  style: GoogleTextStyle.fw700.copyWith(
+                    color: MainColor.white,
+                    fontSize: 12.sp,
+                  ),
+                ),
+              ],
+            ),
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,

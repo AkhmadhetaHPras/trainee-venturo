@@ -2,11 +2,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:trainee/configs/themes/main_color.dart';
+import 'package:trainee/modules/features/order/models/order_detail.dart';
 
+import '../../../../../shared/styles/google_text_style.dart';
 import '../../../cart/views/components/quantity_counter.dart';
 
 class DetailOrderCard extends StatelessWidget {
-  final Map<String, dynamic> detailOrder;
+  final Detail detailOrder;
 
   const DetailOrderCard(this.detailOrder, {Key? key}) : super(key: key);
 
@@ -15,7 +18,7 @@ class DetailOrderCard extends StatelessWidget {
     return Ink(
       padding: EdgeInsets.all(7.r),
       decoration: BoxDecoration(
-        color: Colors.grey[100],
+        color: MainColor.lightGrey,
         borderRadius: BorderRadius.circular(10.r),
         boxShadow: const [
           BoxShadow(
@@ -39,8 +42,7 @@ class DetailOrderCard extends StatelessWidget {
               color: Colors.white,
             ),
             child: CachedNetworkImage(
-              imageUrl: detailOrder['foto'] ??
-                  'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/240px-No_image_available.svg.png',
+              imageUrl: detailOrder.foto,
               fit: BoxFit.contain,
               errorWidget: (context, _, __) => CachedNetworkImage(
                 imageUrl:
@@ -51,20 +53,39 @@ class DetailOrderCard extends StatelessWidget {
           ),
           Expanded(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  detailOrder['nama'],
+                  detailOrder.nama,
                   style: Get.textTheme.titleMedium,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                 ),
                 Text(
-                  'Rp ${int.parse(detailOrder['harga'])}',
+                  'Rp ${detailOrder.harga}',
                   style: Get.textTheme.bodyMedium!.copyWith(
                       color: Theme.of(context).primaryColor,
                       fontWeight: FontWeight.bold),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const Icon(Icons.edit_note),
+                    const SizedBox(
+                      width: 8,
+                    ),
+                    Expanded(
+                      child: Text(
+                        detailOrder.catatan,
+                        style: GoogleTextStyle.fw500.copyWith(
+                          fontSize: 12.sp,
+                          color: MainColor.dark,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -72,7 +93,7 @@ class DetailOrderCard extends StatelessWidget {
           Container(
             height: 75.r,
             padding: EdgeInsets.only(left: 12.w, right: 5.w),
-            child: QuantityCounter(quantity: detailOrder['jumlah']),
+            child: QuantityCounter(quantity: detailOrder.jumlah),
           ),
         ],
       ),

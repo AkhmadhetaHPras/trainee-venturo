@@ -14,7 +14,7 @@ import '../features/cart/views/components/order_success_dialog.dart';
 import '../features/cart/views/components/pin_dialog.dart';
 import '../global_models/diskon.dart';
 import '../global_models/menu_cart.dart';
-import '../global_models/order.dart';
+import '../global_models/post_order.dart';
 import '../global_repositories/cart_repository.dart';
 
 class CartController extends GetxController {
@@ -85,7 +85,7 @@ class CartController extends GetxController {
   }
 
   Future getDiscountPrice() async {
-    discountPrice.value = await getDiscount() * getTotalPrice() ~/ 100;
+    discountPrice.value = discount * getTotalPrice() ~/ 100;
   }
 
   // Get the total price of items in the cart
@@ -149,7 +149,13 @@ class CartController extends GetxController {
 
         // if succeed, order cart
         if (authenticated) {
+          EasyLoading.show(
+            status: 'Sedang Diproses...',
+            maskType: EasyLoadingMaskType.black,
+            dismissOnTap: false,
+          );
           if (await postOrder()) {
+            EasyLoading.dismiss();
             showOrderSuccessDialog();
           }
         }
@@ -187,8 +193,14 @@ class CartController extends GetxController {
     );
 
     if (authenticated == true) {
+      EasyLoading.show(
+        status: 'Sedang Diproses...',
+        maskType: EasyLoadingMaskType.black,
+        dismissOnTap: false,
+      );
       // if succeed, order cart
       if (await postOrder()) {
+        EasyLoading.dismiss();
         showOrderSuccessDialog();
       }
     } else if (authenticated != null) {
@@ -235,6 +247,7 @@ class CartController extends GetxController {
       final order = PostOrder(
           idUser: id,
           idVoucher: selectedVoucher.value.idVoucher,
+          diskon: discount.value,
           potongan: getPriceCut(),
           totalBayar: getGrandTotal());
 
@@ -256,6 +269,7 @@ class CartController extends GetxController {
       if (response.statusCode == 200) {
         final responseData = response.data;
         if (responseData['status_code'] == 200) {
+          await LocalStorageService.box.put('cartItems', []);
           return true;
         } else {
           return false;

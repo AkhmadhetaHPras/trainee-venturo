@@ -77,7 +77,7 @@ class OrderHistoryTabView extends StatelessWidget {
                                 OrderController.to.filteredHistoryOrder[index],
                             onOrderAgain: () {},
                             onTap: () => Get.toNamed(
-                              '${MainRoute.order}/${OrderController.to.filteredHistoryOrder[index]['id_order']}',
+                              '${MainRoute.order}/${OrderController.to.filteredHistoryOrder[index].idOrder}',
                             ),
                           ),
                         ),

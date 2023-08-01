@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:trainee/modules/features/order/models/order_detail.dart';
 
 import 'detail_order_card.dart';
 
@@ -9,7 +10,7 @@ class OrderListSliver extends StatelessWidget {
     required this.orders,
   });
 
-  final List<Map<String, dynamic>> orders;
+  final List<Detail> orders;
 
   @override
   Widget build(BuildContext context) {

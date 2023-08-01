@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:get/get.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
+import '../models/order_detail.dart';
 import '../repositories/order_repository.dart';
 
 class DetailOrderController extends GetxController {
@@ -10,7 +11,7 @@ class DetailOrderController extends GetxController {
 
   // order data
   RxString orderDetailState = 'loading'.obs;
-  Rxn<Map<String, dynamic>> order = Rxn();
+  Rxn<OrderDetail> order = Rxn();
   Timer? timer;
 
   @override
@@ -38,10 +39,12 @@ class DetailOrderController extends GetxController {
       orderDetailState('loading');
     }
     try {
-      final result = _orderRepository.getOrderDetail(orderId);
+      final result = await _orderRepository.getOrderDetail(orderId);
 
-      orderDetailState('success');
-      order(result);
+      if (result.order != null) {
+        orderDetailState('success');
+        order(result);
+      }
     } catch (exception, stacktrace) {
       await Sentry.captureException(
         exception,
@@ -51,15 +54,15 @@ class DetailOrderController extends GetxController {
     }
   }
 
-  List<Map<String, dynamic>> get foodItems =>
-      order.value?['menu']
-          .where((element) => element['kategori'] == 'makanan')
+  List<Detail> get foodItems =>
+      order.value?.detail!
+          .where((element) => element.kategori == 'makanan')
           .toList() ??
       [];
 
-  List<Map<String, dynamic>> get drinkItems =>
-      order.value?['menu']
-          .where((element) => element['kategori'] == 'minuman')
+  List<Detail> get drinkItems =>
+      order.value?.detail!
+          .where((element) => element.kategori == 'minuman')
           .toList() ??
       [];
 }
