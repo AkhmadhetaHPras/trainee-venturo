@@ -190,6 +190,7 @@ class EditMenuCartView extends StatelessWidget {
                                   EditMenuCartController.to
                                       .addOrRemoveTopping(topping);
                                 },
+                                fromCart: true,
                               ),
                             ),
                             const Divider(

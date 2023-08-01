@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:trainee/modules/features/cart/controllers/edit_menu_cart_controller.dart';
 import 'package:trainee/modules/features/menu/controllers/detail_menu_controller.dart';
 import 'package:trainee/modules/features/menu/models/menu_response.dart';
 
@@ -14,6 +15,7 @@ class RadioSection extends StatelessWidget {
   final RxList<Topping> selectedValue;
   final List<Topping> data;
   final void Function(Topping)? onOptionSelected;
+  final bool fromCart;
 
   const RadioSection({
     super.key,
@@ -22,6 +24,7 @@ class RadioSection extends StatelessWidget {
     required this.selectedValue,
     required this.data,
     required this.onOptionSelected,
+    this.fromCart = false,
   });
 
   @override
@@ -88,9 +91,13 @@ class RadioSection extends StatelessWidget {
                                             const EdgeInsets.only(right: 8.0),
                                         child: Obx(
                                           () => OptionChip(
-                                            isSelected: DetailMenuController.to
-                                                .isToppingInSelectedList(
-                                                    datas.idDetail!),
+                                            isSelected: fromCart
+                                                ? EditMenuCartController.to
+                                                    .isToppingInSelectedList(
+                                                        datas.idDetail!)
+                                                : DetailMenuController.to
+                                                    .isToppingInSelectedList(
+                                                        datas.idDetail!),
                                             text: datas.keterangan!,
                                             onTap: () {
                                               onOptionSelected!(datas);
