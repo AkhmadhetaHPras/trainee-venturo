@@ -3,6 +3,7 @@ import 'package:flutter_conditional_rendering/conditional.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:trainee/modules/features/order/controllers/order_detail_controller.dart';
+import 'package:trainee/shared/styles/google_text_style.dart';
 
 import 'checked_step.dart';
 import 'unchecked_step.dart';
@@ -17,7 +18,9 @@ class OrderTracker extends StatelessWidget {
       children: [
         Text(
           'Pesanan kamu sedang disiapkan'.tr,
-          style: Get.textTheme.titleSmall,
+          style: GoogleTextStyle.fw700.copyWith(
+            fontSize: 16.sp,
+          ),
           textAlign: TextAlign.left,
         ),
         18.verticalSpace,
@@ -84,7 +87,9 @@ class OrderTracker extends StatelessWidget {
             Expanded(
               child: Text(
                 'Pesanan Diterima'.tr,
-                style: Get.textTheme.labelMedium,
+                style: GoogleTextStyle.fw400.copyWith(
+                  fontSize: 12.sp,
+                ),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -92,7 +97,9 @@ class OrderTracker extends StatelessWidget {
             Expanded(
               child: Text(
                 'Silakan Diambil'.tr,
-                style: Get.textTheme.labelMedium,
+                style: GoogleTextStyle.fw400.copyWith(
+                  fontSize: 12.sp,
+                ),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -100,7 +107,9 @@ class OrderTracker extends StatelessWidget {
             Expanded(
               child: Text(
                 'Pesanan Selesai'.tr,
-                style: Get.textTheme.labelMedium,
+                style: GoogleTextStyle.fw400.copyWith(
+                  fontSize: 12.sp,
+                ),
                 textAlign: TextAlign.center,
               ),
             ),

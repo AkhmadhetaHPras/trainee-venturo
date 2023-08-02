@@ -51,7 +51,7 @@ class DetailOrderView extends StatelessWidget {
                   child: Text(
                     'Batal'.tr,
                     style: Get.textTheme.labelLarge
-                        ?.copyWith(color: const Color(0xFFD81D1D)),
+                        ?.copyWith(color: MainColor.danger),
                   ),
                 ),
               ),
@@ -90,7 +90,7 @@ class DetailOrderView extends StatelessWidget {
               if (DetailOrderController.to.drinkItems.isNotEmpty) ...[
                 SliverToBoxAdapter(
                   child: SectionHeader(
-                    icon: Icons.food_bank_outlined,
+                    icon: Icons.local_drink_outlined,
                     title: 'Minuman',
                     color: Theme.of(context).primaryColor,
                   ),
@@ -136,10 +136,12 @@ class DetailOrderView extends StatelessWidget {
                             '(${DetailOrderController.to.order.value?.detail?.length} Menu):',
                         message:
                             'Rp ${DetailOrderController.to.order.value?.order?.totalBayar ?? '0'}',
-                        titleStyle: Get.textTheme.titleMedium,
-                        messageStyle: Get.textTheme.titleMedium!.copyWith(
-                            color: Theme.of(context).primaryColor,
-                            fontWeight: FontWeight.w600),
+                        titleStyle:
+                            GoogleTextStyle.fw600.copyWith(fontSize: 18.sp),
+                        messageStyle: GoogleTextStyle.fw600.copyWith(
+                          fontSize: 18.sp,
+                          color: MainColor.primary,
+                        ),
                       ),
                       Divider(color: Colors.black45, height: 2.h),
 
@@ -163,10 +165,12 @@ class DetailOrderView extends StatelessWidget {
                           title: 'Discount',
                           message:
                               'Rp ${DetailOrderController.to.order.value?.order?.potongan ?? '0'}',
-                          titleStyle: Get.textTheme.titleMedium,
-                          messageStyle: Get.textTheme.titleMedium?.copyWith(
-                              color: MainColor.danger,
-                              fontWeight: FontWeight.w600),
+                          titleStyle:
+                              GoogleTextStyle.fw600.copyWith(fontSize: 18.sp),
+                          messageStyle: GoogleTextStyle.fw600.copyWith(
+                            fontSize: 18.sp,
+                            color: MainColor.danger,
+                          ),
                         ),
                         fallbackBuilder: (context) => const SizedBox(),
                       ),
@@ -187,14 +191,16 @@ class DetailOrderView extends StatelessWidget {
                               'Rp ${DetailOrderController.to.order.value?.order?.potongan ?? '0'}',
                           messageSubtitle: DetailOrderController
                               .to.order.value?.order?.namaVoucher,
-                          titleStyle: Get.textTheme.titleMedium,
-                          messageStyle: Get.textTheme.titleMedium?.copyWith(
-                              color: const Color(0xFFD81D1D),
-                              fontWeight: FontWeight.w600),
+                          titleStyle:
+                              GoogleTextStyle.fw600.copyWith(fontSize: 18.sp),
+                          messageStyle: GoogleTextStyle.fw600.copyWith(
+                            fontSize: 18.sp,
+                            color: MainColor.danger,
+                          ),
                         ),
                         fallbackBuilder: (context) => const SizedBox(),
                       ),
-                      Divider(color: const Color(0xFFD81D1D), height: 2.h),
+                      Divider(color: MainColor.danger, height: 2.h),
 
                       // Payment options tile
                       TileOption(
@@ -202,8 +208,10 @@ class DetailOrderView extends StatelessWidget {
                         iconSize: 24.r,
                         title: 'Pembayaran'.tr,
                         message: 'Pay Later',
-                        titleStyle: Get.textTheme.titleMedium,
-                        messageStyle: Get.textTheme.titleMedium,
+                        titleStyle:
+                            GoogleTextStyle.fw600.copyWith(fontSize: 18.sp),
+                        messageStyle:
+                            GoogleTextStyle.fw600.copyWith(fontSize: 18.sp),
                       ),
 
                       Divider(color: Colors.black54, height: 2.h),
@@ -214,10 +222,13 @@ class DetailOrderView extends StatelessWidget {
                         title: 'Total pembayaran'.tr,
                         message:
                             'Rp ${DetailOrderController.to.order.value?.order?.totalBayar ?? '0'}',
-                        titleStyle: Get.textTheme.titleMedium,
-                        messageStyle: Get.textTheme.titleMedium!.copyWith(
-                            color: Theme.of(context).primaryColor,
-                            fontWeight: FontWeight.w600),
+                        titleStyle:
+                            GoogleTextStyle.fw600.copyWith(fontSize: 18.sp),
+                        messageStyle: GoogleTextStyle.fw600
+                            .copyWith(fontSize: 18.sp)!
+                            .copyWith(
+                                color: Theme.of(context).primaryColor,
+                                fontWeight: FontWeight.w600),
                       ),
                       Divider(color: Colors.black54, height: 2.h),
                       24.verticalSpace,

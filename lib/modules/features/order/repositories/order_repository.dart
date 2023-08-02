@@ -8,6 +8,30 @@ import '../models/order.dart';
 class OrderRepository {
   List<Order> ongoingOrder = [];
 
+  Future<Map<String, dynamic>> getListOfDataOnGoing({int offset = 0}) async {
+    int limit = 5 + offset;
+
+    await fetchOrderData();
+    if (limit > getOngoingOrder().length) limit = getOngoingOrder().length;
+    return {
+      'data': getOngoingOrder().getRange(offset, limit).toList(),
+      'next': limit < getOngoingOrder().length ? true : null,
+      'previous': offset > 0 ? true : null,
+    };
+  }
+
+  Future<Map<String, dynamic>> getListOfDataHistory({int offset = 0}) async {
+    int limit = 5 + offset;
+
+    await fetchOrderData();
+    if (limit > getOrderHistory().length) limit = getOrderHistory().length;
+    return {
+      'data': getOrderHistory().getRange(offset, limit).toList(),
+      'next': limit < getOrderHistory().length ? true : null,
+      'previous': offset > 0 ? true : null,
+    };
+  }
+
   Future<void> fetchOrderData() async {
     try {
       var dio =
@@ -39,20 +63,14 @@ class OrderRepository {
   }
 
   List<Order> getOngoingOrder() {
-    return ongoingOrder.where((element) => element.status < 3).toList();
+    return ongoingOrder.reversed
+        .where((element) => element.status < 3)
+        .toList();
   }
 
-  // Get Order History
   List<Order> getOrderHistory() {
     return ongoingOrder.where((element) => element.status >= 2).toList();
   }
-
-  // Get Order Detail
-  // Order? getOrderDetail(int idOrder) {
-  //   return ongoingOrder.firstWhere(
-  //     (element) => element.idOrder == idOrder,
-  //   );
-  // }
 
   Future<OrderDetail> getOrderDetail(int idOrder) async {
     try {

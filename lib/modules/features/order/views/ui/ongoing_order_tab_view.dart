@@ -2,6 +2,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:trainee/configs/routes/main_route.dart';
 
 import '../../controllers/order_controller.dart';
@@ -18,10 +19,15 @@ class OnGoingOrderTabView extends StatelessWidget {
       screenClassOverride: 'Trainee',
     );
 
-    return RefreshIndicator(
-      onRefresh: () async => OrderController.to.getOngoingOrders(),
-      child: Obx(
-        () => ListView.separated(
+    return Obx(
+      () => SmartRefresher(
+        controller: OrderController.to.refreshOnGoingController,
+        enablePullDown: true,
+        onRefresh: OrderController.to.onRefreshOnGoing,
+        enablePullUp:
+            OrderController.to.canLoadMoreOnGoing.isTrue ? true : false,
+        onLoading: OrderController.to.getListOnGoing,
+        child: ListView.separated(
           padding: EdgeInsets.all(25.r),
           itemBuilder: (context, index) => OrderItemCard(
             order: OrderController.to.onGoingOrders[index],

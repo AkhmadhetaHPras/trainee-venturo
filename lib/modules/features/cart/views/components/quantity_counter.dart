@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:trainee/shared/styles/google_text_style.dart';
 
 import '../../../../../configs/themes/main_color.dart';
 
@@ -36,6 +38,7 @@ class QuantityCounter extends StatelessWidget {
         ),
         Text(
           quantity.toString(),
+          style: GoogleTextStyle.fw500.copyWith(fontSize: 18.sp),
         ),
         Visibility(
           visible: onIncrement != null,

@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:trainee/configs/themes/main_color.dart';
 import 'package:trainee/modules/features/order/models/order_detail.dart';
 
@@ -58,15 +57,18 @@ class DetailOrderCard extends StatelessWidget {
               children: [
                 Text(
                   detailOrder.nama,
-                  style: Get.textTheme.titleMedium,
+                  style: GoogleTextStyle.fw500.copyWith(
+                    fontSize: 23.sp,
+                  ),
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                 ),
                 Text(
                   'Rp ${detailOrder.harga}',
-                  style: Get.textTheme.bodyMedium!.copyWith(
-                      color: Theme.of(context).primaryColor,
-                      fontWeight: FontWeight.bold),
+                  style: GoogleTextStyle.fw700.copyWith(
+                    fontSize: 18.sp,
+                    color: MainColor.primary,
+                  ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -77,10 +79,12 @@ class DetailOrderCard extends StatelessWidget {
                     ),
                     Expanded(
                       child: Text(
-                        detailOrder.catatan,
+                        detailOrder.catatan.isEmpty
+                            ? "-"
+                            : detailOrder.catatan.replaceAll('"', ''),
                         style: GoogleTextStyle.fw500.copyWith(
                           fontSize: 12.sp,
-                          color: MainColor.dark,
+                          color: MainColor.grey,
                         ),
                         overflow: TextOverflow.ellipsis,
                       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:trainee/modules/features/order/repositories/order_repository.dart';
 
@@ -14,15 +15,24 @@ class OrderController extends GetxController {
     super.onInit();
     _orderRepository = OrderRepository();
 
-    await _orderRepository.fetchOrderData();
-
-    getOngoingOrders();
+    await getListOnGoing();
+    // await getListHistory();
+    // await _orderRepository.fetchOrderData();
     getOrderHistories();
   }
 
+  final RxInt pageOnGoing = 0.obs;
+  final RxBool canLoadMoreOnGoing = true.obs;
+  final RefreshController refreshOnGoingController =
+      RefreshController(initialRefresh: false);
+
+  // final RxInt pageHistory = 0.obs;
+  // final RxBool canLoadMoreHistory = true.obs;
+  // final RefreshController refreshHistoryController =
+  //     RefreshController(initialRefresh: false);
+
   RxList<Order> onGoingOrders = RxList();
   RxList<Order> historyOrders = RxList();
-  RxString onGoingOrderState = 'loading'.obs;
   RxString orderHistoryState = 'loading'.obs;
 
   Rx<String> selectedCategory = 'all'.obs;
@@ -38,25 +48,24 @@ class OrderController extends GetxController {
     end: DateTime.now(),
   ).obs;
 
-  Future<void> getOngoingOrders() async {
-    onGoingOrderState('loading');
-    try {
-      final result = _orderRepository.getOngoingOrder();
-      final data = result.where((element) => element.status != 4).toList();
-      onGoingOrders(data.reversed.toList());
-      onGoingOrderState('success');
-    } catch (exception, stacktrace) {
-      await Sentry.captureException(
-        exception,
-        stackTrace: stacktrace,
-      );
-      onGoingOrderState('error');
-    }
-  }
+  // Future<void> getOngoingOrders() async {
+  //   onGoingOrderState('loading');
+  //   try {
+  //     final result = _orderRepository.getOngoingOrder();
+  //     final data = result.where((element) => element.status != 4).toList();
+  //     onGoingOrders(data.reversed.toList());
+  //     onGoingOrderState('success');
+  //   } catch (exception, stacktrace) {
+  //     await Sentry.captureException(
+  //       exception,
+  //       stackTrace: stacktrace,
+  //     );
+  //     onGoingOrderState('error');
+  //   }
+  // }
 
   Future<void> getOrderHistories() async {
     orderHistoryState('loading');
-
     try {
       final result = _orderRepository.getOrderHistory();
       historyOrders(result.reversed.toList());
@@ -101,4 +110,88 @@ class OrderController extends GetxController {
 
     return total.toString();
   }
+
+  Future<bool> getListOnGoing() async {
+    try {
+      final result = await _orderRepository.getListOfDataOnGoing(
+        offset: pageOnGoing.value * 5,
+      );
+      if (result['previous'] == null) {
+        onGoingOrders.clear();
+      }
+
+      if (result['next'] == null) {
+        canLoadMoreOnGoing(false);
+        refreshOnGoingController.loadNoData();
+      }
+
+      final data =
+          result['data'].where((element) => element.status != 4).toList();
+      onGoingOrders.addAll(data.toList());
+      pageOnGoing.value++;
+      refreshOnGoingController.loadComplete();
+      return true;
+    } catch (exception, stacktrace) {
+      await Sentry.captureException(
+        exception,
+        stackTrace: stacktrace,
+      );
+
+      refreshOnGoingController.loadFailed();
+      return false;
+    }
+  }
+
+  void onRefreshOnGoing() async {
+    pageOnGoing(0);
+    canLoadMoreOnGoing(true);
+    final result = await getListOnGoing();
+    if (result) {
+      refreshOnGoingController.refreshCompleted();
+    } else {
+      refreshOnGoingController.refreshFailed();
+    }
+  }
+
+  // Future<bool> getListHistory() async {
+  //   try {
+  //     final result = await _orderRepository.getListOfDataOnGoing(
+  //       offset: pageHistory.value * 5,
+  //     );
+  //     if (result['previous'] == null) {
+  //       historyOrders.clear();
+  //     }
+
+  //     if (result['next'] == null) {
+  //       canLoadMoreHistory(false);
+  //       refreshHistoryController.loadNoData();
+  //     }
+
+  //     final data =
+  //         result['data'].where((element) => element.status != 4).toList();
+  //     historyOrders.addAll(data.toList());
+  //     pageHistory.value++;
+  //     refreshHistoryController.loadComplete();
+  //     return true;
+  //   } catch (exception, stacktrace) {
+  //     await Sentry.captureException(
+  //       exception,
+  //       stackTrace: stacktrace,
+  //     );
+
+  //     refreshHistoryController.loadFailed();
+  //     return false;
+  //   }
+  // }
+
+  // Future<void> onRefreshHistory() async {
+  //   pageHistory(0);
+  //   canLoadMoreHistory(true);
+  //   final result = await getListHistory();
+  //   if (result) {
+  //     refreshHistoryController.refreshCompleted();
+  //   } else {
+  //     refreshHistoryController.refreshFailed();
+  //   }
+  // }
 }

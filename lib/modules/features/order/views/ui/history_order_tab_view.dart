@@ -5,6 +5,8 @@ import 'package:flutter_conditional_rendering/conditional_switch.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:trainee/configs/routes/main_route.dart';
+import 'package:trainee/configs/themes/main_color.dart';
+import 'package:trainee/shared/styles/google_text_style.dart';
 
 import '../../controllers/order_controller.dart';
 import '../components/date_picker.dart';
@@ -109,16 +111,14 @@ class OrderHistoryTabView extends StatelessWidget {
           children: [
             Text(
               'Total pesanan'.tr,
-              style: Get.textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.w700,
-              ),
+              style: GoogleTextStyle.fw700.copyWith(fontSize: 18.sp),
             ),
             5.horizontalSpace,
             Obx(() => Text(
                   'Rp ${OrderController.to.totalHistoryOrder}',
-                  style: Get.textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.w700,
-                    color: Theme.of(context).primaryColor,
+                  style: GoogleTextStyle.fw700.copyWith(
+                    fontSize: 18.sp,
+                    color: MainColor.primary,
                   ),
                 )),
           ],

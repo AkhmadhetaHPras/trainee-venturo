@@ -5,8 +5,10 @@ import 'package:flutter_conditional_rendering/conditional_switch.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:trainee/configs/themes/main_color.dart';
 import 'package:trainee/modules/features/order/models/order.dart';
 import 'package:trainee/modules/features/order/views/components/primary_button_with_title.dart';
+import 'package:trainee/shared/styles/google_text_style.dart';
 
 import 'outlined_title_button.dart';
 
@@ -94,31 +96,31 @@ class OrderItemCard extends StatelessWidget {
                         if (order.status == 0)
                           Icon(
                             Icons.access_time,
-                            color: const Color(0xFFFFAC01),
+                            color: MainColor.yellow,
                             size: 16.r,
                           ),
                         if (order.status == 1)
                           Icon(
                             Icons.access_time,
-                            color: const Color(0xFFFFAC01),
+                            color: MainColor.yellow,
                             size: 16.r,
                           ),
                         if (order.status == 2)
                           Icon(
                             Icons.access_time,
-                            color: const Color(0xFFFFAC01),
+                            color: MainColor.yellow,
                             size: 16.r,
                           ),
                         if (order.status == 3)
                           Icon(
                             Icons.check,
-                            color: const Color(0xFF009C48),
+                            color: MainColor.green,
                             size: 16.r,
                           ),
                         if (order.status == 4)
                           Icon(
                             Icons.close,
-                            color: const Color(0xFFD81D1D),
+                            color: MainColor.danger,
                             size: 16.r,
                           ),
                         5.horizontalSpaceRadius,
@@ -129,28 +131,33 @@ class OrderItemCard extends StatelessWidget {
                             caseBuilders: {
                               0: (context) => Text(
                                     'Dalam antrian'.tr,
-                                    style: Get.textTheme.labelMedium!.copyWith(
-                                        color: const Color(0xFFFFAC01)),
+                                    style: GoogleTextStyle.fw500.copyWith(
+                                        color: MainColor.yellow,
+                                        fontSize: 12.sp),
                                   ),
                               1: (context) => Text(
                                     'Sedang disiapkan'.tr,
-                                    style: Get.textTheme.labelMedium!.copyWith(
-                                        color: const Color(0xFFFFAC01)),
+                                    style: GoogleTextStyle.fw500.copyWith(
+                                        color: MainColor.yellow,
+                                        fontSize: 12.sp),
                                   ),
                               2: (context) => Text(
                                     'Siap'.tr,
-                                    style: Get.textTheme.labelMedium!.copyWith(
-                                        color: const Color(0xFFFFAC01)),
+                                    style: GoogleTextStyle.fw500.copyWith(
+                                        color: MainColor.yellow,
+                                        fontSize: 12.sp),
                                   ),
                               3: (context) => Text(
                                     'Selesai'.tr,
-                                    style: Get.textTheme.labelMedium!.copyWith(
-                                        color: const Color(0xFF009C48)),
+                                    style: GoogleTextStyle.fw500.copyWith(
+                                        color: MainColor.green,
+                                        fontSize: 12.sp),
                                   ),
                               4: (context) => Text(
                                     'Dibatalkan'.tr,
-                                    style: Get.textTheme.labelMedium!.copyWith(
-                                        color: const Color(0xFFD81D1D)),
+                                    style: GoogleTextStyle.fw500.copyWith(
+                                        color: MainColor.danger,
+                                        fontSize: 12.sp),
                                   ),
                             },
                             fallbackBuilder: (context) => const SizedBox(),
@@ -161,8 +168,8 @@ class OrderItemCard extends StatelessWidget {
                             'dd MMMM yyyy',
                             Get.locale?.countryCode,
                           ).format(DateTime.parse(order.tanggal)),
-                          style: Get.textTheme.labelMedium!
-                              .copyWith(color: Colors.grey[400]),
+                          style: GoogleTextStyle.fw500
+                              .copyWith(color: MainColor.grey, fontSize: 12.sp),
                         ),
                       ],
                     ),
@@ -171,7 +178,9 @@ class OrderItemCard extends StatelessWidget {
                     // Menu title
                     Text(
                       order.menu.map((e) => e.nama).join(', '),
-                      style: Get.textTheme.bodyMedium,
+                      style: GoogleTextStyle.fw500.copyWith(
+                        fontSize: 18.sp,
+                      ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.left,
@@ -183,14 +192,16 @@ class OrderItemCard extends StatelessWidget {
                       children: [
                         Text(
                           'Rp ${order.totalBayar}',
-                          style: Get.textTheme.labelLarge!
-                              .copyWith(color: Theme.of(context).primaryColor),
+                          style: GoogleTextStyle.fw500.copyWith(
+                            fontSize: 14.sp,
+                            color: MainColor.primary,
+                          ),
                         ),
                         5.horizontalSpace,
                         Text(
                           '(${order.menu.length} Menu)',
-                          style: Get.textTheme.labelLarge!
-                              .copyWith(color: Colors.grey[400]),
+                          style: GoogleTextStyle.fw500
+                              .copyWith(color: MainColor.grey),
                         ),
                       ],
                     ),
