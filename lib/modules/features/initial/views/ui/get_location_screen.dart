@@ -22,7 +22,7 @@ class GetLocationScreen extends StatelessWidget {
           height: double.infinity,
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage(ImageConstant.bgPattern2),
+              image: AssetImage(ImageConstant.bgBlank),
               fit: BoxFit.fitHeight,
               alignment: Alignment.center,
             ),

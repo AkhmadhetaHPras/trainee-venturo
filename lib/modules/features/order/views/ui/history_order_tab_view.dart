@@ -9,6 +9,7 @@ import 'package:trainee/configs/routes/main_route.dart';
 import 'package:trainee/configs/themes/main_color.dart';
 import 'package:trainee/shared/styles/google_text_style.dart';
 
+import '../../../../../constants/cores/assets/image_constant.dart';
 import '../../controllers/order_controller.dart';
 import '../components/date_picker.dart';
 import '../components/dropdown_status.dart';
@@ -34,102 +35,142 @@ class OrderHistoryTabView extends StatelessWidget {
           enablePullUp:
               OrderController.to.canLoadMoreHistory.isTrue ? true : false,
           onLoading: OrderController.to.getListHistory,
-          child: ConditionalSwitch.single(
-            context: context,
-            valueBuilder: (context) =>
-                OrderController.to.orderHistoryState.value,
-            caseBuilders: {},
-            fallbackBuilder: (context) => CustomScrollView(
-              slivers: [
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 25.w, vertical: 25.h),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: DropdownStatus(
-                            items: OrderController.to.dateFilterStatus,
-                            selectedItem:
-                                OrderController.to.selectedCategory.value,
-                            onChanged: (value) => OrderController.to
-                                .setDateFilter(category: value),
-                          ),
-                        ),
-                        22.horizontalSpaceRadius,
-                        Expanded(
-                          child: DatePicker(
-                            selectedDate:
-                                OrderController.to.selectedDateRange.value,
-                            onChanged: (value) =>
-                                OrderController.to.setDateFilter(range: value),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Conditional.single(
-                  context: context,
-                  conditionBuilder: (context) =>
-                      OrderController.to.filteredHistoryOrder.isNotEmpty,
-                  widgetBuilder: (context) => SliverPadding(
-                    padding: EdgeInsets.symmetric(horizontal: 25.w),
-                    sliver: SliverList(
-                      delegate: SliverChildBuilderDelegate(
-                        (context, index) => Padding(
-                          padding: EdgeInsets.only(bottom: 16.r),
-                          child: OrderItemCard(
-                            order:
-                                OrderController.to.filteredHistoryOrder[index],
-                            onOrderAgain: () {},
-                            onTap: () => Get.toNamed(
-                              '${MainRoute.order}/${OrderController.to.filteredHistoryOrder[index].idOrder}',
+          child: Obx(() {
+            if (OrderController.to.historyOrders.isNotEmpty) {
+              return ConditionalSwitch.single(
+                context: context,
+                valueBuilder: (context) =>
+                    OrderController.to.orderHistoryState.value,
+                caseBuilders: {},
+                fallbackBuilder: (context) => CustomScrollView(
+                  slivers: [
+                    SliverToBoxAdapter(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 25.w, vertical: 25.h),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: DropdownStatus(
+                                items: OrderController.to.dateFilterStatus,
+                                selectedItem:
+                                    OrderController.to.selectedCategory.value,
+                                onChanged: (value) => OrderController.to
+                                    .setDateFilter(category: value),
+                              ),
                             ),
-                          ),
+                            22.horizontalSpaceRadius,
+                            Expanded(
+                              child: DatePicker(
+                                selectedDate:
+                                    OrderController.to.selectedDateRange.value,
+                                onChanged: (value) => OrderController.to
+                                    .setDateFilter(range: value),
+                              ),
+                            ),
+                          ],
                         ),
-                        childCount:
-                            OrderController.to.filteredHistoryOrder.length,
                       ),
                     ),
+                    Conditional.single(
+                      context: context,
+                      conditionBuilder: (context) =>
+                          OrderController.to.filteredHistoryOrder.isNotEmpty,
+                      widgetBuilder: (context) => SliverPadding(
+                        padding: EdgeInsets.symmetric(horizontal: 25.w),
+                        sliver: SliverList(
+                          delegate: SliverChildBuilderDelegate(
+                            (context, index) => Padding(
+                              padding: EdgeInsets.only(bottom: 16.r),
+                              child: OrderItemCard(
+                                order: OrderController
+                                    .to.filteredHistoryOrder[index],
+                                onOrderAgain: () {},
+                                onTap: () => Get.toNamed(
+                                  '${MainRoute.order}/${OrderController.to.filteredHistoryOrder[index].idOrder}',
+                                ),
+                              ),
+                            ),
+                            childCount:
+                                OrderController.to.filteredHistoryOrder.length,
+                          ),
+                        ),
+                      ),
+                      fallbackBuilder: (context) => const SliverToBoxAdapter(
+                        child: SizedBox(),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            } else {
+              return Container(
+                alignment: Alignment.center,
+                width: double.infinity,
+                height: double.infinity,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(ImageConstant.bgBlank),
+                    fit: BoxFit.fitHeight,
+                    alignment: Alignment.center,
                   ),
-                  fallbackBuilder: (context) => const SliverToBoxAdapter(
-                    child: SizedBox(),
-                  ),
-                )
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 30.r),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      ImageConstant.icNoteAction,
+                    ),
+                    Text(
+                      "Sudah Pesan?\nMakanan yang kamu pesan akan muncul di sini agar kamu bisa menemukan menu favoritmu lagi!",
+                      style: GoogleTextStyle.fw400.copyWith(
+                        fontSize: 22.sp,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              );
+            }
+          }),
+        ),
+      ),
+      bottomNavigationBar: Obx(() {
+        if (OrderController.to.historyOrders.isNotEmpty) {
+          return Container(
+            width: 1.sw,
+            height: 60.h,
+            padding: EdgeInsets.symmetric(horizontal: 22.w, vertical: 15.h),
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(30.r),
+                )),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Total pesanan'.tr,
+                  style: GoogleTextStyle.fw700.copyWith(fontSize: 18.sp),
+                ),
+                5.horizontalSpace,
+                Obx(() => Text(
+                      'Rp ${OrderController.to.totalHistoryOrder}',
+                      style: GoogleTextStyle.fw700.copyWith(
+                        fontSize: 18.sp,
+                        color: MainColor.primary,
+                      ),
+                    )),
               ],
             ),
-          ),
-        ),
-      ),
-      bottomNavigationBar: Container(
-        width: 1.sw,
-        height: 60.h,
-        padding: EdgeInsets.symmetric(horizontal: 22.w, vertical: 15.h),
-        decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.vertical(
-              top: Radius.circular(30.r),
-            )),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'Total pesanan'.tr,
-              style: GoogleTextStyle.fw700.copyWith(fontSize: 18.sp),
-            ),
-            5.horizontalSpace,
-            Obx(() => Text(
-                  'Rp ${OrderController.to.totalHistoryOrder}',
-                  style: GoogleTextStyle.fw700.copyWith(
-                    fontSize: 18.sp,
-                    color: MainColor.primary,
-                  ),
-                )),
-          ],
-        ),
-      ),
+          );
+        } else {
+          return const SizedBox();
+        }
+      }),
     );
   }
 }

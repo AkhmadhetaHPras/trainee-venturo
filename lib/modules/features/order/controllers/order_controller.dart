@@ -53,7 +53,6 @@ class OrderController extends GetxController {
 
   List<Order> get filteredHistoryOrder {
     final historyOrderList = historyOrders.toList();
-    print(historyOrderList.length);
     if (selectedCategory.value == 'canceled') {
       historyOrderList.removeWhere((element) => element.status != 4);
     } else if (selectedCategory.value == 'completed') {
