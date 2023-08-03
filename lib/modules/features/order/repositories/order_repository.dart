@@ -69,7 +69,9 @@ class OrderRepository {
   }
 
   List<Order> getOrderHistory() {
-    return ongoingOrder.where((element) => element.status >= 2).toList();
+    return ongoingOrder.reversed
+        .where((element) => element.status >= 2)
+        .toList();
   }
 
   Future<OrderDetail> getOrderDetail(int idOrder) async {

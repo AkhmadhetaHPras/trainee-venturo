@@ -16,9 +16,7 @@ class OrderController extends GetxController {
     _orderRepository = OrderRepository();
 
     await getListOnGoing();
-    // await getListHistory();
-    // await _orderRepository.fetchOrderData();
-    await getOrderHistories();
+    await getListHistory();
   }
 
   final RxInt pageOnGoing = 0.obs;
@@ -26,10 +24,10 @@ class OrderController extends GetxController {
   final RefreshController refreshOnGoingController =
       RefreshController(initialRefresh: false);
 
-  // final RxInt pageHistory = 0.obs;
-  // final RxBool canLoadMoreHistory = true.obs;
-  // final RefreshController refreshHistoryController =
-  //     RefreshController(initialRefresh: false);
+  final RxInt pageHistory = 0.obs;
+  final RxBool canLoadMoreHistory = true.obs;
+  final RefreshController refreshHistoryController =
+      RefreshController(initialRefresh: false);
 
   RxList<Order> onGoingOrders = RxList();
   RxList<Order> historyOrders = RxList();
@@ -48,37 +46,6 @@ class OrderController extends GetxController {
     end: DateTime.now(),
   ).obs;
 
-  // Future<void> getOngoingOrders() async {
-  //   onGoingOrderState('loading');
-  //   try {
-  //     final result = _orderRepository.getOngoingOrder();
-  //     final data = result.where((element) => element.status != 4).toList();
-  //     onGoingOrders(data.reversed.toList());
-  //     onGoingOrderState('success');
-  //   } catch (exception, stacktrace) {
-  //     await Sentry.captureException(
-  //       exception,
-  //       stackTrace: stacktrace,
-  //     );
-  //     onGoingOrderState('error');
-  //   }
-  // }
-
-  Future<void> getOrderHistories() async {
-    orderHistoryState('loading');
-    try {
-      final result = _orderRepository.getOrderHistory();
-      historyOrders(result.reversed.toList());
-      orderHistoryState('success');
-    } catch (exception, stacktrace) {
-      await Sentry.captureException(
-        exception,
-        stackTrace: stacktrace,
-      );
-      orderHistoryState('error');
-    }
-  }
-
   void setDateFilter({String? category, DateTimeRange? range}) {
     selectedCategory(category);
     selectedDateRange(range);
@@ -86,7 +53,7 @@ class OrderController extends GetxController {
 
   List<Order> get filteredHistoryOrder {
     final historyOrderList = historyOrders.toList();
-
+    print(historyOrderList.length);
     if (selectedCategory.value == 'canceled') {
       historyOrderList.removeWhere((element) => element.status != 4);
     } else if (selectedCategory.value == 'completed') {
@@ -153,45 +120,44 @@ class OrderController extends GetxController {
     }
   }
 
-  // Future<bool> getListHistory() async {
-  //   try {
-  //     final result = await _orderRepository.getListOfDataOnGoing(
-  //       offset: pageHistory.value * 5,
-  //     );
-  //     if (result['previous'] == null) {
-  //       historyOrders.clear();
-  //     }
+  Future<bool> getListHistory() async {
+    try {
+      final result = await _orderRepository.getListOfDataHistory(
+        offset: pageHistory.value * 5,
+      );
+      if (result['previous'] == null) {
+        historyOrders.clear();
+      }
 
-  //     if (result['next'] == null) {
-  //       canLoadMoreHistory(false);
-  //       refreshHistoryController.loadNoData();
-  //     }
+      if (result['next'] == null) {
+        canLoadMoreHistory(false);
+        refreshHistoryController.loadNoData();
+      }
+      historyOrders.addAll(result['data'].toList());
+      pageHistory.value++;
+      refreshHistoryController.loadComplete();
+      return true;
+    } catch (exception, stacktrace) {
+      await Sentry.captureException(
+        exception,
+        stackTrace: stacktrace,
+      );
 
-  //     final data =
-  //         result['data'].where((element) => element.status != 4).toList();
-  //     historyOrders.addAll(data.toList());
-  //     pageHistory.value++;
-  //     refreshHistoryController.loadComplete();
-  //     return true;
-  //   } catch (exception, stacktrace) {
-  //     await Sentry.captureException(
-  //       exception,
-  //       stackTrace: stacktrace,
-  //     );
+      refreshHistoryController.loadFailed();
+      return false;
+    }
+  }
 
-  //     refreshHistoryController.loadFailed();
-  //     return false;
-  //   }
-  // }
+  Future<void> onRefreshHistory() async {
+    pageHistory(0);
+    canLoadMoreHistory(true);
+    final result = await getListHistory();
+    if (result) {
+      refreshHistoryController.refreshCompleted();
+    } else {
+      refreshHistoryController.refreshFailed();
+    }
+  }
 
-  // Future<void> onRefreshHistory() async {
-  //   pageHistory(0);
-  //   canLoadMoreHistory(true);
-  //   final result = await getListHistory();
-  //   if (result) {
-  //     refreshHistoryController.refreshCompleted();
-  //   } else {
-  //     refreshHistoryController.refreshFailed();
-  //   }
-  // }
+  Future<void> orderAgain(Order preOrder) async {}
 }

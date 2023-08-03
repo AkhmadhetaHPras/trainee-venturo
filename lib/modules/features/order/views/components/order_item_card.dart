@@ -218,7 +218,7 @@ class OrderItemCard extends StatelessWidget {
                             Padding(
                               padding: EdgeInsets.only(top: 10.r, bottom: 5.r),
                               child: OutlinedTitleButton.compact(
-                                text: 'Give review'.tr,
+                                text: 'Beri penilaian'.tr,
                                 onPressed: () =>
                                     onGiveReview?.call(order.idOrder),
                               ),
@@ -229,7 +229,9 @@ class OrderItemCard extends StatelessWidget {
                                 bottom: 5.r,
                                 right: order.status == 3 ? 0.r : 0.3.sw),
                             child: PrimaryButtonWithTitle.compact(
-                              title: 'Order again'.tr,
+                              backgroundColor: MainColor.primary,
+                              borderColor: MainColor.primary,
+                              title: 'Pesan Lagi'.tr,
                               onPressed: onOrderAgain,
                             ),
                           ),

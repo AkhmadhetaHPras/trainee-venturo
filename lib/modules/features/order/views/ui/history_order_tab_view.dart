@@ -4,6 +4,7 @@ import 'package:flutter_conditional_rendering/conditional.dart';
 import 'package:flutter_conditional_rendering/conditional_switch.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:trainee/configs/routes/main_route.dart';
 import 'package:trainee/configs/themes/main_color.dart';
 import 'package:trainee/shared/styles/google_text_style.dart';
@@ -25,10 +26,15 @@ class OrderHistoryTabView extends StatelessWidget {
     );
 
     return Scaffold(
-      body: RefreshIndicator(
-        onRefresh: OrderController.to.getOrderHistories,
-        child: Obx(
-          () => ConditionalSwitch.single(
+      body: Obx(
+        () => SmartRefresher(
+          controller: OrderController.to.refreshHistoryController,
+          enablePullDown: true,
+          onRefresh: OrderController.to.onRefreshHistory,
+          enablePullUp:
+              OrderController.to.canLoadMoreHistory.isTrue ? true : false,
+          onLoading: OrderController.to.getListHistory,
+          child: ConditionalSwitch.single(
             context: context,
             valueBuilder: (context) =>
                 OrderController.to.orderHistoryState.value,
