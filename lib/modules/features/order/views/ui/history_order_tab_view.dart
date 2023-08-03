@@ -125,7 +125,7 @@ class OrderHistoryTabView extends StatelessWidget {
                       ImageConstant.icNoteAction,
                     ),
                     Text(
-                      "Sudah Pesan?\nMakanan yang kamu pesan akan muncul di sini agar kamu bisa menemukan menu favoritmu lagi!",
+                      "Mulai buat pesanan\nMakanan yang kamu pesan akan muncul di sini agar kamu bisa menemukan menu favoritmu lagi!",
                       style: GoogleTextStyle.fw400.copyWith(
                         fontSize: 22.sp,
                       ),
