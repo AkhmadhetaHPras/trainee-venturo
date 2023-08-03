@@ -18,7 +18,7 @@ class OrderController extends GetxController {
     await getListOnGoing();
     // await getListHistory();
     // await _orderRepository.fetchOrderData();
-    getOrderHistories();
+    await getOrderHistories();
   }
 
   final RxInt pageOnGoing = 0.obs;

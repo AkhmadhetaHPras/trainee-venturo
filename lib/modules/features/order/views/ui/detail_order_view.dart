@@ -43,7 +43,30 @@ class DetailOrderView extends StatelessWidget {
               widgetBuilder: (context) => Padding(
                 padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 10.w),
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.dialog(
+                      AlertDialog(
+                        title: const Text('Konfirmasi'),
+                        content: const Text(
+                            'Apakah Anda yakin ingin membatalkan pesanan ini?'),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Get.back();
+                            },
+                            child: const Text('Batal'),
+                          ),
+                          ElevatedButton(
+                            onPressed: () async {
+                              Get.back();
+                              await DetailOrderController.to.cancelOrder();
+                            },
+                            child: const Text('Ya'),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
                   style: TextButton.styleFrom(
                     padding: EdgeInsets.zero,
                     visualDensity: VisualDensity.compact,
@@ -225,7 +248,7 @@ class DetailOrderView extends StatelessWidget {
                         titleStyle:
                             GoogleTextStyle.fw600.copyWith(fontSize: 18.sp),
                         messageStyle: GoogleTextStyle.fw600
-                            .copyWith(fontSize: 18.sp)!
+                            .copyWith(fontSize: 18.sp)
                             .copyWith(
                                 color: Theme.of(context).primaryColor,
                                 fontWeight: FontWeight.w600),

@@ -41,7 +41,8 @@ class DetailOrderCard extends StatelessWidget {
               color: Colors.white,
             ),
             child: CachedNetworkImage(
-              imageUrl: detailOrder.foto,
+              imageUrl: detailOrder.foto ??
+                  'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/240px-No_image_available.svg.png',
               fit: BoxFit.contain,
               errorWidget: (context, _, __) => CachedNetworkImage(
                 imageUrl:

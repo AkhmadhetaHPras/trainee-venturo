@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:get/get.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
+import 'package:trainee/modules/features/order/controllers/order_controller.dart';
 
+import '../../../../configs/themes/main_color.dart';
 import '../models/order_detail.dart';
 import '../repositories/order_repository.dart';
 
@@ -13,12 +15,13 @@ class DetailOrderController extends GetxController {
   RxString orderDetailState = 'loading'.obs;
   Rxn<OrderDetail> order = Rxn();
   Timer? timer;
+  late int orderId;
 
   @override
   void onInit() {
     super.onInit();
     _orderRepository = OrderRepository();
-    final orderId = int.parse(Get.parameters['orderId'] as String);
+    orderId = int.parse(Get.parameters['orderId'] as String);
 
     getOrderDetail(orderId).then((value) {
       timer = Timer.periodic(
@@ -65,4 +68,27 @@ class DetailOrderController extends GetxController {
           .where((element) => element.kategori == 'minuman')
           .toList() ??
       [];
+
+  Future<void> cancelOrder() async {
+    final response = await _orderRepository.cancelOrder(orderId);
+    if (response) {
+      Get.back();
+      OrderController.to.onRefreshOnGoing();
+      Get.snackbar(
+        "Berhasil",
+        "Pesanan berhasil dibatalkan",
+        duration: const Duration(milliseconds: 1500),
+        backgroundColor: MainColor.white,
+        snackPosition: SnackPosition.TOP,
+      );
+    } else {
+      Get.snackbar(
+        "Gagal",
+        "Pesanan gagal dibatalkan, terjadi kesalahan",
+        duration: const Duration(milliseconds: 1500),
+        backgroundColor: MainColor.white,
+        snackPosition: SnackPosition.TOP,
+      );
+    }
+  }
 }

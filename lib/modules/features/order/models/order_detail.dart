@@ -71,7 +71,7 @@ class Detail {
   String kategori;
   List<int> topping;
   String nama;
-  String foto;
+  String? foto;
   int jumlah;
   int harga;
   int total;
@@ -82,7 +82,7 @@ class Detail {
     required this.kategori,
     required this.topping,
     required this.nama,
-    required this.foto,
+    this.foto,
     required this.jumlah,
     required this.harga,
     required this.total,
@@ -98,7 +98,7 @@ class Detail {
       kategori: json['kategori'] as String,
       topping: toppingList,
       nama: json['nama'] as String,
-      foto: json['foto'] as String,
+      foto: json['foto'],
       jumlah: json['jumlah'] as int,
       harga: int.parse(json['harga']),
       total: json['total'] as int,

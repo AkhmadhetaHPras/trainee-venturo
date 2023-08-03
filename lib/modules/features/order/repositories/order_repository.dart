@@ -107,4 +107,31 @@ class OrderRepository {
       return OrderDetail();
     }
   }
+
+  Future<bool> cancelOrder(int idOrder) async {
+    try {
+      var dio =
+          HttpService.dioCall(token: await LocalStorageService.getToken());
+
+      final response = await dio.post(
+        'order/batal/$idOrder',
+      );
+
+      if (response.statusCode == 200) {
+        final responseCode = response.data['data']['status'];
+        if (responseCode == 4) {
+          return true;
+        }
+        return false;
+      } else {
+        throw Exception('API Error');
+      }
+    } catch (exception, stackTrace) {
+      await Sentry.captureException(
+        exception,
+        stackTrace: stackTrace,
+      );
+      return false;
+    }
+  }
 }
