@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:trainee/configs/routes/main_route.dart';
 import 'package:trainee/constants/cores/assets/image_constant.dart';
+import 'package:trainee/modules/global_controllers/bottom_navigation_controller.dart';
 
 class OrderSuccessDialog extends StatelessWidget {
   const OrderSuccessDialog({Key? key}) : super(key: key);
@@ -51,7 +52,10 @@ class OrderSuccessDialog extends StatelessWidget {
           SizedBox(
             width: 168.w,
             child: ElevatedButton(
-              onPressed: () => Get.toNamed(MainRoute.order),
+              onPressed: () {
+                BottomNavigationController.to.setActiveIndex(1);
+                Get.toNamed(MainRoute.order);
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Theme.of(context).primaryColor,
                 maximumSize: Size(

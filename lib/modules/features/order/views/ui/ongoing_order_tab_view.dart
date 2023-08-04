@@ -29,54 +29,50 @@ class OnGoingOrderTabView extends StatelessWidget {
         enablePullUp:
             OrderController.to.canLoadMoreOnGoing.isTrue ? true : false,
         onLoading: OrderController.to.getListOnGoing,
-        child: Obx(() {
-          if (OrderController.to.onGoingOrders.isNotEmpty) {
-            return ListView.separated(
-              padding: EdgeInsets.all(25.r),
-              itemBuilder: (context, index) => OrderItemCard(
-                order: OrderController.to.onGoingOrders[index],
-                onTap: () {
-                  Get.toNamed(
-                    '${MainRoute.order}/${OrderController.to.onGoingOrders[index].idOrder}',
-                  );
-                },
-                onOrderAgain: () {},
-              ),
-              separatorBuilder: (context, index) => 16.verticalSpace,
-              itemCount: OrderController.to.onGoingOrders.length,
-            );
-          } else {
-            return Container(
-              alignment: Alignment.center,
-              width: double.infinity,
-              height: double.infinity,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(ImageConstant.bgBlank),
-                  fit: BoxFit.fitHeight,
-                  alignment: Alignment.center,
+        child: OrderController.to.onGoingOrders.isNotEmpty
+            ? ListView.separated(
+                padding: EdgeInsets.all(25.r),
+                itemBuilder: (context, index) => OrderItemCard(
+                  order: OrderController.to.onGoingOrders[index],
+                  onTap: () {
+                    Get.toNamed(
+                      '${MainRoute.order}/${OrderController.to.onGoingOrders[index].idOrder}',
+                    );
+                  },
+                  onOrderAgain: () {},
+                ),
+                separatorBuilder: (context, index) => 16.verticalSpace,
+                itemCount: OrderController.to.onGoingOrders.length,
+              )
+            : Container(
+                alignment: Alignment.center,
+                width: double.infinity,
+                height: double.infinity,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(ImageConstant.bgBlank),
+                    fit: BoxFit.fitHeight,
+                    alignment: Alignment.center,
+                  ),
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 30.r),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      ImageConstant.icNoteAction,
+                    ),
+                    Text(
+                      "Sudah Pesan?\nLacak Pesananmu di sini",
+                      style: GoogleTextStyle.fw400.copyWith(
+                        fontSize: 22.sp,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
                 ),
               ),
-              padding: EdgeInsets.symmetric(horizontal: 30.r),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    ImageConstant.icNoteAction,
-                  ),
-                  Text(
-                    "Sudah Pesan?\nLacak Pesananmu di sini",
-                    style: GoogleTextStyle.fw400.copyWith(
-                      fontSize: 22.sp,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-            );
-          }
-        }),
       ),
     );
   }

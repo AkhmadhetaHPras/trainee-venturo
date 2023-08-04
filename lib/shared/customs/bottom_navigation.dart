@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:trainee/configs/routes/main_route.dart';
 import 'package:trainee/configs/themes/main_color.dart';
+import 'package:trainee/modules/global_controllers/bottom_navigation_controller.dart';
 import 'package:trainee/shared/styles/google_text_style.dart';
 
 class BottomNavigation extends StatelessWidget implements PreferredSizeWidget {
@@ -36,22 +37,32 @@ class BottomNavigation extends StatelessWidget implements PreferredSizeWidget {
         children: [
           InkWell(
             onTap: () {
+              BottomNavigationController.to.setActiveIndex(0);
               Get.offAllNamed(MainRoute.list);
             },
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Icon(
-                  Icons.home,
-                  size: 34,
-                  color: MainColor.white,
+                Obx(
+                  () => Icon(
+                    Icons.home,
+                    size: 34,
+                    color: BottomNavigationController.to.activeIndex.value == 0
+                        ? MainColor.white
+                        : MainColor.grey,
+                  ),
                 ),
-                Text(
-                  "Home",
-                  style: GoogleTextStyle.fw700.copyWith(
-                    color: MainColor.white,
-                    fontSize: 12.sp,
+                Obx(
+                  () => Text(
+                    "Home",
+                    style: GoogleTextStyle.fw700.copyWith(
+                      color:
+                          BottomNavigationController.to.activeIndex.value == 0
+                              ? MainColor.white
+                              : MainColor.grey,
+                      fontSize: 12.sp,
+                    ),
                   ),
                 ),
               ],
@@ -59,44 +70,68 @@ class BottomNavigation extends StatelessWidget implements PreferredSizeWidget {
           ),
           InkWell(
             onTap: () {
+              BottomNavigationController.to.setActiveIndex(1);
               Get.toNamed(MainRoute.order);
             },
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Icon(
-                  Icons.brunch_dining,
-                  size: 34,
-                  color: MainColor.white,
+                Obx(
+                  () => Icon(
+                    Icons.brunch_dining,
+                    size: 34,
+                    color: BottomNavigationController.to.activeIndex.value == 1
+                        ? MainColor.white
+                        : MainColor.grey,
+                  ),
                 ),
-                Text(
-                  "Pesanan",
-                  style: GoogleTextStyle.fw700.copyWith(
-                    color: MainColor.white,
-                    fontSize: 12.sp,
+                Obx(
+                  () => Text(
+                    "Pesanan",
+                    style: GoogleTextStyle.fw700.copyWith(
+                      color:
+                          BottomNavigationController.to.activeIndex.value == 1
+                              ? MainColor.white
+                              : MainColor.grey,
+                      fontSize: 12.sp,
+                    ),
                   ),
                 ),
               ],
             ),
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Icon(
-                Icons.account_circle_outlined,
-                size: 34,
-                color: MainColor.white,
-              ),
-              Text(
-                "Profil",
-                style: GoogleTextStyle.fw700.copyWith(
-                  color: MainColor.white,
-                  fontSize: 12.sp,
+          InkWell(
+            onTap: () {
+              BottomNavigationController.to.setActiveIndex(2);
+            },
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Obx(
+                  () => Icon(
+                    Icons.account_circle_outlined,
+                    size: 34,
+                    color: BottomNavigationController.to.activeIndex.value == 2
+                        ? MainColor.white
+                        : MainColor.grey,
+                  ),
                 ),
-              ),
-            ],
+                Obx(
+                  () => Text(
+                    "Profil",
+                    style: GoogleTextStyle.fw700.copyWith(
+                      color:
+                          BottomNavigationController.to.activeIndex.value == 2
+                              ? MainColor.white
+                              : MainColor.grey,
+                      fontSize: 12.sp,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
