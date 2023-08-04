@@ -269,6 +269,7 @@ class CartController extends GetxController {
       if (response.statusCode == 200) {
         final responseData = response.data;
         if (responseData['status_code'] == 200) {
+          cartItems.clear();
           await LocalStorageService.box.put('cartItems', []);
           return true;
         } else {
