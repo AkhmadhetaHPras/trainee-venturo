@@ -10,4 +10,8 @@ class ImageConstant {
   static const String foodCover = "assets/images/ic_food_cover.png";
   static const String icSuccessOrder = "assets/images/ic_success_order.png";
   static const String icNoteAction = "assets/images/ic_note_action.png";
+  static const String bgProfile = "assets/images/bg_profile.png";
+
+  static const String icKtp = "assets/svg/ic_ktp.svg";
+  static const String icRating = "assets/svg/ic_rating.svg";
 }
