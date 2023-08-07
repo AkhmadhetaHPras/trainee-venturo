@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../configs/themes/main_color.dart';
 import '../../../../../shared/styles/elevated_button_style.dart';
 import '../../../../../shared/styles/google_text_style.dart';
 

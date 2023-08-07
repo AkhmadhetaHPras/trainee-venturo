@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:trainee/configs/routes/main_route.dart';
 import 'package:trainee/configs/themes/main_color.dart';
+import 'package:trainee/modules/global_controllers/cart_controller.dart';
 import 'package:trainee/shared/styles/google_text_style.dart';
 
 import '../../../../../constants/cores/assets/image_constant.dart';
@@ -85,7 +86,16 @@ class OrderHistoryTabView extends StatelessWidget {
                                 child: OrderItemCard(
                                   order: OrderController
                                       .to.filteredHistoryOrder[index],
-                                  onOrderAgain: () {},
+                                  onOrderAgain: () {
+                                    final orderMenu = OrderController
+                                        .to.filteredHistoryOrder[index].menu;
+                                    for (var element in orderMenu) {
+                                      CartController.to
+                                          .addToCart(element.toMenuCart());
+                                    }
+
+                                    Get.offAndToNamed(MainRoute.cart);
+                                  },
                                   onTap: () => Get.toNamed(
                                     '${MainRoute.order}/${OrderController.to.filteredHistoryOrder[index].idOrder}',
                                   ),

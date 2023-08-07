@@ -1,3 +1,7 @@
+import 'dart:convert';
+
+import '../../../global_models/menu_cart.dart';
+
 class Order {
   int idOrder;
   String noStruk;
@@ -45,6 +49,7 @@ class Menu {
   int harga;
   int total;
   String catatan;
+  List<int> topping;
 
   Menu({
     required this.idMenu,
@@ -55,18 +60,37 @@ class Menu {
     required this.harga,
     required this.total,
     required this.catatan,
+    required this.topping,
   });
 
   factory Menu.fromJson(Map<String, dynamic> json) {
+    List<int> toppingList = (json['topping'] as String).isNotEmpty
+        ? List<int>.from(jsonDecode(json['topping']) as List<dynamic>)
+        : [];
     return Menu(
-      idMenu: json['id_menu'] as int,
-      kategori: json['kategori'] as String,
-      nama: json['nama'] as String,
-      foto: json['foto'] ?? "",
-      jumlah: json['jumlah'] as int,
-      harga: int.parse(json['harga']),
-      total: json['total'] as int,
-      catatan: json['catatan'] as String,
+        idMenu: json['id_menu'] as int,
+        kategori: json['kategori'] as String,
+        nama: json['nama'] as String,
+        foto: json['foto'] ?? "",
+        jumlah: json['jumlah'] as int,
+        harga: int.parse(json['harga']),
+        total: json['total'] as int,
+        catatan: json['catatan'] as String,
+        topping: toppingList);
+  }
+
+  MenuCart toMenuCart() {
+    return MenuCart(
+      idMenu: idMenu,
+      harga: harga,
+      level: 0,
+      topping: [],
+      jumlah: jumlah,
+      nama: nama,
+      kategori: kategori,
+      catatan: catatan.isEmpty ? "-" : catatan.replaceAll('"', ''),
+      foto: foto,
+      deskripsi: "",
     );
   }
 }
