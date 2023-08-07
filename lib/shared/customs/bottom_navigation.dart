@@ -38,7 +38,7 @@ class BottomNavigation extends StatelessWidget implements PreferredSizeWidget {
           InkWell(
             onTap: () {
               BottomNavigationController.to.setActiveIndex(0);
-              Get.offAndToNamed(MainRoute.list);
+              Get.offNamed(MainRoute.list);
             },
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -71,7 +71,7 @@ class BottomNavigation extends StatelessWidget implements PreferredSizeWidget {
           InkWell(
             onTap: () {
               BottomNavigationController.to.setActiveIndex(1);
-              Get.offAndToNamed(MainRoute.order);
+              Get.offNamed(MainRoute.order);
             },
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -104,7 +104,7 @@ class BottomNavigation extends StatelessWidget implements PreferredSizeWidget {
           InkWell(
             onTap: () {
               BottomNavigationController.to.setActiveIndex(2);
-              Get.offAndToNamed(MainRoute.profile);
+              Get.offNamed(MainRoute.profile);
             },
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,

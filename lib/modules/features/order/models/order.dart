@@ -64,9 +64,10 @@ class Menu {
   });
 
   factory Menu.fromJson(Map<String, dynamic> json) {
-    List<int> toppingList = (json['topping'] as String).isNotEmpty
-        ? List<int>.from(jsonDecode(json['topping']) as List<dynamic>)
-        : [];
+    List<int> toppingList =
+        (json['topping'] as String).replaceAll('"', '').length > 2
+            ? List<int>.from(jsonDecode(json['topping']) as List<dynamic>)
+            : [];
     return Menu(
         idMenu: json['id_menu'] as int,
         kategori: json['kategori'] as String,
@@ -84,7 +85,7 @@ class Menu {
       idMenu: idMenu,
       harga: harga,
       level: 0,
-      topping: [],
+      topping: topping,
       jumlah: jumlah,
       nama: nama,
       kategori: kategori,
