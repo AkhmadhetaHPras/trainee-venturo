@@ -31,8 +31,10 @@ dependencies:
   app_settings: ^5.0.0
   cached_network_image: ^3.2.3
   cupertino_icons: ^1.0.2
+  device_info_plus: ^9.0.3
   dio: ^5.2.1+1
   dropdown_button2: ^2.3.7
+  file_picker: ^5.3.3
   firebase_analytics: ^10.4.3
   firebase_auth: ^4.7.0
   firebase_core: ^2.14.0
@@ -41,6 +43,8 @@ dependencies:
   flutter_conditional_rendering: ^2.0.0
   flutter_easyloading: ^3.0.5
   flutter_html: ^3.0.0-beta.2
+  flutter_localizations:
+    sdk: flutter
   flutter_math_fork: ^0.7.1
   flutter_screenutil: ^5.7.0
   flutter_slidable: ^3.0.0
@@ -54,7 +58,7 @@ dependencies:
   hive_flutter: ^1.1.0
   image_cropper: ^5.0.0
   image_picker: ^1.0.2
-  intl: ^0.18.1
+  intl: ^0.18.0
   loadmore: ^2.1.0
   local_auth: ^2.1.6
   panara_dialogs: ^0.1.4

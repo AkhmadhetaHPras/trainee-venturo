@@ -91,21 +91,46 @@ class ProfileView extends StatelessWidget {
               ),
             ),
             21.verticalSpacingRadius,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SvgPicture.asset(
-                  ImageConstant.icKtp,
+            // Info KTP
+            Obx(
+              () => Conditional.single(
+                context: context,
+                conditionBuilder: (context) =>
+                    ProfileController.to.isVerif.value != false,
+                widgetBuilder: (context) => Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.check,
+                      color: Colors.green,
+                      size: 20.r,
+                    ),
+                    7.horizontalSpaceRadius,
+                    Text(
+                      ' Your have verified your ID card'.tr,
+                      style: Get.textTheme.labelMedium!
+                          .copyWith(color: MainColor.primary),
+                    )
+                  ],
                 ),
-                7.horizontalSpaceRadius,
-                Text(
-                  'Verifikasi KTP mu sekarang!'.tr,
-                  style: GoogleTextStyle.fw400.copyWith(
-                    color: MainColor.primary,
-                    fontSize: 14.sp,
+                fallbackBuilder: (context) => InkWell(
+                  onTap: ProfileController.to.pickFile,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset(
+                        ImageConstant.icKtp,
+                      ),
+                      7.horizontalSpaceRadius,
+                      Text(
+                        'Verify your ID card now!'.tr,
+                        style: Get.textTheme.labelMedium!
+                            .copyWith(color: MainColor.primary),
+                      )
+                    ],
                   ),
-                )
-              ],
+                ),
+              ),
             ),
 
             22.verticalSpacingRadius,
@@ -133,40 +158,64 @@ class ProfileView extends StatelessWidget {
                     ),
                     child: Column(
                       children: [
-                        TileOption(
-                          title: 'Nama'.tr,
-                          message: '-',
-                          onTap: () {},
+                        Obx(
+                          () => TileOption(
+                            title: 'Nama'.tr,
+                            message:
+                                ProfileController.to.user.value.nama ?? '-',
+                            onTap: () {
+                              ProfileController.to.updateProfileName();
+                            },
+                          ),
                         ),
                         Divider(color: Colors.black45, height: 0.5.h),
-                        TileOption(
-                          title: 'Tanggal Lahir'.tr,
-                          message: '-',
-                          onTap: () {},
+                        Obx(
+                          () => TileOption(
+                            title: 'Tanggal Lahir'.tr,
+                            message:
+                                ProfileController.to.user.value.tglLahir ?? '-',
+                            onTap: () {
+                              ProfileController.to.updateBirthDate();
+                            },
+                          ),
                         ),
                         Divider(color: Colors.black45, height: 0.5.h),
-                        TileOption(
-                          title: 'No. Telepon'.tr,
-                          message: '-',
-                          onTap: () {},
+                        Obx(
+                          () => TileOption(
+                            title: 'No. Telepon'.tr,
+                            message:
+                                ProfileController.to.user.value.telepon ?? '-',
+                            onTap: () {
+                              ProfileController.to.updatePhoneNumber();
+                            },
+                          ),
                         ),
                         Divider(color: Colors.black45, height: 0.5.h),
-                        TileOption(
-                          title: 'Email'.tr,
-                          message: 'user@email.com',
-                          onTap: () {},
+                        Obx(
+                          () => TileOption(
+                            title: 'Email'.tr,
+                            message:
+                                ProfileController.to.user.value.email ?? '-',
+                            onTap: () {
+                              ProfileController.to.updateEmail();
+                            },
+                          ),
                         ),
                         Divider(color: Colors.black45, height: 0.5.h),
-                        TileOption(
-                          title: 'Ubah PIN'.tr,
-                          message: '******',
-                          onTap: () {},
+                        Obx(
+                          () => TileOption(
+                            title: 'Ubah PIN'.tr,
+                            message: ProfileController.to.user.value.pin ?? "-",
+                            onTap: () {},
+                          ),
                         ),
                         Divider(color: Colors.black45, height: 0.5.h),
-                        TileOption(
-                          title: 'Ganti Bahasa'.tr,
-                          message: "Inggris",
-                          onTap: () {},
+                        Obx(
+                          () => TileOption(
+                            title: 'Ganti Bahasa'.tr,
+                            message: ProfileController.to.currentLang.value,
+                            onTap: ProfileController.to.updateLanguage,
+                          ),
                         ),
                       ],
                     ),

@@ -14,4 +14,6 @@ class ImageConstant {
 
   static const String icKtp = "assets/svg/ic_ktp.svg";
   static const String icRating = "assets/svg/ic_rating.svg";
+  static const String icFlagEn = "assets/svg/flag_en.svg";
+  static const String icFlagId = "assets/svg/flag_id.svg";
 }

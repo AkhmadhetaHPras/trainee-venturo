@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
@@ -8,6 +9,7 @@ import 'package:trainee/configs/pages/main_page.dart';
 import 'package:trainee/configs/routes/main_route.dart';
 import 'package:trainee/configs/themes/main_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'configs/localization/localization.dart';
 import 'firebase_options.dart';
 import 'modules/global_binddings/global_binding.dart';
 import 'modules/global_models/menu_cart.dart';
@@ -53,6 +55,15 @@ class MyApp extends StatelessWidget {
           getPages: MainPage.main,
           initialBinding: GlobalBinding(),
           builder: EasyLoading.init(),
+          translations: Localization(),
+          locale: Localization.defaultLocale,
+          fallbackLocale: Localization.fallbackLocale,
+          supportedLocales: Localization.locales,
+          localizationsDelegates: const [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
         );
       },
     );
