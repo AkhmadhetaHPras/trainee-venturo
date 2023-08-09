@@ -97,8 +97,12 @@ class ProfileController extends GetxController {
     if (result != null) {
       File file = File(result.files.single.path!);
 
-      /// Selanjutnya apa yang ingin diinginkan
-      isVerif.value = true;
+      // Read bytes from the file
+      List<int> fileBytes = await file.readAsBytes();
+      // Convert bytes to base64-encoded string
+      String ktpBase64 = base64.encode(fileBytes);
+
+      await postKtp(ktpBase64);
     }
   }
 
@@ -224,6 +228,17 @@ class ProfileController extends GetxController {
       Get.snackbar("Foto Profile", "Berhasil Mengganti Foto Profile");
     } else {
       Get.snackbar("Foto Profile", "Gagal Mengganti Foto Profile");
+    }
+  }
+
+  Future<void> postKtp(String image64) async {
+    if (await repository.postKtp(image64)) {
+      isVerif.value = true;
+      user.value = await repository.getDetailProfile() ?? User();
+      Get.snackbar("KTP", "Berhasil Validasi KTP");
+    } else {
+      isVerif.value = false;
+      Get.snackbar("KTP", "Gagal Validasi KTP");
     }
   }
 }

@@ -103,4 +103,33 @@ class ProfileRepository {
       return false;
     }
   }
+
+  Future<bool> postKtp(String image64) async {
+    try {
+      var dio =
+          HttpService.dioCall(token: await LocalStorageService.getToken());
+
+      final id = await LocalStorageService.box.get('id');
+
+      final response = await dio.post(
+        'user/ktp/$id',
+        data: {
+          "image": image64,
+        },
+      );
+
+      if (response.statusCode == 200) {
+        final responseData = response.data;
+        return responseData['status_code'] == 200 ? true : false;
+      } else {
+        throw Exception('API Error');
+      }
+    } catch (exception, stackTrace) {
+      await Sentry.captureException(
+        exception,
+        stackTrace: stackTrace,
+      );
+      return false;
+    }
+  }
 }
