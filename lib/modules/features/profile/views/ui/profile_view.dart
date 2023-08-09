@@ -52,9 +52,9 @@ class ProfileView extends StatelessWidget {
                       () => Conditional.single(
                         context: context,
                         conditionBuilder: (context) =>
-                            ProfileController.to.imageFile != null,
-                        widgetBuilder: (context) => Image.file(
-                          ProfileController.to.imageFile!,
+                            ProfileController.to.user.value.foto != null,
+                        widgetBuilder: (context) => Image.network(
+                          ProfileController.to.user.value.foto!,
                           width: 170.r,
                           height: 170.r,
                           fit: BoxFit.cover,
@@ -160,7 +160,7 @@ class ProfileView extends StatelessWidget {
                       children: [
                         Obx(
                           () => TileOption(
-                            title: 'Nama'.tr,
+                            title: 'Name'.tr,
                             message:
                                 ProfileController.to.user.value.nama ?? '-',
                             onTap: () {
@@ -171,7 +171,7 @@ class ProfileView extends StatelessWidget {
                         Divider(color: Colors.black45, height: 0.5.h),
                         Obx(
                           () => TileOption(
-                            title: 'Tanggal Lahir'.tr,
+                            title: 'Birth Date'.tr,
                             message:
                                 ProfileController.to.user.value.tglLahir ?? '-',
                             onTap: () {
@@ -182,7 +182,7 @@ class ProfileView extends StatelessWidget {
                         Divider(color: Colors.black45, height: 0.5.h),
                         Obx(
                           () => TileOption(
-                            title: 'No. Telepon'.tr,
+                            title: 'Phone Number'.tr,
                             message:
                                 ProfileController.to.user.value.telepon ?? '-',
                             onTap: () {
@@ -204,7 +204,7 @@ class ProfileView extends StatelessWidget {
                         Divider(color: Colors.black45, height: 0.5.h),
                         Obx(
                           () => TileOption(
-                            title: 'Ubah PIN'.tr,
+                            title: 'Change PIN'.tr,
                             message: ProfileController.to.user.value.pin ?? "-",
                             onTap: () {},
                           ),
@@ -212,7 +212,7 @@ class ProfileView extends StatelessWidget {
                         Divider(color: Colors.black45, height: 0.5.h),
                         Obx(
                           () => TileOption(
-                            title: 'Ganti Bahasa'.tr,
+                            title: 'Change Language'.tr,
                             message: ProfileController.to.currentLang.value,
                             onTap: ProfileController.to.updateLanguage,
                           ),

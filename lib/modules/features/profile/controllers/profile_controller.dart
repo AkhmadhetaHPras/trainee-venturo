@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
@@ -81,6 +82,13 @@ class ProfileController extends GetxController {
       if (croppedFile != null) {
         _imageFile.value = File(croppedFile.path);
       }
+
+      // Read bytes from the file
+      List<int> imageBytes = await _imageFile.value!.readAsBytes();
+      // Convert bytes to base64-encoded string
+      String base64Format = base64.encode(imageBytes);
+
+      await postUpdatePhoto(base64Format);
     }
   }
 
@@ -207,6 +215,15 @@ class ProfileController extends GetxController {
 
     if (emailInput != null && emailInput.isNotEmpty) {
       await updateUser(email: emailInput);
+    }
+  }
+
+  Future<void> postUpdatePhoto(String image64) async {
+    if (await repository.postPhotoProfile(image64)) {
+      user.value = await repository.getDetailProfile() ?? User();
+      Get.snackbar("Foto Profile", "Berhasil Mengganti Foto Profile");
+    } else {
+      Get.snackbar("Foto Profile", "Gagal Mengganti Foto Profile");
     }
   }
 }
