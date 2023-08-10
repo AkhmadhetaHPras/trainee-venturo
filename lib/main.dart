@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,6 +12,7 @@ import 'package:trainee/configs/pages/main_page.dart';
 import 'package:trainee/configs/routes/main_route.dart';
 import 'package:trainee/configs/themes/main_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:trainee/utils/services/firebase_messaging_service.dart';
 import 'configs/localization/localization.dart';
 import 'firebase_options.dart';
 import 'modules/global_binddings/global_binding.dart';
@@ -25,6 +29,24 @@ void main() async {
   // firebase init
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
+  // notif
+  await FirebaseMessagingService.instance.requestPermission(
+    alert: true,
+    announcement: false,
+    badge: true,
+    carPlay: false,
+    criticalAlert: false,
+    provisional: false,
+    sound: true,
+  );
+
+  log((await FirebaseMessagingService.instance.getToken()).toString());
+
+  await FirebaseMessaging.instance.subscribeToTopic('order');
+
+  await FirebaseMessagingService().initialize();
+  FirebaseMessaging.onBackgroundMessage(
+      FirebaseMessagingService.handleBackgroundNotif);
   // sentry init
   await SentryFlutter.init(
     (options) {
