@@ -11,6 +11,7 @@ import 'package:trainee/modules/features/initial/bindings/location_binding.dart'
 import 'package:trainee/modules/features/menu/bindings/menu_binding.dart';
 import 'package:trainee/modules/features/menu/views/ui/menu_view.dart';
 import 'package:trainee/modules/features/profile/bindings/profile_binding.dart';
+import 'package:trainee/modules/features/profile/views/components/privacy_policy_view.dart';
 import 'package:trainee/modules/features/profile/views/ui/profile_view.dart';
 import 'package:trainee/modules/features/promo/bindings/promo_binding.dart';
 import 'package:trainee/modules/features/promo/views/ui/promo_view.dart';
@@ -116,5 +117,9 @@ abstract class MainPage {
       page: () => const ProfileView(),
       binding: ProfileBinding(),
     ),
+    GetPage(
+      name: MainRoute.privacyPolicy,
+      page: () => const PrivacyPolicyView(),
+    )
   ];
 }

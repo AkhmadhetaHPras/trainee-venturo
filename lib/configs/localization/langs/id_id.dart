@@ -122,5 +122,7 @@ const Map<String, String> translationsIdId = {
       'Harap lakukan autentikasi untuk mengonfirmasi pesanan',
   'Log Out': 'Keluar',
   'Error': 'Eror',
-  'Log Out Filed': 'Gagal Keluar'
+  'Log Out Filed': 'Gagal Keluar',
+  'Privacy Policy': 'Kebijakan Privasi',
+  'Here': 'Disini',
 };

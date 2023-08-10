@@ -332,6 +332,12 @@ class ProfileView extends StatelessWidget {
                             message: ProfileController.to.deviceVersion.value,
                           ),
                         ),
+                        Divider(color: Colors.black45, height: 0.5.h),
+                        TileOption(
+                          title: 'Privacy Policy'.tr,
+                          message: 'Here'.tr,
+                          onTap: ProfileController.to.privacyPolicyWebView,
+                        ),
                       ],
                     ),
                   ),

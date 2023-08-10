@@ -122,5 +122,7 @@ const Map<String, String> translationsEnUs = {
       'Please authenticate to confirm order',
   'Log Out': 'Log Out',
   'Error': 'Error',
-  'Log Out Filed': 'Log Out Filed'
+  'Log Out Filed': 'Log Out Filed',
+  'Privacy Policy': 'Privacy Policy',
+  'Here': 'Here',
 };

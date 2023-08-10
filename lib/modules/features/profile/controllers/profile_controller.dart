@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -46,6 +47,36 @@ class ProfileController extends GetxController {
 
     /// Load Device Info
     getDeviceInformation();
+  }
+
+  void setCookie() async {
+    final cookieManager = CookieManager.instance();
+    final expiresDate =
+        DateTime.now().add(const Duration(days: 1)).millisecondsSinceEpoch;
+    final url = Uri.parse("https://venturo.id");
+
+    await cookieManager.setCookie(
+      url: url,
+      name: "traineeCookie",
+      value: "trainee",
+      expiresDate: expiresDate,
+      isSecure: true,
+    );
+  }
+
+  Future<Cookie?> getCookie() async {
+    final cookieManager = CookieManager.instance();
+    final url = Uri.parse("https://venturo.id");
+    Cookie? cookie =
+        await cookieManager.getCookie(url: url, name: "traineeCookie");
+
+    return cookie;
+  }
+
+  void deleteCookie() async {
+    final cookieManager = CookieManager.instance();
+    final url = Uri.parse("https://venturo.id");
+    await cookieManager.deleteCookie(url: url, name: "traineeCookie");
   }
 
   /// Pilih image untuk update photo
@@ -264,6 +295,10 @@ class ProfileController extends GetxController {
     }
   }
 
+  void privacyPolicyWebView() {
+    Get.toNamed(MainRoute.privacyPolicy);
+  }
+
   void logout(context) async {
     EasyLoading.show(
       status: 'Loading...'.tr,
@@ -279,6 +314,7 @@ class ProfileController extends GetxController {
 
       if (isLoginStatus == false) {
         EasyLoading.dismiss();
+        deleteCookie();
         Get.offAllNamed(MainRoute.signIn);
       } else {
         EasyLoading.dismiss();
