@@ -119,5 +119,8 @@ const Map<String, String> translationsIdId = {
   'Loading...': 'Sedang diproses...',
   'All Status': 'Semua Status',
   'Please authenticate to confirm order':
-      'Harap lakukan autentikasi untuk mengonfirmasi pesanan'
+      'Harap lakukan autentikasi untuk mengonfirmasi pesanan',
+  'Log Out': 'Keluar',
+  'Error': 'Eror',
+  'Log Out Filed': 'Gagal Keluar'
 };

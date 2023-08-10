@@ -205,8 +205,12 @@ class ProfileView extends StatelessWidget {
                         Obx(
                           () => TileOption(
                             title: 'Change PIN'.tr,
-                            message: ProfileController.to.user.value.pin ?? "-",
-                            onTap: () {},
+                            message: ProfileController.to.user.value.pin
+                                    ?.replaceAll(RegExp('.'), '*') ??
+                                "-",
+                            onTap: () {
+                              ProfileController.to.updatePIN();
+                            },
                           ),
                         ),
                         Divider(color: Colors.black45, height: 0.5.h),
@@ -315,20 +319,52 @@ class ProfileView extends StatelessWidget {
                     ),
                     child: Column(
                       children: [
-                        TileOption(
-                          title: 'Device Info'.tr,
-                          message: 'Iphone 15'.tr,
-                          onTap: () {},
+                        Obx(
+                          () => TileOption(
+                            title: 'Device Info'.tr,
+                            message: ProfileController.to.deviceModel.value,
+                          ),
                         ),
                         Divider(color: Colors.black45, height: 0.5.h),
-                        TileOption(
-                          title: 'Version'.tr,
-                          message: 'Gear 5'.tr,
-                          onTap: () {},
+                        Obx(
+                          () => TileOption(
+                            title: 'Version'.tr,
+                            message: ProfileController.to.deviceVersion.value,
+                          ),
                         ),
                       ],
                     ),
                   ),
+                  27.verticalSpacingRadius,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        ProfileController.to.logout(context);
+                      },
+                      style: EvelatedButtonStyle.mainRounded.copyWith(
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                          MainColor.primary,
+                        ),
+                        shape: MaterialStateProperty.all<OutlinedBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(144.r),
+                            side: const BorderSide(color: MainColor.darkGreen),
+                          ),
+                        ),
+                        minimumSize: MaterialStateProperty.all<Size>(
+                          const Size(double.infinity, 35),
+                        ),
+                      ),
+                      child: Text(
+                        "Log Out".tr,
+                        style: GoogleTextStyle.fw500.copyWith(
+                          fontSize: 14.sp,
+                          color: MainColor.white,
+                        ),
+                      ),
+                    ),
+                  )
                 ],
               ),
             )

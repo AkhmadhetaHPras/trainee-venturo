@@ -3,17 +3,22 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:panara_dialogs/panara_dialogs.dart';
 import 'package:trainee/configs/themes/main_color.dart';
 import 'package:trainee/modules/features/profile/repositories/profile_repository.dart';
 import 'package:trainee/shared/widgets/image_picker_dialog.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 
 import '../../../../configs/localization/localization.dart';
+import '../../../../configs/routes/main_route.dart';
+import '../../../../utils/services/local_storage_service.dart';
+import '../../../global_controllers/global_controller.dart';
 import '../models/user.dart';
 import '../views/components/language_bottom_sheet.dart';
 import '../views/components/contact_info_bottom_sheet.dart';
@@ -222,6 +227,23 @@ class ProfileController extends GetxController {
     }
   }
 
+  Future<void> updatePIN() async {
+    String? pinInput = await Get.bottomSheet(
+      ContactInfoBottomSheet(title: "PIN", pin: user.value.pin ?? '-'),
+      backgroundColor: Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(30.r),
+        ),
+      ),
+      isScrollControlled: true,
+    );
+
+    if (pinInput != null && pinInput.isNotEmpty) {
+      await updateUser(pin: pinInput);
+    }
+  }
+
   Future<void> postUpdatePhoto(String image64) async {
     if (await repository.postPhotoProfile(image64)) {
       user.value = await repository.getDetailProfile() ?? User();
@@ -239,6 +261,41 @@ class ProfileController extends GetxController {
     } else {
       isVerif.value = false;
       Get.snackbar("KTP", "Gagal Validasi KTP");
+    }
+  }
+
+  void logout(context) async {
+    EasyLoading.show(
+      status: 'Loading...'.tr,
+      maskType: EasyLoadingMaskType.black,
+      dismissOnTap: false,
+    );
+
+    GlobalController.to.checkConnection();
+
+    if (GlobalController.to.isConnect.isTrue) {
+      await repository.logOut();
+      bool? isLoginStatus = await LocalStorageService.isLogIn();
+
+      if (isLoginStatus == false) {
+        EasyLoading.dismiss();
+        Get.offAllNamed(MainRoute.signIn);
+      } else {
+        EasyLoading.dismiss();
+        PanaraInfoDialog.show(
+          context,
+          title: "Error".tr,
+          message: "Log Out Filed".tr,
+          buttonText: "Retry".tr,
+          onTapDismiss: () {
+            Get.back();
+          },
+          panaraDialogType: PanaraDialogType.error,
+          barrierDismissible: false,
+        );
+      }
+    } else {
+      Get.toNamed(MainRoute.noConnection);
     }
   }
 }

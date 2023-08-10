@@ -18,4 +18,5 @@ class MainColor {
   static const Color lightGrey = Color(0xFFF6F6F6);
   static const Color yellow = Color(0xFFFFAC01);
   static const Color green = Color(0xFF009C48);
+  static const Color darkGreen = Color(0xff00717F);
 }

@@ -103,7 +103,7 @@ class SignInView extends StatelessWidget {
                 style: EvelatedButtonStyle.mainRounded,
                 onPressed: () => SignInController.to.validateForm(context),
                 child: Text(
-                  "Sign In",
+                  "Sign In".tr,
                   style: GoogleTextStyle.fw800.copyWith(
                     fontSize: 14.sp,
                     color: MainColor.white,
@@ -126,7 +126,7 @@ class SignInView extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
                     child: Text(
-                      'atau',
+                      'or'.tr,
                       style: GoogleTextStyle.fw400.copyWith(
                         fontSize: 14.sp,
                         color: MainColor.black,

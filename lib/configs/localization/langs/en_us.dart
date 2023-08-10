@@ -118,5 +118,9 @@ const Map<String, String> translationsEnUs = {
   'Incorrect OTP code': 'Incorrect OTP code',
   'Loading...': 'Loading...',
   'All Status': 'All Status',
-  'Please authenticate to confirm order': 'Please authenticate to confirm order'
+  'Please authenticate to confirm order':
+      'Please authenticate to confirm order',
+  'Log Out': 'Log Out',
+  'Error': 'Error',
+  'Log Out Filed': 'Log Out Filed'
 };

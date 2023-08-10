@@ -45,7 +45,6 @@ class ConterController extends GetxController {
     if (GlobalController.to.isConnect.isTrue) {
       await _counterRepository.logOut();
       bool? isLoginStatus = await LocalStorageService.isLogIn();
-      print(isLoginStatus);
 
       if (isLoginStatus == false) {
         EasyLoading.dismiss();
