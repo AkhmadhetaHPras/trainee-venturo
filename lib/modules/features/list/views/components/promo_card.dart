@@ -36,7 +36,7 @@ class PromoCard extends StatelessWidget {
         softWrap: true,
         textAlign: TextAlign.center,
         TextSpan(
-          text: 'Diskon',
+          text: 'Discount'.tr,
           style: Get.textTheme.titleLarge?.copyWith(
             fontWeight: FontWeight.w800,
             color: Colors.white,
@@ -66,14 +66,14 @@ class PromoCard extends StatelessWidget {
 
     final voucher = [
       Text(
-        'Voucher',
+        'Voucher'.tr,
         style: Get.textTheme.titleLarge?.copyWith(
           fontWeight: FontWeight.w800,
           color: Colors.white,
         ),
       ),
       Text(
-        'Rp. $voucherNominal',
+        'Rp. $voucherNominal'.tr,
         style: Get.textTheme.displaySmall?.copyWith(
           fontWeight: FontWeight.w800,
           fontSize: 32.sp,

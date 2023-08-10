@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:trainee/configs/themes/main_color.dart';
 import 'package:trainee/modules/features/order/models/order_detail.dart';
 
@@ -65,7 +66,7 @@ class DetailOrderCard extends StatelessWidget {
                   maxLines: 1,
                 ),
                 Text(
-                  'Rp ${detailOrder.harga}',
+                  'Rp ${detailOrder.harga}'.tr,
                   style: GoogleTextStyle.fw700.copyWith(
                     fontSize: 18.sp,
                     color: MainColor.primary,

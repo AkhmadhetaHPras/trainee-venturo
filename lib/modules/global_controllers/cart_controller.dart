@@ -43,7 +43,7 @@ class CartController extends GetxController {
   // Method to add an item to the cart and save to Hive
   Future addToCart(MenuCart menu) async {
     EasyLoading.show(
-      status: 'Sedang Diproses...',
+      status: 'Loading...'.tr,
       maskType: EasyLoadingMaskType.black,
       dismissOnTap: false,
     );
@@ -150,7 +150,7 @@ class CartController extends GetxController {
         // if succeed, order cart
         if (authenticated) {
           EasyLoading.show(
-            status: 'Sedang Diproses...',
+            status: 'Loading...'.tr,
             maskType: EasyLoadingMaskType.black,
             dismissOnTap: false,
           );
@@ -194,7 +194,7 @@ class CartController extends GetxController {
 
     if (authenticated == true) {
       EasyLoading.show(
-        status: 'Sedang Diproses...',
+        status: 'Loading...'.tr,
         maskType: EasyLoadingMaskType.black,
         dismissOnTap: false,
       );

@@ -143,7 +143,7 @@ class ProfileView extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.only(left: 20.w),
                     child: Text(
-                      'Info Akun'.tr,
+                      'Account Info'.tr,
                       style: GoogleTextStyle.fw600
                           .copyWith(color: MainColor.primary, fontSize: 20.sp),
                     ),
@@ -245,7 +245,7 @@ class ProfileView extends StatelessWidget {
                                 9.horizontalSpaceRadius,
                                 // title text
                                 Text(
-                                  "Penilaian",
+                                  "Ratings".tr,
                                   style: GoogleTextStyle.fw600.copyWith(
                                     fontSize: 16.sp,
                                   ),
@@ -280,7 +280,7 @@ class ProfileView extends StatelessWidget {
                                         ),
                                       ),
                                       child: Text(
-                                        "Nilai Sekarang",
+                                        "Rating Now".tr,
                                         style: GoogleTextStyle.fw500.copyWith(
                                           fontSize: 14.sp,
                                           color: MainColor.white,
@@ -300,7 +300,7 @@ class ProfileView extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.only(left: 20.w),
                     child: Text(
-                      'Info Lainnya'.tr,
+                      'Other Info'.tr,
                       style: GoogleTextStyle.fw600
                           .copyWith(color: MainColor.primary, fontSize: 20.sp),
                     ),
@@ -316,14 +316,14 @@ class ProfileView extends StatelessWidget {
                     child: Column(
                       children: [
                         TileOption(
-                          title: 'Info Perangkat'.tr,
-                          message: 'Iphone 15',
+                          title: 'Device Info'.tr,
+                          message: 'Iphone 15'.tr,
                           onTap: () {},
                         ),
                         Divider(color: Colors.black45, height: 0.5.h),
                         TileOption(
-                          title: 'Versi'.tr,
-                          message: 'Gear 5',
+                          title: 'Version'.tr,
+                          message: 'Gear 5'.tr,
                           onTap: () {},
                         ),
                       ],

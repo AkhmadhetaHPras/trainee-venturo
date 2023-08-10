@@ -24,7 +24,7 @@ class ToppingSection extends StatelessWidget {
     if (fromCart) {
       return RadioSection(
         icon: Icons.local_pizza_outlined,
-        title: "Topping",
+        title: "Topping".tr,
         selectedValue: data == null
             ? EditMenuCartController.to.selectedTopping
             : (selectedValue == null ? <Topping>[].obs : selectedValue!),
@@ -38,7 +38,7 @@ class ToppingSection extends StatelessWidget {
     } else {
       return RadioSection(
         icon: Icons.local_pizza_outlined,
-        title: "Topping",
+        title: "Topping".tr,
         selectedValue: data == null
             ? DetailMenuController.to.selectedTopping
             : (selectedValue == null ? <Topping>[].obs : selectedValue!),

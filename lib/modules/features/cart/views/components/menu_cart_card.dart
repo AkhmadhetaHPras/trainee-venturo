@@ -74,7 +74,7 @@ class MenuCartCard extends StatelessWidget {
                     maxLines: 1,
                   ),
                   Text(
-                    "Rp. ${menu.harga}",
+                    "Rp. ${menu.harga}".tr,
                     style: Get.textTheme.bodyMedium!.copyWith(
                         color: Theme.of(context).primaryColor,
                         fontSize: 18.sp,
@@ -89,7 +89,7 @@ class MenuCartCard extends StatelessWidget {
                       ),
                       Expanded(
                         child: Text(
-                          menu.catatan ?? "Tambahkan Catatan",
+                          menu.catatan ?? "Tambahkan Catatan".tr,
                           style: GoogleTextStyle.fw500.copyWith(
                             fontSize: 12.sp,
                             color: menu.catatan == null

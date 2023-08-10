@@ -130,31 +130,31 @@ class OrderItemCard extends StatelessWidget {
                             valueBuilder: (context) => order.status,
                             caseBuilders: {
                               0: (context) => Text(
-                                    'Dalam antrian'.tr,
+                                    'In Queue'.tr,
                                     style: GoogleTextStyle.fw500.copyWith(
                                         color: MainColor.yellow,
                                         fontSize: 12.sp),
                                   ),
                               1: (context) => Text(
-                                    'Sedang disiapkan'.tr,
+                                    'Being Prepared'.tr,
                                     style: GoogleTextStyle.fw500.copyWith(
                                         color: MainColor.yellow,
                                         fontSize: 12.sp),
                                   ),
                               2: (context) => Text(
-                                    'Siap'.tr,
+                                    'Ready'.tr,
                                     style: GoogleTextStyle.fw500.copyWith(
                                         color: MainColor.yellow,
                                         fontSize: 12.sp),
                                   ),
                               3: (context) => Text(
-                                    'Selesai'.tr,
+                                    'Done'.tr,
                                     style: GoogleTextStyle.fw500.copyWith(
                                         color: MainColor.green,
                                         fontSize: 12.sp),
                                   ),
                               4: (context) => Text(
-                                    'Dibatalkan'.tr,
+                                    'Canceled'.tr,
                                     style: GoogleTextStyle.fw500.copyWith(
                                         color: MainColor.danger,
                                         fontSize: 12.sp),
@@ -166,7 +166,7 @@ class OrderItemCard extends StatelessWidget {
                         Text(
                           DateFormat(
                             'dd MMMM yyyy',
-                            Get.locale?.countryCode,
+                            Get.locale?.toLanguageTag(),
                           ).format(DateTime.parse(order.tanggal)),
                           style: GoogleTextStyle.fw500
                               .copyWith(color: MainColor.grey, fontSize: 12.sp),
@@ -218,7 +218,7 @@ class OrderItemCard extends StatelessWidget {
                             Padding(
                               padding: EdgeInsets.only(top: 10.r, bottom: 5.r),
                               child: OutlinedTitleButton.compact(
-                                text: 'Beri penilaian'.tr,
+                                text: 'Give Review'.tr,
                                 onPressed: () =>
                                     onGiveReview?.call(order.idOrder),
                               ),
@@ -231,7 +231,7 @@ class OrderItemCard extends StatelessWidget {
                             child: PrimaryButtonWithTitle.compact(
                               backgroundColor: MainColor.primary,
                               borderColor: MainColor.primary,
-                              title: 'Pesan Lagi'.tr,
+                              title: 'Order Again'.tr,
                               onPressed: onOrderAgain,
                             ),
                           ),

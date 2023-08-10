@@ -36,9 +36,9 @@ class OrderController extends GetxController {
   Rx<String> selectedCategory = 'all'.obs;
 
   Map<String, String> get dateFilterStatus => {
-        'all': 'Semua Status'.tr,
-        'completed': 'Selesai'.tr,
-        'canceled': 'Dibatalkan'.tr,
+        'all': 'All Status',
+        'completed': 'Done',
+        'canceled': 'Canceled',
       };
 
   Rx<DateTimeRange> selectedDateRange = DateTimeRange(

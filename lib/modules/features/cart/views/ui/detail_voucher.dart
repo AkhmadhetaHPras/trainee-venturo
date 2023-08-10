@@ -103,7 +103,7 @@ class DetailVoucher extends StatelessWidget {
                           SizedBox(
                             width: 110,
                             child: Text(
-                              "Tanggal Kadaluwarsa",
+                              "Expired Date",
                               style: GoogleTextStyle.fw600.copyWith(
                                 fontSize: 18.sp,
                                 color: MainColor.dark,
@@ -153,7 +153,7 @@ class DetailVoucher extends StatelessWidget {
               ),
             ),
             child: Text(
-              "Pilih Voucher",
+              "Choose Voucher",
               style: GoogleTextStyle.fw700
                   .copyWith(fontSize: 16.sp, color: MainColor.white),
             ),

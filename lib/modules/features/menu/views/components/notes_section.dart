@@ -54,7 +54,7 @@ class NotesSection extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Buat Catatan",
+                  "Add Notes".tr,
                   style: GoogleTextStyle.fw700.copyWith(
                     fontSize: 18.sp,
                     color: MainColor.dark,
@@ -71,7 +71,7 @@ class NotesSection extends StatelessWidget {
                         initialValue: edit != null && edit == true
                             ? EditMenuCartController.to.catatan.value
                             : DetailMenuController.to.catatan.value,
-                        hint: "Catatan",
+                        hint: "Notes".tr,
                       ),
                     ),
                     ElevatedButton(
@@ -111,7 +111,7 @@ class NotesSection extends StatelessWidget {
               width: 8,
             ),
             Text(
-              "Catatan",
+              "Notes".tr,
               style: GoogleTextStyle.fw600
                   .copyWith(fontSize: 16, color: MainColor.dark),
             ),

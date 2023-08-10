@@ -29,10 +29,10 @@ class ListItemView extends StatelessWidget {
             return [
               SliverToBoxAdapter(child: 22.verticalSpace),
               // list of promo
-              const SliverToBoxAdapter(
+              SliverToBoxAdapter(
                 child: SectionHeader(
                   icon: Icons.discount,
-                  title: 'Promo yang Tersedia',
+                  title: 'Available Promos'.tr,
                 ),
               ),
               SliverToBoxAdapter(child: 22.verticalSpace),
@@ -110,7 +110,7 @@ class ListItemView extends StatelessWidget {
                     SliverToBoxAdapter(
                       child: SectionHeader(
                         icon: Icons.food_bank_outlined,
-                        title: 'Makanan',
+                        title: 'Food'.tr,
                         color: Theme.of(context).primaryColor,
                       ),
                     ),
@@ -153,7 +153,7 @@ class ListItemView extends StatelessWidget {
                     SliverToBoxAdapter(
                       child: SectionHeader(
                         icon: Icons.local_drink_outlined,
-                        title: 'Minuman',
+                        title: 'Drink'.tr,
                         color: Theme.of(context).primaryColor,
                       ),
                     ),

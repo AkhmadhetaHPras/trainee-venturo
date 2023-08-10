@@ -64,7 +64,7 @@ class OnGoingOrderTabView extends StatelessWidget {
                       ImageConstant.icNoteAction,
                     ),
                     Text(
-                      "Sudah Pesan?\nLacak Pesananmu di sini",
+                      "Already ordered?\nTrack your order here".tr,
                       style: GoogleTextStyle.fw400.copyWith(
                         fontSize: 22.sp,
                       ),

@@ -27,7 +27,7 @@ class DetailOrderView extends StatelessWidget {
 
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Pesanan',
+        title: 'Order'.tr,
         titleStyle: GoogleTextStyle.fw700.copyWith(
           fontSize: 20.sp,
           color: MainColor.black,
@@ -47,22 +47,22 @@ class DetailOrderView extends StatelessWidget {
                   onPressed: () {
                     Get.dialog(
                       AlertDialog(
-                        title: const Text('Konfirmasi'),
-                        content: const Text(
-                            'Apakah Anda yakin ingin membatalkan pesanan ini?'),
+                        title: Text('Confirmation'.tr),
+                        content: Text(
+                            'Are you sure you want to cancel this order?'.tr),
                         actions: [
                           TextButton(
                             onPressed: () {
                               Get.back();
                             },
-                            child: const Text('Batal'),
+                            child: Text('Cancel'.tr),
                           ),
                           ElevatedButton(
                             onPressed: () async {
                               Get.back();
                               await DetailOrderController.to.cancelOrder();
                             },
-                            child: const Text('Ya'),
+                            child: Text('Yes'.tr),
                           ),
                         ],
                       ),
@@ -73,7 +73,7 @@ class DetailOrderView extends StatelessWidget {
                     visualDensity: VisualDensity.compact,
                   ),
                   child: Text(
-                    'Batal'.tr,
+                    'Cancel'.tr,
                     style: Get.textTheme.labelLarge
                         ?.copyWith(color: MainColor.danger),
                   ),
@@ -98,7 +98,7 @@ class DetailOrderView extends StatelessWidget {
                 SliverToBoxAdapter(
                   child: SectionHeader(
                     icon: Icons.food_bank_outlined,
-                    title: 'Makanan',
+                    title: 'Food'.tr,
                     color: Theme.of(context).primaryColor,
                   ),
                 ),
@@ -115,7 +115,7 @@ class DetailOrderView extends StatelessWidget {
                 SliverToBoxAdapter(
                   child: SectionHeader(
                     icon: Icons.local_drink_outlined,
-                    title: 'Minuman',
+                    title: 'Drink'.tr,
                     color: Theme.of(context).primaryColor,
                   ),
                 ),
@@ -155,7 +155,7 @@ class DetailOrderView extends StatelessWidget {
                     children: [
                       // Total order tile
                       TileOption(
-                        title: 'Total pesanan',
+                        title: 'Total Order '.tr,
                         subtitle:
                             '(${DetailOrderController.to.order.value?.detail?.length} Menu):',
                         message:
@@ -186,9 +186,10 @@ class DetailOrderView extends StatelessWidget {
                         widgetBuilder: (context) => TileOption(
                           icon: Icons.discount_outlined,
                           iconSize: 24.r,
-                          title: 'Discount',
+                          title: 'Discount'.tr,
                           message:
-                              'Rp ${DetailOrderController.to.order.value?.order?.potongan ?? '0'}',
+                              'Rp ${DetailOrderController.to.order.value?.order?.potongan ?? '0'}'
+                                  .tr,
                           titleStyle:
                               GoogleTextStyle.fw600.copyWith(fontSize: 18.sp),
                           messageStyle: GoogleTextStyle.fw600.copyWith(
@@ -212,7 +213,8 @@ class DetailOrderView extends StatelessWidget {
                           iconSize: 24.r,
                           title: 'Voucher'.tr,
                           message:
-                              'Rp ${DetailOrderController.to.order.value?.order?.potongan ?? '0'}',
+                              'Rp ${DetailOrderController.to.order.value?.order?.potongan ?? '0'}'
+                                  .tr,
                           messageSubtitle: DetailOrderController
                               .to.order.value?.order?.namaVoucher,
                           titleStyle:
@@ -230,8 +232,8 @@ class DetailOrderView extends StatelessWidget {
                       TileOption(
                         icon: Icons.payment_outlined,
                         iconSize: 24.r,
-                        title: 'Pembayaran'.tr,
-                        message: 'Pay Later',
+                        title: 'Payment'.tr,
+                        message: 'Pay Later'.tr,
                         titleStyle:
                             GoogleTextStyle.fw600.copyWith(fontSize: 18.sp),
                         messageStyle:
@@ -243,9 +245,10 @@ class DetailOrderView extends StatelessWidget {
                       // total payment
                       TileOption(
                         iconSize: 24.r,
-                        title: 'Total pembayaran'.tr,
+                        title: 'Total Payment'.tr,
                         message:
-                            'Rp ${DetailOrderController.to.order.value?.order?.totalBayar ?? '0'}',
+                            'Rp ${DetailOrderController.to.order.value?.order?.totalBayar ?? '0'}'
+                                .tr,
                         titleStyle:
                             GoogleTextStyle.fw600.copyWith(fontSize: 18.sp),
                         messageStyle: GoogleTextStyle.fw600

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:trainee/configs/themes/main_color.dart';
 import 'package:trainee/shared/styles/google_text_style.dart';
 
@@ -27,9 +28,9 @@ class OrderTopBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       padding: EdgeInsets.symmetric(horizontal: 20.w),
       child: TabBar(
-        tabs: const [
-          Tab(text: 'Sedang Berjalan'),
-          Tab(text: 'Riwayat'),
+        tabs: [
+          Tab(text: 'Ongoing'.tr),
+          Tab(text: 'History'.tr),
         ],
         indicatorColor: MainColor.primary,
         indicatorWeight: 3.h,

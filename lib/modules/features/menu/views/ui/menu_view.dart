@@ -64,7 +64,7 @@ class MenuView extends StatelessWidget {
                           Obx(
                             () => Text(
                               DetailMenuController.to.menu.value.nama ??
-                                  "Nama Menu",
+                                  "Menu Name",
                               style: GoogleTextStyle.fw700.copyWith(
                                 fontSize: 20.sp,
                                 color: MainColor.primary,
@@ -165,7 +165,7 @@ class MenuView extends StatelessWidget {
                           ),
                         ),
                         child: Text(
-                          "Tambahkan Ke Pesanan",
+                          "Add to Cart".tr,
                           style: GoogleTextStyle.fw700.copyWith(
                               fontSize: 16.sp, color: MainColor.white),
                         ),

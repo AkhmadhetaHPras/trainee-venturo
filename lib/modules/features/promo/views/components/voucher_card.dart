@@ -44,14 +44,14 @@ class VoucherCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Voucher',
+                'Voucher'.tr,
                 style: Get.textTheme.titleLarge?.copyWith(
                   fontWeight: FontWeight.w800,
                   color: Colors.white,
                 ),
               ),
               Text(
-                'Rp. $nominal',
+                'Rp. $nominal'.tr,
                 style: Get.textTheme.displaySmall?.copyWith(
                   fontWeight: FontWeight.w800,
                   foreground: Paint()

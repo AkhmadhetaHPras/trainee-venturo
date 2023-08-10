@@ -11,14 +11,14 @@ class PriceSection extends StatelessWidget {
   final int? harga;
 
   Widget textPriceWidget(String text) => Text(
-        "Rp. $text",
+        "Rp. $text".tr,
         style: GoogleTextStyle.fw700
             .copyWith(fontSize: 18, color: MainColor.primary),
       );
 
   final Widget obxPriceWidget = Obx(
     () => Text(
-      "Rp. ${DetailMenuController.to.menu.value.harga}",
+      "Rp. ${DetailMenuController.to.menu.value.harga}".tr,
       style: GoogleTextStyle.fw700
           .copyWith(fontSize: 18, color: MainColor.primary),
     ),
@@ -35,7 +35,7 @@ class PriceSection extends StatelessWidget {
             width: 8,
           ),
           Text(
-            "Harga",
+            "Price".tr,
             style: GoogleTextStyle.fw600
                 .copyWith(fontSize: 16, color: MainColor.dark),
           ),

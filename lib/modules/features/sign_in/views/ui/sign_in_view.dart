@@ -25,28 +25,28 @@ class SignInView extends StatelessWidget {
     if (Platform.isAndroid) {
       /// Tracking bahwa dia masuk screen sign in di device android
       analytics.setCurrentScreen(
-        screenName: 'Sign In Screen',
-        screenClassOverride: 'Android',
+        screenName: 'Sign In Screen'.tr,
+        screenClassOverride: 'Android'.tr,
       );
     } else if (Platform.isIOS) {
       /// Tracking bahwa dia masuk screen sign in di device ios
       analytics.setCurrentScreen(
-        screenName: 'Sign In Screen',
-        screenClassOverride: 'IOS',
+        screenName: 'Sign In Screen'.tr,
+        screenClassOverride: 'IOS'.tr,
       );
     } else if (Platform.isMacOS) {
       /// Tracking bahwa dia masuk screen sign in di device macos
       analytics.setCurrentScreen(
-        screenName: 'Sign In Screen',
-        screenClassOverride: 'MacOS',
+        screenName: 'Sign In Screen'.tr,
+        screenClassOverride: 'MacOS'.tr,
       );
     }
 
     if (kIsWeb) {
       /// Tracking bahwa dia masuk screen sign in di device web
       analytics.setCurrentScreen(
-        screenName: 'Sign In Screen',
-        screenClassOverride: 'Web',
+        screenName: 'Sign In Screen'.tr,
+        screenClassOverride: 'Web'.tr,
       );
     }
 
@@ -71,7 +71,7 @@ class SignInView extends StatelessWidget {
               ),
               SizedBox(height: 40.h),
               Text(
-                'Masuk untuk melanjutkan!',
+                'Sign in to continue!'.tr,
                 style: GoogleTextStyle.fw600.copyWith(
                   fontSize: 22.sp,
                   color: MainColor.black,
@@ -89,7 +89,7 @@ class SignInView extends StatelessWidget {
                       Get.toNamed(MainRoute.forgotPassword);
                     },
                     child: Text(
-                      "Forgot Password",
+                      "Forgot Password".tr,
                       style: GoogleTextStyle.fw400.copyWith(
                         fontSize: 14.sp,
                         color: MainColor.black,
@@ -103,7 +103,7 @@ class SignInView extends StatelessWidget {
                 style: EvelatedButtonStyle.mainRounded,
                 onPressed: () => SignInController.to.validateForm(context),
                 child: Text(
-                  "Masuk",
+                  "Sign In",
                   style: GoogleTextStyle.fw800.copyWith(
                     fontSize: 14.sp,
                     color: MainColor.white,
@@ -143,7 +143,7 @@ class SignInView extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               SocialSignInButtonComponent(
-                buttonText: "Google",
+                buttonText: "Google".tr,
                 iconAssetPath: ImageConstant.icGoogle,
                 backgroundColor: MainColor.white,
                 fontColor: MainColor.black,
@@ -153,7 +153,7 @@ class SignInView extends StatelessWidget {
                 height: 17,
               ),
               SocialSignInButtonComponent(
-                buttonText: "Apple",
+                buttonText: "Apple".tr,
                 iconAssetPath: ImageConstant.icApple,
                 backgroundColor: MainColor.black,
                 fontColor: MainColor.white,

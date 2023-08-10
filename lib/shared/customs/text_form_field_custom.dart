@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:trainee/configs/themes/main_color.dart';
 import 'package:trainee/shared/styles/google_text_style.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,7 +14,7 @@ class TextFormFieldCustom extends StatelessWidget {
     required this.hint,
     this.isPassword = false,
     this.isRequired = false,
-    this.requiredText = "Input type tidak boleh kosong",
+    this.requiredText = "Input type cannot be empty",
     this.maxLength,
     this.suffixIcon,
   });

@@ -69,7 +69,7 @@ class RadioSection extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(bottom: 10.0),
                             child: Text(
-                              "Pilih $title",
+                              "Choose $title",
                               style: GoogleTextStyle.fw700.copyWith(
                                 fontSize: 18.sp,
                                 color: MainColor.dark,
@@ -113,8 +113,8 @@ class RadioSection extends StatelessWidget {
                   )
               : () {
                   Get.snackbar(
-                    "Maaf",
-                    "Tidak tersedia pilihan ${title.toLowerCase()}",
+                    "Sorry".tr,
+                    "No option available for ".tr + title.toLowerCase(),
                     duration: const Duration(milliseconds: 1500),
                     backgroundColor: MainColor.white,
                     snackPosition: SnackPosition.BOTTOM,

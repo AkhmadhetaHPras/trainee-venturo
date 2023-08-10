@@ -16,6 +16,7 @@ class FingerprintDialog extends StatelessWidget {
           Text(
             'Verify order'.tr,
             style: Get.textTheme.headlineMedium,
+            textAlign: TextAlign.center,
           ),
 
           // subtitle
@@ -37,7 +38,7 @@ class FingerprintDialog extends StatelessWidget {
           TextButton(
             onPressed: () => Get.back<String>(result: 'pin'),
             child: Text(
-              'Verify using PIN code',
+              'Verify using PIN code'.tr,
               style: Get.textTheme.titleSmall!
                   .copyWith(color: Theme.of(context).primaryColor),
             ),

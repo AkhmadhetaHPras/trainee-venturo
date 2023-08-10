@@ -4,6 +4,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:trainee/modules/features/forgot_password/controllers/forgot_password_controller.dart';
 
 import '../../../../../configs/themes/main_color.dart';
@@ -68,7 +69,7 @@ class ForgotPasswordView extends StatelessWidget {
               ),
               SizedBox(height: 121.h),
               Text(
-                'Masukkan alamat email untuk mengubah password anda',
+                'Enter your email address to change your password'.tr,
                 style: GoogleTextStyle.fw600.copyWith(
                   fontSize: 22.sp,
                   color: MainColor.black,
@@ -95,7 +96,7 @@ class ForgotPasswordView extends StatelessWidget {
                   ForgotPasswordController.to.sendOtp();
                 },
                 child: Text(
-                  "Ubah Password",
+                  "Change Password".tr,
                   style: GoogleTextStyle.fw800.copyWith(
                     fontSize: 14.sp,
                     color: MainColor.white,

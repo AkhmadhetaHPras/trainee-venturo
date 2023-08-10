@@ -21,7 +21,7 @@ class CartView extends StatelessWidget {
         backgroundColor: Colors.white,
         appBar: CustomAppBar(
           icon: Icons.shopping_cart_checkout,
-          title: "Pesanan",
+          title: "Order".tr,
           titleStyle: GoogleTextStyle.fw700.copyWith(
             fontSize: 20.sp,
             color: MainColor.black,
@@ -40,7 +40,7 @@ class CartView extends StatelessWidget {
                       SliverToBoxAdapter(
                         child: SectionHeader(
                           icon: Icons.food_bank_outlined,
-                          title: 'Makanan',
+                          title: 'Food'.tr,
                           color: Theme.of(context).primaryColor,
                         ),
                       ),
@@ -78,7 +78,7 @@ class CartView extends StatelessWidget {
                       SliverToBoxAdapter(
                         child: SectionHeader(
                           icon: Icons.local_drink_outlined,
-                          title: 'Minuman',
+                          title: 'Drink'.tr,
                           color: Theme.of(context).primaryColor,
                         ),
                       ),
@@ -138,7 +138,7 @@ class CartView extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "Total Pesanan ",
+                                "Total Order ".tr,
                                 style: GoogleTextStyle.fw600.copyWith(
                                     fontSize: 18, color: MainColor.dark),
                               ),
@@ -183,7 +183,7 @@ class CartView extends StatelessWidget {
                                 ),
                                 Obx(
                                   () => Text(
-                                    "Diskon ${CartController.to.discount}%",
+                                    "${"Discount".tr} ${CartController.to.discount}%",
                                     style: GoogleTextStyle.fw600.copyWith(
                                         fontSize: 18, color: MainColor.dark),
                                   ),
@@ -215,8 +215,8 @@ class CartView extends StatelessWidget {
                           child: InkWell(
                             onTap: () {
                               if (CartController.to.vouchers.isEmpty) {
-                                Get.snackbar("Mohon maaf",
-                                    "Anda tidak memiliki voucher");
+                                Get.snackbar(
+                                    "Voucher".tr, "You dont have voucher".tr);
                               } else {
                                 Get.toNamed(MainRoute.chooseVoucher);
                               }
@@ -229,7 +229,7 @@ class CartView extends StatelessWidget {
                                   width: 8,
                                 ),
                                 Text(
-                                  "Voucher",
+                                  "Voucher".tr,
                                   style: GoogleTextStyle.fw600.copyWith(
                                       fontSize: 18, color: MainColor.dark),
                                 ),
@@ -266,7 +266,7 @@ class CartView extends StatelessWidget {
                                         () => Text(
                                           CartController.to.selectedVoucher
                                                   .value.nama ??
-                                              "Pilih Voucher",
+                                              "Choose Voucher".tr,
                                           style: GoogleTextStyle.fw500.copyWith(
                                             fontSize: CartController
                                                         .to
@@ -309,7 +309,7 @@ class CartView extends StatelessWidget {
                                   width: 8,
                                 ),
                                 Text(
-                                  "Pembayaran",
+                                  "Payment".tr,
                                   style: GoogleTextStyle.fw600.copyWith(
                                       fontSize: 18, color: MainColor.dark),
                                 ),
@@ -317,7 +317,7 @@ class CartView extends StatelessWidget {
                                   child: SizedBox(),
                                 ),
                                 Text(
-                                  "Pay Later",
+                                  "Pay Later".tr,
                                   style: GoogleTextStyle.fw400.copyWith(
                                       fontSize: 14, color: MainColor.dark),
                                 ),
@@ -359,7 +359,7 @@ class CartView extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "Total Pembayaran",
+                                "Total Payment".tr,
                                 style: GoogleTextStyle.fw500.copyWith(
                                   fontSize: 12.sp,
                                 ),
@@ -385,7 +385,7 @@ class CartView extends StatelessWidget {
                             CartController.to.verify();
                           },
                           child: Text(
-                            "Pesan Sekarang",
+                            "Order Now".tr,
                             style: GoogleTextStyle.fw800.copyWith(
                               fontSize: 14.sp,
                               color: MainColor.white,

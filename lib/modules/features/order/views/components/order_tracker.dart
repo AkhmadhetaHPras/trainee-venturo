@@ -17,7 +17,7 @@ class OrderTracker extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Pesanan kamu sedang disiapkan'.tr,
+          'Your order is being prepared'.tr,
           style: GoogleTextStyle.fw700.copyWith(
             fontSize: 16.sp,
           ),
@@ -86,7 +86,7 @@ class OrderTracker extends StatelessWidget {
           children: [
             Expanded(
               child: Text(
-                'Pesanan Diterima'.tr,
+                'Order Accepted'.tr,
                 style: GoogleTextStyle.fw400.copyWith(
                   fontSize: 12.sp,
                 ),
@@ -96,7 +96,7 @@ class OrderTracker extends StatelessWidget {
             const Spacer(),
             Expanded(
               child: Text(
-                'Silakan Diambil'.tr,
+                'Take'.tr,
                 style: GoogleTextStyle.fw400.copyWith(
                   fontSize: 12.sp,
                 ),
@@ -106,7 +106,7 @@ class OrderTracker extends StatelessWidget {
             const Spacer(),
             Expanded(
               child: Text(
-                'Pesanan Selesai'.tr,
+                'Order Done'.tr,
                 style: GoogleTextStyle.fw400.copyWith(
                   fontSize: 12.sp,
                 ),

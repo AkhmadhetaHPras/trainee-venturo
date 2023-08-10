@@ -55,7 +55,7 @@ class BottomNavigation extends StatelessWidget implements PreferredSizeWidget {
                 ),
                 Obx(
                   () => Text(
-                    "Home",
+                    "Home".tr,
                     style: GoogleTextStyle.fw700.copyWith(
                       color:
                           BottomNavigationController.to.activeIndex.value == 0
@@ -88,7 +88,7 @@ class BottomNavigation extends StatelessWidget implements PreferredSizeWidget {
                 ),
                 Obx(
                   () => Text(
-                    "Pesanan",
+                    "Order".tr,
                     style: GoogleTextStyle.fw700.copyWith(
                       color:
                           BottomNavigationController.to.activeIndex.value == 1
@@ -121,7 +121,7 @@ class BottomNavigation extends StatelessWidget implements PreferredSizeWidget {
                 ),
                 Obx(
                   () => Text(
-                    "Profil",
+                    "Profile".tr,
                     style: GoogleTextStyle.fw700.copyWith(
                       color:
                           BottomNavigationController.to.activeIndex.value == 2

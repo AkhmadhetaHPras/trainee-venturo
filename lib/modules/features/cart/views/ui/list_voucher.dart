@@ -32,7 +32,7 @@ class ListVoucher extends StatelessWidget {
               child: Obx(() {
                 if (CartController.to.vouchers.isEmpty) {
                   return const Center(
-                    child: Text("Maaf anda tidak memiliki voucher"),
+                    child: Text("Sorry you dont have voucher"),
                   );
                 } else {
                   return ListView.builder(
@@ -106,7 +106,7 @@ class ListVoucher extends StatelessWidget {
                         children: [
                           TextSpan(
                               text:
-                                  'Penggunaan voucher tidak dapat digabung dengan\n',
+                                  'The use of vouchers cannot be combined with\n',
                               style: GoogleTextStyle.fw400.copyWith(
                                 color: MainColor.dark,
                                 fontSize: 13.sp,

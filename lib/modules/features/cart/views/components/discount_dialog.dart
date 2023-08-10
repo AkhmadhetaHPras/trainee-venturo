@@ -19,7 +19,7 @@ class DiscountDialog extends StatelessWidget {
         children: [
           28.verticalSpace,
           Text(
-            'Info Diskon'.tr,
+            'Discount Info'.tr,
             style: GoogleTextStyle.fw600.copyWith(
               fontSize: 22.sp,
               color: MainColor.primary,
@@ -59,8 +59,8 @@ class DiscountDialog extends StatelessWidget {
                   children: wid,
                 );
               } else {
-                return const Center(
-                  child: Text("Anda tidak memiliki diskon"),
+                return Center(
+                  child: Text("You dont have discount".tr),
                 );
               }
             },
@@ -93,7 +93,7 @@ class DiscountDialog extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Oke',
+                    'Oke'.tr,
                     textAlign: TextAlign.center,
                     style: Get.textTheme.labelLarge?.copyWith(
                       fontWeight: FontWeight.w800,

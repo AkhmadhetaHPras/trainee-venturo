@@ -58,7 +58,7 @@ class _ContactInfoBottomSheetState extends State<ContactInfoBottomSheet> {
                 if (widget.name != null)
                   ..._buildTextField(
                     controller: _nameController,
-                    label: 'Nama'.tr,
+                    label: 'Name'.tr,
                     maxLength: 100,
                     validator: (value) =>
                         value?.isEmpty ?? false ? 'Name is required'.tr : null,
@@ -66,7 +66,7 @@ class _ContactInfoBottomSheetState extends State<ContactInfoBottomSheet> {
                 if (widget.phoneNumber != null)
                   ..._buildTextField(
                     controller: _phoneNumberController,
-                    label: 'No. Telepon'.tr,
+                    label: 'Phone Number'.tr,
                     maxLength: 15,
                     validator: (value) =>
                         null, // Add phone number validation if needed
@@ -131,7 +131,7 @@ class _ContactInfoBottomSheetState extends State<ContactInfoBottomSheet> {
     return [
       TextFormField(
         controller: controller,
-        keyboardType: label == "No. Telepon" ? TextInputType.number : null,
+        keyboardType: label == "Phone Number" ? TextInputType.number : null,
         style: Get.textTheme.bodySmall,
         decoration: InputDecoration(
           hintText: label,

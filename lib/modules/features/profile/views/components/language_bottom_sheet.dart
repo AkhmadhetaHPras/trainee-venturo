@@ -24,7 +24,7 @@ class _LanguageBottomSheetState extends State<LanguageBottomSheet> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           16.verticalSpacingRadius,
-          Text('Change language'.tr, style: Get.textTheme.headlineSmall),
+          Text('Change Language'.tr, style: Get.textTheme.headlineSmall),
           16.verticalSpacingRadius,
           Wrap(
             spacing: 12.r,

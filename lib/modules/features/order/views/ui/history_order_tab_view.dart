@@ -133,7 +133,8 @@ class OrderHistoryTabView extends StatelessWidget {
                         ImageConstant.icNoteAction,
                       ),
                       Text(
-                        "Mulai buat pesanan\nMakanan yang kamu pesan akan muncul di sini agar kamu bisa menemukan menu favoritmu lagi!",
+                        "Start making orders\nThe food you ordered will appear here so you can find your favorites again!"
+                            .tr,
                         style: GoogleTextStyle.fw400.copyWith(
                           fontSize: 22.sp,
                         ),
@@ -159,7 +160,7 @@ class OrderHistoryTabView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Total pesanan'.tr,
+                  'Total Order'.tr,
                   style: GoogleTextStyle.fw700.copyWith(fontSize: 18.sp),
                 ),
                 5.horizontalSpace,

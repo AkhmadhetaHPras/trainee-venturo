@@ -63,7 +63,8 @@ class OtpView extends StatelessWidget {
             SizedBox(height: 121.h),
             Obx(
               () => Text(
-                'Masukkan kode otp yang telah dikirimkan ke email ${OtpController.to.email.value}',
+                'Enter the otp code that has been sent to the email ${OtpController.to.email.value}'
+                    .tr,
                 style: GoogleTextStyle.fw600.copyWith(
                   fontSize: 22.sp,
                   color: MainColor.black,
@@ -80,7 +81,7 @@ class OtpView extends StatelessWidget {
               keyboardType: TextInputType.number,
               validator: (value) {
                 if (value != "1234") {
-                  return "Kode OTP salah";
+                  return "Incorrect OTP code".tr;
                 }
                 return null;
               },

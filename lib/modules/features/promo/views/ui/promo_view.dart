@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:trainee/configs/themes/main_color.dart';
 import 'package:trainee/modules/features/promo/controllers/detail_promo_controller.dart';
 import 'package:trainee/modules/features/promo/views/components/discount_card.dart';
@@ -61,7 +62,7 @@ class PromoView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Nama Promo",
+                        "Promo Name".tr,
                         style: GoogleTextStyle.fw600.copyWith(
                           fontSize: 16.sp,
                           color: MainColor.dark,
@@ -101,7 +102,7 @@ class PromoView extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Syarat Dan Ketentuan",
+                                  "Terms and Conditions".tr,
                                   style: GoogleTextStyle.fw600.copyWith(
                                     fontSize: 16.sp,
                                     color: MainColor.dark,

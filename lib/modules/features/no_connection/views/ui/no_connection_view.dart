@@ -44,7 +44,7 @@ class NoConnectionView extends StatelessWidget {
             ),
             SizedBox(height: 25.h),
             Text(
-              "Oops Tidak ada koneksi internet",
+              "Oops no internet connection".tr,
               style: GoogleFonts.roboto(
                 fontSize: 22.sp,
                 fontWeight: FontWeight.w800,
@@ -54,7 +54,8 @@ class NoConnectionView extends StatelessWidget {
             ),
             SizedBox(height: 10.h),
             Text(
-              "Pastikan wifi atau data seluler terhubung, lalu tekan tombol coba lagi",
+              "Make sure your wifi or mobile data is connected, then press the retry button"
+                  .tr,
               style: GoogleFonts.roboto(
                 fontSize: 18.sp,
                 fontWeight: FontWeight.w400,
@@ -80,8 +81,8 @@ class NoConnectionView extends StatelessWidget {
                     Get.offNamed(MainRoute.initial);
                   } else {
                     Get.snackbar(
-                      "Terjadi Kesalahan",
-                      "Koneksi masih belum tersambung",
+                      "Error Occurred".tr,
+                      "Connection still not established".tr,
                     );
                   }
                 },
@@ -90,7 +91,7 @@ class NoConnectionView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Coba Lagi",
+                      "Retry".tr,
                       style: GoogleFonts.roboto(
                         fontSize: 18.sp,
                         fontWeight: FontWeight.w400,

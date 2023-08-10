@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import '../../../../../shared/styles/elevated_button_style.dart';
 import '../../../../../shared/styles/google_text_style.dart';
@@ -41,7 +42,7 @@ class SocialSignInButtonComponent extends StatelessWidget {
             TextSpan(
               children: [
                 TextSpan(
-                  text: 'Masuk menggunakan ',
+                  text: 'Sign In with '.tr,
                   style: GoogleTextStyle.fw400.copyWith(
                     fontSize: 14.sp,
                     color: fontColor,

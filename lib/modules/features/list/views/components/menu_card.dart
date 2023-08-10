@@ -72,7 +72,7 @@ class MenuCard extends StatelessWidget {
                     maxLines: 1,
                   ),
                   Text(
-                    "Rp. ${menu.harga}",
+                    "Rp. ${menu.harga}".tr,
                     style: Get.textTheme.bodyMedium!.copyWith(
                         color: Theme.of(context).primaryColor,
                         fontSize: 18.sp,
@@ -86,7 +86,7 @@ class MenuCard extends StatelessWidget {
                         width: 8,
                       ),
                       Text(
-                        'Tambahkan Catatan',
+                        'Add Notes'.tr,
                         style: GoogleTextStyle.fw500
                             .copyWith(fontSize: 12.sp, color: MainColor.grey),
                       ),

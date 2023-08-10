@@ -65,13 +65,13 @@ class _PinDialogState extends State<PinDialog> {
         children: [
           // title
           Text(
-            'Verify order',
+            'Verify order'.tr,
             style: Get.textTheme.labelLarge,
           ),
 
           // subtitle
           Text(
-            'Enter PIN code',
+            'Enter PIN code'.tr,
             style: Get.textTheme.bodySmall!.copyWith(color: Colors.black),
           ),
           24.verticalSpacingRadius,

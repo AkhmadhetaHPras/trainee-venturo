@@ -35,7 +35,7 @@ class ConterController extends GetxController {
 
   void logout(context) async {
     EasyLoading.show(
-      status: 'Sedang Diproses...',
+      status: 'Loading...'.tr,
       maskType: EasyLoadingMaskType.black,
       dismissOnTap: false,
     );

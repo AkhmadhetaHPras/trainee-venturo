@@ -70,7 +70,8 @@ class _DatePickerState extends State<DatePicker> {
             Expanded(
               child: Obx(
                 () => Text(
-                  '${DateFormat('dd/MM/yy').format(startDate.value)} - ${DateFormat('dd/MM/yy').format(endDate.value)}',
+                  '${DateFormat('dd/MM/yy').format(startDate.value)} - ${DateFormat('dd/MM/yy').format(endDate.value)}'
+                      .tr,
                   style: Get.textTheme.labelLarge?.copyWith(
                     fontSize: 12.sp,
                   ),

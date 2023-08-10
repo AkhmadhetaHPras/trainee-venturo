@@ -23,7 +23,7 @@ class ConterView extends StatelessWidget {
           titleSpacing: 0,
           backgroundColor: MainColor.primary,
           title: Text(
-            "Conter App",
+            "Conter App".tr,
             style: GoogleFonts.roboto(
               fontSize: 20.sp,
               fontWeight: FontWeight.w700,

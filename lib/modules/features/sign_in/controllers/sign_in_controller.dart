@@ -47,7 +47,7 @@ class SignInController extends GetxController {
 
     if (isValid && GlobalController.to.isConnect.value == true) {
       EasyLoading.show(
-        status: 'Sedang Diproses...',
+        status: 'Loading...'.tr,
         maskType: EasyLoadingMaskType.black,
         dismissOnTap: false,
       );
@@ -155,7 +155,7 @@ class SignInController extends GetxController {
 
   void signInWithGoogle(context) async {
     EasyLoading.show(
-      status: 'Sedang Diproses...',
+      status: 'Loading...'.tr,
       maskType: EasyLoadingMaskType.black,
       dismissOnTap: false,
     );
