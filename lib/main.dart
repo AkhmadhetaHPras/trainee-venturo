@@ -12,6 +12,7 @@ import 'package:trainee/configs/pages/main_page.dart';
 import 'package:trainee/configs/routes/main_route.dart';
 import 'package:trainee/configs/themes/main_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:trainee/shared/customs/bottom_navigation_observer.dart';
 import 'package:trainee/utils/services/firebase_messaging_service.dart';
 import 'configs/localization/localization.dart';
 import 'firebase_options.dart';
@@ -72,6 +73,7 @@ class MyApp extends StatelessWidget {
           title: 'Trainee Sekeleton',
           debugShowCheckedModeBanner: false,
           initialRoute: MainRoute.splash,
+          navigatorObservers: [BottomNavigationObserver()],
           theme: mainTheme,
           defaultTransition: Transition.native,
           getPages: MainPage.main,
