@@ -54,7 +54,7 @@ class OrderSuccessDialog extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () {
                 BottomNavigationController.to.setActiveIndex(1);
-                Get.toNamed(MainRoute.order);
+                Get.offNamed(MainRoute.order);
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Theme.of(context).primaryColor,

@@ -157,6 +157,4 @@ class OrderController extends GetxController {
       refreshHistoryController.refreshFailed();
     }
   }
-
-  Future<void> orderAgain(Order preOrder) async {}
 }

@@ -125,4 +125,7 @@ const Map<String, String> translationsEnUs = {
   'Log Out Filed': 'Log Out Filed',
   'Privacy Policy': 'Privacy Policy',
   'Here': 'Here',
+  'Add Menu to Cart Fisrt!': 'Add Menu to Cart Fisrt!',
+  'Your Cart is Empty': 'Your Cart is Empty',
+  'Shop Now': 'Shop Now',
 };

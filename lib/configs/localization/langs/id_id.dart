@@ -125,4 +125,7 @@ const Map<String, String> translationsIdId = {
   'Log Out Filed': 'Gagal Keluar',
   'Privacy Policy': 'Kebijakan Privasi',
   'Here': 'Disini',
+  'Add Menu to Cart Fisrt!': 'Tambahkan Menu ke Keranjang Terlebih Dahulu!',
+  'Your Cart is Empty': 'Keranjangmu Kosong',
+  'Shop Now': 'Belanja Sekarang',
 };

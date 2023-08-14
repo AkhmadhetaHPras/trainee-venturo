@@ -129,42 +129,46 @@ class CartController extends GetxController {
   }
 
   Future<void> verify() async {
-    // check supported auth type in device
-    final LocalAuthentication localAuth = LocalAuthentication();
-    final bool canCheckBiometrics = await localAuth.canCheckBiometrics;
-    final bool isBiometricSupported = await localAuth.isDeviceSupported();
+    if (cartItems.isNotEmpty) {
+// check supported auth type in device
+      final LocalAuthentication localAuth = LocalAuthentication();
+      final bool canCheckBiometrics = await localAuth.canCheckBiometrics;
+      final bool isBiometricSupported = await localAuth.isDeviceSupported();
 
-    if (canCheckBiometrics && isBiometricSupported) {
-      // open fingerprint dialog if supported
-      final String? authType = await showFingerprintDialog();
+      if (canCheckBiometrics && isBiometricSupported) {
+        // open fingerprint dialog if supported
+        final String? authType = await showFingerprintDialog();
 
-      if (authType == 'fingerprint') {
-        // fingerprint auth flow
-        final bool authenticated = await localAuth.authenticate(
-          localizedReason: 'Please authenticate to confirm order'.tr,
-          options: const AuthenticationOptions(
-            biometricOnly: true,
-          ),
-        );
-
-        // if succeed, order cart
-        if (authenticated) {
-          EasyLoading.show(
-            status: 'Loading...'.tr,
-            maskType: EasyLoadingMaskType.black,
-            dismissOnTap: false,
+        if (authType == 'fingerprint') {
+          // fingerprint auth flow
+          final bool authenticated = await localAuth.authenticate(
+            localizedReason: 'Please authenticate to confirm order'.tr,
+            options: const AuthenticationOptions(
+              biometricOnly: true,
+            ),
           );
-          if (await postOrder()) {
-            EasyLoading.dismiss();
-            showOrderSuccessDialog();
+
+          // if succeed, order cart
+          if (authenticated) {
+            EasyLoading.show(
+              status: 'Loading...'.tr,
+              maskType: EasyLoadingMaskType.black,
+              dismissOnTap: false,
+            );
+            if (await postOrder()) {
+              EasyLoading.dismiss();
+              showOrderSuccessDialog();
+            }
           }
+        } else if (authType == 'pin') {
+          // pin auth flow
+          await showPinDialog();
         }
-      } else if (authType == 'pin') {
-        // pin auth flow
+      } else {
         await showPinDialog();
       }
     } else {
-      await showPinDialog();
+      Get.snackbar("Sorry".tr, "Add Menu to Cart Fisrt!".tr);
     }
   }
 
@@ -215,9 +219,8 @@ class CartController extends GetxController {
       title: '',
       titleStyle: const TextStyle(fontSize: 0),
       content: const OrderSuccessDialog(),
+      barrierDismissible: false,
     );
-
-    Get.back();
   }
 
   Future<void> showDiscountDialog() async {

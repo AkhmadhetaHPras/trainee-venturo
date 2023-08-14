@@ -89,7 +89,7 @@ class Menu {
       jumlah: jumlah,
       nama: nama,
       kategori: kategori,
-      catatan: catatan.isEmpty ? "-" : catatan.replaceAll('"', ''),
+      catatan: catatan.isEmpty ? null : catatan.replaceAll('"', ''),
       foto: foto,
       deskripsi: "",
     );

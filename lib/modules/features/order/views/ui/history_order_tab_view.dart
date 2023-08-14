@@ -94,7 +94,7 @@ class OrderHistoryTabView extends StatelessWidget {
                                           .addToCart(element.toMenuCart());
                                     }
 
-                                    Get.offAndToNamed(MainRoute.cart);
+                                    Get.toNamed(MainRoute.cart);
                                   },
                                   onTap: () => Get.toNamed(
                                     '${MainRoute.order}/${OrderController.to.filteredHistoryOrder[index].idOrder}',
