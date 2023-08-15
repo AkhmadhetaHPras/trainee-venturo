@@ -44,6 +44,7 @@ class ProfileController extends GetxController {
 
     // get detail user
     user.value = await repository.getDetailProfile() ?? User();
+    await LocalStorageService.setPin(user.value.pin ?? "111111");
 
     /// Load Device Info
     getDeviceInformation();
@@ -272,6 +273,7 @@ class ProfileController extends GetxController {
 
     if (pinInput != null && pinInput.isNotEmpty) {
       await updateUser(pin: pinInput);
+      await LocalStorageService.setPin(pinInput);
     }
   }
 

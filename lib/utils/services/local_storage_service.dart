@@ -23,6 +23,14 @@ class LocalStorageService extends GetxService {
     );
   }
 
+  static Future<void> setPin(String value) async {
+    await box.put("pin", value);
+  }
+
+  static Future<String?> getPin() async {
+    return box.get('pin');
+  }
+
   static Future deleteAuth() async {
     if (box.get("isRememberMe") == false) {
       box.clear();

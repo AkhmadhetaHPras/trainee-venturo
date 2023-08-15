@@ -38,7 +38,7 @@ class _PinDialogState extends State<PinDialog> {
       } else {
         // show how many tries user have left
         controller.clear();
-        errorText.value = 'PIN wrong! n chances left.'.trParams({
+        errorText.value = 'PIN wrong! n chances left.'.tr.trParams({
           'n': (3 - tries).toString(),
         });
       }

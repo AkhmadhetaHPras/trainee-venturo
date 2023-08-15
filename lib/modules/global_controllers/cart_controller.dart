@@ -188,12 +188,12 @@ class CartController extends GetxController {
     // ensure all modal is closed before show pin dialog
     Get.until(ModalRoute.withName(MainRoute.cart));
 
-    const userPin = '123456';
+    final userPin = await LocalStorageService.getPin() ?? "111111";
 
     final bool? authenticated = await Get.defaultDialog(
       title: '',
       titleStyle: const TextStyle(fontSize: 0),
-      content: const PinDialog(pin: userPin),
+      content: PinDialog(pin: userPin),
     );
 
     if (authenticated == true) {
